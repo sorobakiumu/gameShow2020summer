@@ -146,21 +146,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="scene\BaseScene.cpp" />
+    <ClCompile Include="scene\GameScene.cpp" />
+    <ClCompile Include="Obj\Gimmick\FallLift.cpp" />
     <ClCompile Include="Obj\Gimmick\Lift.cpp" />
     <ClCompile Include="Obj\Gimmick\Gimmick.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obj\Obj.cpp" />
     <ClCompile Include="player\player.cpp" />
     <ClCompile Include="scene\SceneManage.cpp" />
+    <ClCompile Include="scene\TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scene\BaseScene.h" />
     <ClInclude Include="Common\Details\Vector2.h" />
     <ClInclude Include="Common\Vector2.h" />
+    <ClInclude Include="scene\GameScene.h" />
+    <ClInclude Include="Obj\Gimmick\FallLift.h" />
     <ClInclude Include="Obj\Gimmick\Lift.h" />
     <ClInclude Include="Obj\Gimmick\Gimmick.h" />
     <ClInclude Include="Obj\Obj.h" />
     <ClInclude Include="player\player.h" />
     <ClInclude Include="scene\SceneManage.h" />
+    <ClInclude Include="scene\TitleScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
