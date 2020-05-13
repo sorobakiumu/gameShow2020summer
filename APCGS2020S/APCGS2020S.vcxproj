@@ -146,6 +146,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Obj\Gimmick\Lift.cpp" />
+    <ClCompile Include="Obj\Gimmick\Gimmick.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obj\Obj.cpp" />
     <ClCompile Include="player\player.cpp" />
@@ -154,6 +156,8 @@
   <ItemGroup>
     <ClInclude Include="Common\Details\Vector2.h" />
     <ClInclude Include="Common\Vector2.h" />
+    <ClInclude Include="Obj\Gimmick\Lift.h" />
+    <ClInclude Include="Obj\Gimmick\Gimmick.h" />
     <ClInclude Include="Obj\Obj.h" />
     <ClInclude Include="player\player.h" />
     <ClInclude Include="scene\SceneManage.h" />
