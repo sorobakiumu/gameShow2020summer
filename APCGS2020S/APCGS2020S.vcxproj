@@ -146,8 +146,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="scene\BaseScene.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
+=======
+    <ClCompile Include="Obj\Gimmick\Lift.cpp" />
+    <ClCompile Include="Obj\Gimmick\Gimmick.cpp" />
+>>>>>>> 36104122159a2f3109562e51efb7703ec1f3c5fe
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Obj\Obj.cpp" />
     <ClCompile Include="player\player.cpp" />
@@ -158,7 +163,12 @@
     <ClInclude Include="scene\BaseScene.h" />
     <ClInclude Include="Common\Details\Vector2.h" />
     <ClInclude Include="Common\Vector2.h" />
+<<<<<<< HEAD
     <ClInclude Include="scene\GameScene.h" />
+=======
+    <ClInclude Include="Obj\Gimmick\Lift.h" />
+    <ClInclude Include="Obj\Gimmick\Gimmick.h" />
+>>>>>>> 36104122159a2f3109562e51efb7703ec1f3c5fe
     <ClInclude Include="Obj\Obj.h" />
     <ClInclude Include="player\player.h" />
     <ClInclude Include="scene\SceneManage.h" />
