@@ -146,11 +146,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Obj\Obj.cpp" />
     <ClCompile Include="scene\SceneManage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\Details\Vector2.h" />
     <ClInclude Include="Common\Vector2.h" />
+    <ClInclude Include="Obj\Obj.h" />
     <ClInclude Include="scene\SceneManage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
