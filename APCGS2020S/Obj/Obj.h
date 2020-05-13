@@ -12,6 +12,7 @@ enum class OBJ_ID
 
 class Obj
 {
+public:
 	Obj();
 	virtual ~Obj();
 
