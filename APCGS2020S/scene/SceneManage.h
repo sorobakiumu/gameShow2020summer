@@ -6,7 +6,11 @@
 #include "BaseScene.h"
 
 
+<<<<<<< HEAD
 using DRAW_QUE = std::tuple<Vec2double, double, double, int>;		//座標、サイズ、角度、ハンドル
+=======
+using DRAW_QUE = std::tuple<Vec2double,double,double,int>;		//座標、サイズ、角度、ハンドル
+>>>>>>> 5ffb7be724dad423b8821f9521aeeb4f27d2817f
 
 class SceneManage
 {

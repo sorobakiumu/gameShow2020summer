@@ -8,11 +8,19 @@ void SceneManage::Draw()
 {
 	ClsDrawScreen();
 	Vec2double pos;
+<<<<<<< HEAD
 	double size, angle;
 	int image;
 	for (auto dque : _drawList)
 	{
 		dque = std::tie(pos, size, angle, image);
+=======
+	double size,angle;
+	int image;
+	for (auto dque : _drawList)
+	{
+		dque=std::tie(pos,size,angle,image);
+>>>>>>> 5ffb7be724dad423b8821f9521aeeb4f27d2817f
 		DrawRotaGraph(pos.x, pos.y,
 			size, angle,
 			image, true, true);
