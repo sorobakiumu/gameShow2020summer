@@ -14,6 +14,8 @@ class Gimmick :
 public:
 	Gimmick();
 	~Gimmick();
+
+	virtual void UpDate() = 0;
 protected:
 	GIMMICK_ID G_ID;
 };

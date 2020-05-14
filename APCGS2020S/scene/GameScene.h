@@ -1,5 +1,8 @@
 #pragma once
+#include <vector>
 #include "BaseScene.h"
+#include "../Obj/Obj.h"
+
 class GameScene :
 	public BaseScene
 {
@@ -9,4 +12,5 @@ public:
 	~GameScene();
 private:
 	int bgImage;
+	std::vector<SharedObj> ObjList;
 };

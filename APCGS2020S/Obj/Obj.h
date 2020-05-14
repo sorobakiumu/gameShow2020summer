@@ -1,4 +1,5 @@
 #pragma once
+#include<memory>
 #include "../Common/Vector2.h"
 
 enum class OBJ_ID
@@ -9,6 +10,10 @@ enum class OBJ_ID
 	GIMMICK,
 	MAX,
 };
+
+class Obj;
+
+using SharedObj = std::shared_ptr<Obj>;
 
 class Obj
 {
@@ -22,6 +27,7 @@ public:
 
 	void SetPos(Vec2double pos) { Pos = pos; };
 
+	virtual void UpDate() = 0;
 protected:
 	OBJ_ID ID;
 	Vec2double Pos;

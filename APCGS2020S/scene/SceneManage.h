@@ -7,6 +7,8 @@
 
 using DRAW_QUE = std::tuple<Vec2double, double, double, int>;		//座標、サイズ（倍率）、角度、ハンドル
 #define lpSceneMng SceneManage::GetInstance()
+#define ScrSize lpSceneMng.ScreenSize
+#define ScrCenter lpSceneMng.ScreenCenter
 
 class SceneManage
 {

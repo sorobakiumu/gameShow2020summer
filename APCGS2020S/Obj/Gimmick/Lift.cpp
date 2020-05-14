@@ -1,4 +1,6 @@
+#include <DxLib.h>
 #include "Lift.h"
+#include "../../scene/SceneManage.h"
 
 Lift::Lift()
 {
@@ -7,6 +9,7 @@ Lift::Lift()
 	ID = OBJ_ID::GIMMICK;
 	G_ID = GIMMICK_ID::LIFT;
 	Speed = {0,0};
+	Image = LoadGraph("image/リフト.png");
 }
 
 Lift::Lift(Vec2double pos, Vec2double StartPos, Vec2double EndPos,int Movetime)
@@ -17,6 +20,8 @@ Lift::Lift(Vec2double pos, Vec2double StartPos, Vec2double EndPos,int Movetime)
 	G_ID = GIMMICK_ID::LIFT;
 	Speed = (StartPos-EndPos)/static_cast<double>(Movetime);	// 始点と終点の差から1秒当たりの移動量を求める
 	MovingTime = 0;
+	MoveTime = Movetime;
+	Image = LoadGraph("image/リフト.png");
 }
 
 Lift::~Lift()
@@ -32,7 +37,7 @@ void Lift::UpDate()
 
 void Lift::Draw()
 {
-
+	lpSceneMng.addDrawQue(std::make_tuple(Pos,1.0,0.0,Image));
 }
 
 void Lift::Move()
