@@ -14,7 +14,7 @@ void SceneManage::Draw()
 	{
 	double size,angle;
 	int image;
-	dque = std::tie(pos, size, angle, image);
+	std::tie(pos, size, angle, image)=dque;
 		DrawRotaGraph(pos.x, pos.y,
 			size, angle,
 			image, true, true);

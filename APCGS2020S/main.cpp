@@ -2,7 +2,8 @@
 #include <Windows.h>
 #include "Scene/SceneManage.h"
 
-int main()
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+//int main()
 {
 	SceneManage::GetInstance().Run();
 	SceneManage::Destroy();

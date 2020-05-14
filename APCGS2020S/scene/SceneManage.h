@@ -6,6 +6,7 @@
 #include "BaseScene.h"
 
 using DRAW_QUE = std::tuple<Vec2double, double, double, int>;		//座標、サイズ、角度、ハンドル
+#define lpSceneMng SceneManage::GetInstance()
 
 class SceneManage
 {
@@ -34,7 +35,7 @@ public:
 	}
 
 	const Vec2Int ScreenSize;
-	Vec2Int ScreenCenter;
+	Vec2double ScreenCenter;
 
 	//描画したいものをキューに追加する
 	void addDrawQue(DRAW_QUE dque);
