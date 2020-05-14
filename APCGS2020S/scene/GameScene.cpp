@@ -5,11 +5,11 @@
 
 unique_Base GameScene::Update(unique_Base own)
 {
-	;if (CheckHitKey(KEY_INPUT_LSHIFT))
+	if (CheckHitKey(KEY_INPUT_LSHIFT))
 	{
 		return std::move(std::make_unique<TitleScene>());
 	}
-	lpSceneMng.addDrawQue(std::make_tuple(lpSceneMng.ScreenCenter,1.0,1.0,bgImage));
+	lpSceneMng.addDrawQue(std::make_tuple(lpSceneMng.ScreenCenter,1.0,0.0,bgImage));
 	return std::move(own);
 }
 

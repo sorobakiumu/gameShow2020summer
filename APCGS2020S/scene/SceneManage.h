@@ -5,7 +5,7 @@
 #include "../Common/Vector2.h"
 #include "BaseScene.h"
 
-using DRAW_QUE = std::tuple<Vec2double, double, double, int>;		//座標、サイズ、角度、ハンドル
+using DRAW_QUE = std::tuple<Vec2double, double, double, int>;		//座標、サイズ（倍率）、角度、ハンドル
 #define lpSceneMng SceneManage::GetInstance()
 
 class SceneManage
