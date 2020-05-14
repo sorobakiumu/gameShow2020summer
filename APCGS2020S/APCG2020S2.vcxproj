@@ -23,6 +23,7 @@
     <ProjectGuid>{F18AE043-BA71-4409-BDB3-3E465506E5E1}</ProjectGuid>
     <RootNamespace>APCG2020S2</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>APCG2020S</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
