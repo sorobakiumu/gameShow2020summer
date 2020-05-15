@@ -112,10 +112,39 @@ void player::UpDate()
 }
 
 
+// çUåÇêßå‰ä÷êî
+void player::attack(void)
+{ 
+	if (shotFlag == false && CheckHitKey(KEY_INPUT_A))
+	{
+		shotFlag = true;
+	}
+
+	if (shotFlag == true)
+	{
+		shotPos = Pos;
+		shot();
+	}
+
+}
+
+
+void player::shot(void)
+{
+	shotPos.x = shotPos.x + 6.0;
+}
+
+
+// playerèâä˙âª
 void player::Init(void)
 {
+	ptn = KeyBoard;
+
 	sec = 0;
-	jmpFlg = 0;
 	jmpCnt = 180;
-	jpCtlFlag = 0;
+	jmpFlg = false;
+	jpCtlFlag = false;
+	shotFlag = false;
+	shotPos = { 0.0,0.0 };
+
 }
