@@ -41,7 +41,7 @@ GameScene::GameScene()
 	//ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y)}, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) },300));
 	ObjList.emplace_back(new player(ScrCenter, {0,0}));
 	FILE* fp;
-	fopen_s(&fp,"Data/test2.dat","rb");
+	fopen_s(&fp,"Data/test.dat","rb");
  	if (fp != nullptr)
 	{
 		int x, y,i=0;
