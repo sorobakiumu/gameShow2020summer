@@ -33,12 +33,12 @@ void FallLift::UpDate()
 {
 	if (FallFlag==true)
 	{
-		Pos.y + Speed;
+		Pos.y += Speed;
 	}
 	Draw();
 }
 
 void FallLift::Draw()
 {
-	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, Image,LAYER::MAP));
+	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, Image,LAYER::MAP,999));
 }

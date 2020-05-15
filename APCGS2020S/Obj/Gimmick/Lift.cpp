@@ -37,7 +37,7 @@ void Lift::UpDate()
 
 void Lift::Draw()
 {
-	lpSceneMng.addDrawQue(std::make_tuple(Pos,1.0,0.0,Image,LAYER::MAP));
+	lpSceneMng.addDrawQue(std::make_tuple(Pos,1.0,0.0,Image,LAYER::MAP,999));
 }
 
 void Lift::Move()

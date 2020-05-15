@@ -6,7 +6,7 @@
 #include "BaseScene.h"
 #include "LAYER.h"
 
-using DRAW_QUE = std::tuple<Vec2double, double, double, int,LAYER>;		//座標、サイズ（倍率）、角度、ハンドル、レイヤー
+using DRAW_QUE = std::tuple<Vec2double, double, double, int,LAYER,int>;		//座標、サイズ（倍率）、角度、ハンドル、レイヤー,Zオーダー
 #define lpSceneMng SceneManage::GetInstance()
 #define ScrSize lpSceneMng.ScreenSize
 #define ScrCenter lpSceneMng.ScreenCenter

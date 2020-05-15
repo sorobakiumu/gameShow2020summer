@@ -11,7 +11,7 @@ void SceneManage::Draw()
 
 	std::sort(_drawList.begin(), _drawList.end(), [](DRAW_QUE dQa,DRAW_QUE dQb)
 		{
-			return std::get <4>(dQa)< std::get <4>(dQb);
+			return std::tie(std::get <4>(dQa),std::get <5>(dQa))<std::tie(std::get <4>(dQb), std::get <5>(dQb));
 		});
 
 
@@ -24,7 +24,7 @@ void SceneManage::Draw()
 	{
 	double size,angle;
 	int image;
-	std::tie(pos, size, angle, image,std::ignore)=dque;
+	std::tie(pos, size, angle, image,std::ignore,std::ignore)=dque;
 		DrawRotaGraph(pos.x, pos.y,
 			size, angle,
 			image, true,false);
