@@ -17,7 +17,7 @@ void SceneManage::Draw()
 	std::tie(pos, size, angle, image)=dque;
 		DrawRotaGraph(pos.x, pos.y,
 			size, angle,
-			image, true, true);
+			image, true,false);
 	}
 	ScreenFlip();
 }

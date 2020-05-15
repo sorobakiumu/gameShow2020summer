@@ -11,6 +11,7 @@ public:
 	GameScene();
 	~GameScene();
 private:
-	int bgImage;
+	int bgImage[9];
+	int MapScreen;
 	std::vector<SharedObj> ObjList;
 };
