@@ -40,5 +40,5 @@ void FallLift::UpDate()
 
 void FallLift::Draw()
 {
-	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, Image));
+	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, Image,LAYER::MAP));
 }

@@ -30,7 +30,7 @@ unique_Base GameScene::Update(unique_Base own)
 	{
 		MapPos.x = MapSize.x-ScrSize.x-ScrCenter.x;
 	}
-	lpSceneMng.addDrawQue(std::make_tuple(MapPos,1.0,0.0,MapScreen));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos,1.0,0.0,MapScreen,LAYER::BG));
 	return std::move(own);
 }
 
@@ -38,10 +38,10 @@ unique_Base GameScene::Update(unique_Base own)
 GameScene::GameScene()
 {
 	LoadDivGraph("image/tile.png",9,3,3,32,32,bgImage);
-	//ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y)}, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) },300));
+	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y)}, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) },300));
 	ObjList.emplace_back(new player(ScrCenter, {0,0}));
 	FILE* fp;
-	fopen_s(&fp,"Data/test.dat","rb");
+	fopen_s(&fp,"Data/test2.dat","rb");
  	if (fp != nullptr)
 	{
 		int x, y,i=0;
