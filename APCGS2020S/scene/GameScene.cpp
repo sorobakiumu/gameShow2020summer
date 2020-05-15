@@ -13,6 +13,7 @@ unique_Base GameScene::Update(unique_Base own)
 	{
 		return std::move(std::make_unique<TitleScene>());
 	}
+
 	for (auto obj : ObjList)
 	{
 		obj->UpDate();
@@ -21,6 +22,7 @@ unique_Base GameScene::Update(unique_Base own)
 			plPos = obj->GetPos();
 		}
 	}
+
 	MapPos = { (MapSize.x / 2) - plPos.x,ScrCenter.y+16.0};
 	if (MapPos.x< -ScrCenter.x)
 	{
@@ -30,7 +32,17 @@ unique_Base GameScene::Update(unique_Base own)
 	{
 		MapPos.x = MapSize.x-ScrSize.x-ScrCenter.x;
 	}
+
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos,1.0,0.0,MapScreen,LAYER::MAP,0));
+
+	auto itr = std::remove_if(ObjList.begin(),				// チェックの開始地点
+		ObjList.end(),								// チェックの終了地点
+		/* ラムダ式*/  [](SharedObj& obj) {return (*obj).Getdead(); }	// removeの条件
+	);
+
+	ObjList.erase(itr,
+		ObjList.end());
+
 	return std::move(own);
 }
 

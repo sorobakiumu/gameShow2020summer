@@ -146,5 +146,5 @@ void player::Init(void)
 	jpCtlFlag = false;
 	shotFlag = false;
 	shotPos = { 0.0,0.0 };
-
+	dead = false;
 }

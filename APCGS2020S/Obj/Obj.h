@@ -24,7 +24,7 @@ public:
 	const OBJ_ID GetID()const { return ID; }
 	const Vec2double GetPos()const { return Pos; }
 	const Vec2Int GetSize()const { return Size; }
-
+	const bool Getdead()const { return dead; }
 	void SetPos(Vec2double pos) { Pos = pos; }
 
 	virtual void UpDate() = 0;
@@ -33,5 +33,6 @@ protected:
 	Vec2double Pos;
 	Vec2Int Size;
 
+	bool dead;
 };
 
