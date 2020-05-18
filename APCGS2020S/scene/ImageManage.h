@@ -17,12 +17,14 @@ public:
 		return *sInstance;
 	}
 
-
+	// ‰æ‘œ“Ç‚İ‚İ(ƒvƒƒOƒ‰ƒ€“à)
 	const VecInt& GetID(const std::string& key);
 
+	// ‰æ‘œ“Ç‚İ‚İ(’P‰æ)
 	const VecInt& GetID(const std::string& key,
 						const std::string& fileName);
 
+	// •ªŠ„‰æ‘œ“Ç‚İ‚İ
 	const VecInt& GetID(const std::string& key,
 		const std::string& fileName,
 		const Vec2Int& divsize,

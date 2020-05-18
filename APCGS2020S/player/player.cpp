@@ -1,7 +1,7 @@
 #include "player.h"
 #include "DxLib.h"
 
-// playerのコンストラクタ
+// playerのｺﾝｽﾄﾗｸﾀ
 player::player()
 {
 	Init();
