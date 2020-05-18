@@ -1,7 +1,6 @@
 #pragma once
 #include<memory>
 #include "../Common/Vector2.h"
-#include "Gimmick/Gimmick.h"
 enum class OBJ_ID
 {
 	PLAYER,
