@@ -14,13 +14,16 @@ unique_Base GameScene::Update(unique_Base own)
 		return std::move(std::make_unique<TitleScene>());
 	}
 
+	int Cnt=0;
 	for (auto obj : ObjList)
 	{
 		obj->UpDate();
 		if (obj->GetID()==OBJ_ID::PLAYER)
 		{
 			plPos = obj->GetPos();
+			FuncCheckHit()(Cnt,this);		// ObjListの何番目かとゲームシーンのポインタを渡す
 		}
+		Cnt++;
 	}
 
 	MapPos = { (MapSize.x / 2) - plPos.x,ScrCenter.y+16.0};

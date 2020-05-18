@@ -21,7 +21,7 @@ FallLift::FallLift(Vec2double pos, int speed)
 	Speed = speed;
 	Pos = pos;
 	FallFlag = false;
-	Size = { 0,0 };
+	Size = { 96,16 };
 	Image = LoadGraph("image/ƒŠƒtƒg.png");
 	dead = false;
 }
