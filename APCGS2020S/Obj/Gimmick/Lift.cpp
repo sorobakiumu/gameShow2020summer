@@ -16,7 +16,7 @@ Lift::Lift()
 Lift::Lift(Vec2double pos, Vec2double StartPos, Vec2double EndPos,int Movetime)
 {
 	Pos = pos;
-	Size = { 0,0 };
+	Size = { 96,16 };
 	ID = OBJ_ID::GIMMICK;
 	G_ID = GIMMICK_ID::LIFT;
 	Speed = (StartPos-EndPos)/static_cast<double>(Movetime);	// 始点と終点の差から1秒当たりの移動量を求める
