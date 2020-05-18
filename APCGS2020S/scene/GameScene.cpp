@@ -69,7 +69,7 @@ GameScene::GameScene()
 			i++;
 		}
 		fclose(fp);
-		MapSize = {x*32.0,y*32.0};
+		MapSize = {x*32,y*32};
 		MapScreen = MakeScreen(MapSize.x,MapSize.y, true);
 		SetDrawScreen(MapScreen);
 		for (i = 0; i <y; i++)

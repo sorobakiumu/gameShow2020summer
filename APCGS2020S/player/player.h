@@ -30,7 +30,6 @@ public:
 	Vec2double atkPos;
 
 	int plImage[12];
-
 private:
 
 	

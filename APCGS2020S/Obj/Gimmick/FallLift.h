@@ -6,7 +6,6 @@ class FallLift :
 	FallLift();
 	FallLift(Vec2double pos,int speed);
 	~FallLift();
-
 	void UpDate();
 	void Draw();
 private:

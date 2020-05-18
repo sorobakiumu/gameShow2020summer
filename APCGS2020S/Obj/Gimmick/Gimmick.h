@@ -15,9 +15,6 @@ public:
 	Gimmick();
 	~Gimmick();
 
-	const GIMMICK_ID GetG_ID() const { return G_ID; }
-
-	virtual void UpDate() = 0;
 protected:
 	GIMMICK_ID G_ID;
 };

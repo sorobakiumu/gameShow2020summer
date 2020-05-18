@@ -7,5 +7,6 @@ struct FuncCheckHit
 private:
 	Vec2double Pos;
 	Vec2Int Size;
+	bool CheckHit[4]; // 左上、右上、左下、右下の順で当たっているかどうか
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include<memory>
 #include "../Common/Vector2.h"
-
+#include "Gimmick/Gimmick.h"
 enum class OBJ_ID
 {
 	PLAYER,
@@ -22,6 +22,7 @@ public:
 	virtual ~Obj();
 
 	const OBJ_ID GetID()const { return ID; }
+
 	const Vec2double GetPos()const { return Pos; }
 	const Vec2Int GetSize()const { return Size; }
 	const bool Getdead()const { return dead; }
