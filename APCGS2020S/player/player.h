@@ -24,13 +24,16 @@ public:
 	void UpDate() override;				// player更新用関数
 
 	void shot(void);
-
+	void attack(void);
 	Vec2double shotPos;
+	Vec2double atkPos;
+
+	int plImage[12];
 
 private:
 
 	
-	void attack(void);
+	void attackCtl(void);
 	void Init(void);						// 初期化関数
 
 	int jmpCnt;								// 跳躍制御ﾌﾗｸﾞ変数
@@ -38,6 +41,7 @@ private:
 	bool jmpFlg;							// 跳躍開始変数
 	bool jpCtlFlag;							// 跳躍制御ﾌﾗｸﾞ変数
 	bool shotFlag;
+	bool atkFlag;
 
 	int ptn;
 };

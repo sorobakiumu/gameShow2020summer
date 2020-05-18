@@ -48,7 +48,7 @@ void player::UpDate()
 		{
 			Pos.x = Pos.x + 5.0;
 		}
-
+        
 		// 十字ｷｰ(上)入力時、跳躍
 		if (CheckHitKey(KEY_INPUT_UP) == 1 && jmpFlg == 0)
 		{
@@ -86,6 +86,17 @@ void player::UpDate()
 
 	}
 
+	// 画面外に行かないようにする制御
+	if ( Pos.x <= 0 )
+	{
+		Pos.x = 0;
+	}
+	if (Pos.x >= lpSceneMng.ScreenSize.x)
+	{
+		Pos.x = lpSceneMng.ScreenSize.x;
+	}
+
+
 	// 跳躍ﾌﾗｸﾞが立っているとき
 	if (jpCtlFlag == 1)
 	{
@@ -113,38 +124,76 @@ void player::UpDate()
 
 
 // 攻撃制御関数
-void player::attack(void)
-{ 
+void player::attackCtl(void)
+{
+
+	// 射撃ﾌﾗｸﾞ管理
 	if (shotFlag == false && CheckHitKey(KEY_INPUT_A))
 	{
+		shotPos = Pos;
+
 		shotFlag = true;
 	}
 
-	if (shotFlag == true)
+	// 近接ﾌﾗｸﾞ管理
+	if (atkFlag == false && CheckHitKey(KEY_INPUT_B))
 	{
 		shotPos = Pos;
+		atkFlag = true;
+	}
+
+	// 射撃制御関数呼び出し
+	if (shotFlag == true)
+	{
+		shot();
+	}
+
+	// 近接制御関数呼び出し
+	if ( atkFlag == true)
+	{
 		shot();
 	}
 
 }
 
+// 近接関数
+void player::attack(void)
+{ 
+	atkPos.x = atkPos.x + 0.1;
+}
 
+// 射撃関数
 void player::shot(void)
 {
-	shotPos.x = shotPos.x + 6.0;
+	shotPos.x = shotPos.x + 3.0;
+
+	if (shotPos.x >= lpSceneMng.ScreenSize.x || shotPos.x <= 0)
+	{
+		shotFlag = false;
+	}
 }
+
 
 
 // player初期化
 void player::Init(void)
 {
 	ptn = KeyBoard;
-
+	
 	sec = 0;
+
 	jmpCnt = 180;
+
 	jmpFlg = false;
+
 	jpCtlFlag = false;
+
 	shotFlag = false;
+
 	shotPos = { 0.0,0.0 };
-	dead = false;
+
+	LoadDivGraph("image/歩行ドットキャラ.png",12,3,4,32,32,plImage);
+	
+	data.emplace_back()
+
 }
