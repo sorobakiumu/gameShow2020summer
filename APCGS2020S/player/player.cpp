@@ -119,7 +119,6 @@ void player::UpDate()
 			sec = 0;
 		}
 	}
-	Draw();
 }
 
 void player::Draw()

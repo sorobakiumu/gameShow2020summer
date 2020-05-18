@@ -52,8 +52,6 @@ public:
 
 	void Draw(int id);
 
-	void Draw(void) = 0;
-
 	bool State(const STATE state);
 
 	const STATE animKey(void) const;
