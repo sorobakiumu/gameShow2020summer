@@ -52,7 +52,7 @@ public:
 
 	void Draw(int id);
 
-	virtual void Draw(void) = 0;
+	void Draw(void) = 0;
 
 	bool State(const STATE state);
 
