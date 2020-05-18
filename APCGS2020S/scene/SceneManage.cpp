@@ -53,6 +53,7 @@ void SceneManage::Run()
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
 		_drawList.clear();
+		frmCnt++;
 		_activeScene = (*_activeScene).Update(std::move(_activeScene));
 		Draw();
 	}
