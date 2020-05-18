@@ -194,6 +194,5 @@ void player::Init(void)
 
 	LoadDivGraph("image/歩行ドットキャラ.png",12,3,4,32,32,plImage);
 	
-	data.emplace_back()
 
 }

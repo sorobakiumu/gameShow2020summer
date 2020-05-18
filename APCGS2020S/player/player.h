@@ -3,6 +3,7 @@
 #include "../Obj/Obj.h"
 #include "../scene/SceneManage.h"
 #include "../scene/GameScene.h"
+#include "../scene/ImageManage.h"
 
 // ‘€ì¯•Ê\‘¢‘Ì
 enum Ctl

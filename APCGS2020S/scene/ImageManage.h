@@ -17,6 +17,7 @@ public:
 		return *sInstance;
 	}
 
+
 	const VecInt& GetID(const std::string& key);
 
 	const VecInt& GetID(const std::string& key,
