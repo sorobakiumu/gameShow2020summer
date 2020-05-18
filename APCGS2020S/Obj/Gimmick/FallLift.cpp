@@ -37,7 +37,7 @@ void FallLift::UpDate()
 	{
 		Pos.y += Speed;
 	}
-	Draw();
+
 }
 
 void FallLift::Draw()

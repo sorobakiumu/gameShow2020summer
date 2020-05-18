@@ -119,9 +119,13 @@ void player::UpDate()
 			sec = 0;
 		}
 	}
-
+	Draw();
 }
 
+void player::Draw()
+{
+	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, Image, LAYER::CHARA, 999));
+}
 
 // 攻撃制御関数
 void player::attackCtl(void)
@@ -192,7 +196,8 @@ void player::Init(void)
 
 	shotPos = { 0.0,0.0 };
 
-	LoadDivGraph("image/歩行ドットキャラ.png",12,3,4,32,32,plImage);
-	
+	//LoadDivGraph("image/歩行ドットキャラ.png",12,3,4,32,32,plImage);
+	Image = LoadGraph("image/test.png", true);
 
+	dead = false;
 }

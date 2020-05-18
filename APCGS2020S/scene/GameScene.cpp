@@ -26,7 +26,8 @@ unique_Base GameScene::Update(unique_Base own)
 		Cnt++;
 	}
 
-	MapPos = { (MapSize.x / 2) - plPos.x,ScrCenter.y+16.0};
+	MapPos.x = MapPos.x-(plPos.x-plPosOld.x);
+	plPosOld = plPos;
 	if (MapPos.x< -ScrCenter.x)
 	{
 		MapPos.x = -ScrCenter.x;
@@ -35,6 +36,18 @@ unique_Base GameScene::Update(unique_Base own)
 	{
 		MapPos.x = MapSize.x-ScrSize.x-ScrCenter.x;
 	}
+	else
+	{
+		for (auto obj : ObjList)
+		{
+			if (obj->GetID() == OBJ_ID::PLAYER)
+			{
+				obj->SetPos(ScrCenter);
+				plPosOld = plPos;
+			}
+		}
+
+	}
 
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos,1.0,0.0,MapScreen,LAYER::MAP,0));
 
@@ -42,6 +55,11 @@ unique_Base GameScene::Update(unique_Base own)
 		ObjList.end(),								// チェックの終了地点
 		/* ラムダ式*/  [](SharedObj& obj) {return (*obj).Getdead(); }	// removeの条件
 	);
+
+	for (auto obj:ObjList)
+	{
+		obj->Draw();
+	}
 
 	ObjList.erase(itr,
 		ObjList.end());
@@ -53,11 +71,12 @@ unique_Base GameScene::Update(unique_Base own)
 GameScene::GameScene()
 {
 	MapScreen = 0;
-	LoadDivGraph("image/tile.png",9,3,3,32,32,bgImage);
-	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y)}, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) },300));
-	ObjList.emplace_back(new player(ScrCenter, {0,0}));
+	LoadDivGraph("image/tile.png", 9, 3, 3, 32, 32, bgImage);
+	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, 300));
+	ObjList.emplace_back(new player(ScrCenter, { 32,32 }));
+
 	FILE* fp;
-	fopen_s(&fp,"Data/test2.dat","rb");
+	fopen_s(&fp,"Data/tester.dat","rb");
  	if (fp != nullptr)
 	{
 		int x, y,i=0;
@@ -76,12 +95,12 @@ GameScene::GameScene()
 		{
 			for (int j=0;j<x;j++)
 			{
-				DrawRotaGraph(j * 32,i*32,1.0,0,bgImage[Map[j+i*x]-1],true);
+				DrawRotaGraph(j * 32,i*32,1.0,0,bgImage[Map[j+i*x]],true);
 			}
 		}
 		SetDrawScreen(DX_SCREEN_BACK);
 	}
-
+	MapPos = { MapSize.x/2-ScrCenter.x,ScrCenter.y};
 }
 
 GameScene::~GameScene()

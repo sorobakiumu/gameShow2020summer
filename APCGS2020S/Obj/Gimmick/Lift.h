@@ -7,6 +7,7 @@ public:
 	Lift();
 	Lift(Vec2double pos, Vec2double StartPos, Vec2double EndPos, int Movetime);
 	~Lift();
+	void Draw();
 private:
 	int MoveTime;
 
@@ -15,7 +16,7 @@ private:
 
 
 	void UpDate();
-	void Draw();
+
 	void Move();
 
 	int Image;

@@ -18,6 +18,6 @@ private:
 	int MapScreen;
 	std::vector<SharedObj> ObjList;
 	std::vector<int> Map;
-	Vec2double plPos, MapPos;
+	Vec2double plPos,plPosOld, MapPos;
 	Vec2Int MapSize;
 };

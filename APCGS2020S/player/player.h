@@ -29,9 +29,11 @@ public:
 	Vec2double shotPos;
 	Vec2double atkPos;
 
+	void Draw();
+
 	int plImage[12];
 private:
-
+	int Image;
 	
 	void attackCtl(void);
 	void Init(void);						// ‰Šú‰»ŠÖ”

@@ -34,7 +34,6 @@ Lift::~Lift()
 void Lift::UpDate()
 {
 	Move();
-	Draw();
 }
 
 void Lift::Draw()
