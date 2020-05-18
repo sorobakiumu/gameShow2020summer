@@ -33,7 +33,7 @@ const VecInt& ImageManage::GetID(const std::string& key, const std::string& file
 	{
 		imgMap[key].resize(divCnt.x * divCnt.y);
 
-		LoadDivGraph(fileName.c_str, divCnt.x * divCnt.y, divCnt.x , divCnt.y, divSize.x, divSize.y, &imgMap[key][0]);
+		LoadDivGraph(fileName.c_str, (divCnt.x*divCnt.y), divCnt.x , divCnt.y, divSize.x, divSize.y, &imgMap[key][0]);
 	}
 
 	return imgMap[key];

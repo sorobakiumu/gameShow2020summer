@@ -1,8 +1,10 @@
+
+#pragma once
 enum class LAYER
 {
 	BG,
 	MAP,
-	CHAR,
+	CHARA,
 	UI,
 	MAX,
 };
