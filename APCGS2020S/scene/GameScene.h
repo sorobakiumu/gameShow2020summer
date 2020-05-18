@@ -14,6 +14,6 @@ private:
 	int bgImage[9];
 	int MapScreen;
 	std::vector<SharedObj> ObjList;
-
+	std::vector<int> Map;
 	Vec2double plPos, MapPos,MapSize;
 };

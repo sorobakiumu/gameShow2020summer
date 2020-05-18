@@ -58,12 +58,11 @@ GameScene::GameScene()
  	if (fp != nullptr)
 	{
 		int x, y,i=0;
-		std::vector<int> map;
 		fscanf(fp,"%d %d",&x,&y);
-		map.resize(x*y);
+		Map.resize(x*y);
 		while (i<x*y)
 		{
-			fscanf(fp, "%d", &map[i]);
+			fscanf(fp, "%d", &Map[i]);
 			i++;
 		}
 		fclose(fp);
@@ -74,7 +73,7 @@ GameScene::GameScene()
 		{
 			for (int j=0;j<x;j++)
 			{
-				DrawRotaGraph(j * 32,i*32,1.0,0,bgImage[map[j+i*x]-1],true);
+				DrawRotaGraph(j * 32,i*32,1.0,0,bgImage[Map[j+i*x]-1],true);
 			}
 		}
 		SetDrawScreen(DX_SCREEN_BACK);
