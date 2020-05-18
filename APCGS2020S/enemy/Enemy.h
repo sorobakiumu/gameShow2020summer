@@ -36,6 +36,8 @@ private:
 	bool flag;
 	Vec2double pos;
 
+	int animCnt;
+	int frmCnt;
 
 
 	std::map<ENEMY_ID, std::vector<int>> enemyImage;
