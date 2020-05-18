@@ -25,25 +25,29 @@ unique_Base GameScene::Update(unique_Base own)
 		}
 		Cnt++;
 	}
+	if (ScrCenter.x-5<=plPos.x&&plPos.x<=ScrCenter.x+5)
+	{
+		MapPos.x = MapPos.x-(plPos.x-plPosOld.x);
+	}
 
-	MapPos.x = MapPos.x-(plPos.x-plPosOld.x);
+
 	plPosOld = plPos;
 	if (MapPos.x< -ScrCenter.x)
 	{
 		MapPos.x = -ScrCenter.x;
 	}
-	else if (MapPos.x > (MapSize.x- ScrSize.x - ScrCenter.x))
+	else if (MapPos.x > (MapSize.x - ScrSize.x - ScrCenter.x))
 	{
 		MapPos.x = MapSize.x-ScrSize.x-ScrCenter.x;
 	}
-	else
+	else if(MapPos.x>-ScrCenter.x&&MapPos.x< (MapSize.x - ScrSize.x - ScrCenter.x))
 	{
 		for (auto obj : ObjList)
 		{
 			if (obj->GetID() == OBJ_ID::PLAYER)
 			{
 				obj->SetPos(ScrCenter);
-				plPosOld = plPos;
+				plPosOld = ScrCenter;
 			}
 		}
 
