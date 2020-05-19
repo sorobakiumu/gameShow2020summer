@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include "../scene/SceneManage.h"
 #include "../scene/LAYER.h"
-#include <DxLib.h>"
+#include <DxLib.h>
 
 
 bool Enemy::initFlag;
@@ -90,22 +90,22 @@ void Enemy::Draw()
 
 void Enemy::wolff()
 {
-	Pos.x++;
+	MapPos.x++;
 	animCnt = (lpSceneMng.FrmCnt() / 30) % 3;
-	lpSceneMng.addDrawQue(std::make_tuple(Pos,1.0,0.0,enemyImage[ENEMY_ID::WOLF][animCnt],LAYER::CHARA,999));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos,1.0,0.0,enemyImage[ENEMY_ID::WOLF][animCnt],LAYER::ENEMY,999));
 }
 
 void Enemy::ghost()
 {
-	Pos.x++;
+	MapPos.x++;
 	animCnt = (lpSceneMng.FrmCnt() / 30) % 6;
-	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::GHOST][animCnt], LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::GHOST][animCnt], LAYER::ENEMY, 999));
 }
 
 Enemy::Enemy(ENEMY_ID enemyId)
 {
 	_enemyID = enemyId;
-	Pos = { 10,10 };
+	MapPos = { 10,10 };
 	flag = true;
 
 	frmCnt =lpSceneMng.FrmCnt();
@@ -124,36 +124,36 @@ Enemy::~Enemy()
 void Enemy::man()
 {
 	animCnt = (lpSceneMng.FrmCnt() / 30) % 3;
-	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::MAN][animCnt], LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::MAN][animCnt], LAYER::ENEMY, 999));
 }
 
 void Enemy::black()
 {
 	animCnt = (lpSceneMng.FrmCnt() / 30) % 3;
-	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::BLACK][animCnt], LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::BLACK][animCnt], LAYER::ENEMY, 999));
 }
 
 void Enemy::burst()
 {
 	animCnt = (lpSceneMng.FrmCnt() / 30) % 2;
-	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::BURST][animCnt], LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::BURST][animCnt], LAYER::ENEMY, 999));
 }
 
 void Enemy::baze()
 {
 	animCnt = (lpSceneMng.FrmCnt() / 30) % 4;
-	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::BAZE][animCnt], LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::BAZE][animCnt], LAYER::ENEMY, 999));
 }
 
 void Enemy::boss()
 {
 	animCnt = (lpSceneMng.FrmCnt() / 30) % 3;
-	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::BOSS][animCnt], LAYER::CHARA, 998));
-	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::PIT][0], LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::BOSS][animCnt], LAYER::ENEMY, 998));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::PIT][0], LAYER::ENEMY, 999));
 }
 
 void Enemy::rare()
 {
 	animCnt = (lpSceneMng.FrmCnt() / 30) % 4;
-	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::RARE][animCnt], LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::RARE][animCnt], LAYER::ENEMY, 999));
 }

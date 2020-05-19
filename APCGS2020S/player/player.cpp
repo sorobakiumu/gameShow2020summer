@@ -8,13 +8,15 @@ player::player()
 }
 
 // playerの初期座標とsizeを設定
-player::player(Vec2double _pos, Vec2Int _size)
+player::player(Vec2double _pos, Vec2Int _size,Vec2Int MSize)
 {
 	// playerの初期座標とsizeを設定
-	Pos = _pos;
+	MapPos = _pos;
 
 	// ｻｲｽﾞ代入
 	Size = _size;
+
+	MapSize = MSize;
 
 	// 対象識別付与
 	ID = OBJ_ID::PLAYER;
@@ -41,12 +43,12 @@ void player::UpDate()
 		// 十字ｷｰ(左)入力時、左移動
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1)
 		{
-			Pos.x = Pos.x - 5.0;
+			MapPos.x = MapPos.x - 5.0;
 		}
 		// 十字ｷｰ(右)入力時、右移動
 		else if (CheckHitKey(KEY_INPUT_RIGHT) == 1)
 		{
-			Pos.x = Pos.x + 5.0;
+			MapPos.x = MapPos.x + 5.0;
 		}
         
 		// 十字ｷｰ(上)入力時、跳躍
@@ -62,13 +64,13 @@ void player::UpDate()
 		// ﾊﾟｯﾄﾞ(左)入力時、左移動
 		if (GetJoypadInputState(PAD_INPUT_LEFT) == 1)
 		{
-			Pos.x = Pos.x - 5.0;
+			MapPos.x = MapPos.x - 5.0;
 		}
 		// ﾊﾟｯﾄﾞ(右)入力時、右移動
 		else if (GetJoypadInputState(PAD_INPUT_RIGHT) == 1)
 
 		{
-			Pos.x = Pos.x + 5.0;
+			MapPos.x = MapPos.x + 5.0;
 		}
 
 		// ﾊﾟｯﾄﾞ(上)入力時、跳躍
@@ -87,13 +89,13 @@ void player::UpDate()
 	}
 
 	// 画面外に行かないようにする制御
-	if ( Pos.x <= 0 )
+	if ( MapPos.x <= Size.x/2 )
 	{
-		Pos.x = 0;
+		MapPos.x = 0;
 	}
-	if (Pos.x >= lpSceneMng.ScreenSize.x)
+	if (MapPos.x >= MapSize.x-Size.x/2)
 	{
-		Pos.x = lpSceneMng.ScreenSize.x;
+		MapPos.x = MapSize.x - Size.x / 2;
 	}
 
 
@@ -101,16 +103,16 @@ void player::UpDate()
 	if (jpCtlFlag == 1)
 	{
 		// 跳躍山なり移動用2次関数
-		Pos.y = pow((sec - jmpCnt), 2) * (64 / jmpCnt) + lpSceneMng.ScreenSize.y - Size.y;
+		MapPos.y = pow((sec - jmpCnt), 2) * (64 / jmpCnt) + lpSceneMng.ScreenSize.y - Size.y;
 
 		// 経過時間計測
 		sec++;
 
 		// もし、着地したら
-		if (Pos.y >= lpSceneMng.ScreenSize.y )
+		if (MapPos.y >= lpSceneMng.ScreenSize.y )
 		{
 			// めり込まないように再調整
-			Pos.y = lpSceneMng.ScreenSize.y;
+			MapPos.y = lpSceneMng.ScreenSize.y;
 			
 			// 跳躍ﾌﾗｸﾞ戻し
 			jpCtlFlag = 0;
@@ -123,7 +125,7 @@ void player::UpDate()
 
 void player::Draw()
 {
-	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, Image, LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, Image, LAYER::PLAYER, 999));
 }
 
 // 攻撃制御関数
@@ -133,7 +135,7 @@ void player::attackCtl(void)
 	// 射撃ﾌﾗｸﾞ管理
 	if (shotFlag == false && CheckHitKey(KEY_INPUT_A))
 	{
-		shotPos = Pos;
+		shotPos = MapPos;
 
 		shotFlag = true;
 	}
@@ -141,7 +143,7 @@ void player::attackCtl(void)
 	// 近接ﾌﾗｸﾞ管理
 	if (atkFlag == false && CheckHitKey(KEY_INPUT_B))
 	{
-		shotPos = Pos;
+		shotPos = MapPos;
 		atkFlag = true;
 	}
 

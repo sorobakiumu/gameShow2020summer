@@ -45,7 +45,7 @@ public:
 	const OBJ_ID GetID()const { return ID; }
 
 	// 座標取得用関数
-	const Vec2double GetPos()const { return Pos; }
+	const Vec2double GetPos()const { return MapPos; }
 
 	// ｻｲｽﾞ取得用関数
 	const Vec2Int GetSize()const { return Size; }
@@ -56,7 +56,7 @@ public:
 	// 生存取得用関数
 	bool GetAlive(void) { return alive; };
 
-	void SetPos(Vec2double pos) { Pos = pos; }
+	void SetPos(Vec2double pos) { MapPos = pos; }
 
 	// ｱﾆﾒｰｼｮﾝ抜きの描画を行う関数
 	void Draw(Vec2double pos, int id  );
@@ -81,7 +81,7 @@ public:
 	virtual void UpDate() = 0;
 protected:
 	OBJ_ID ID;
-	Vec2double Pos;
+	Vec2double MapPos;
 	Vec2Int Size;
 
 	// 完全に消していいかを判断する

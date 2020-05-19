@@ -4,7 +4,7 @@
 
 Lift::Lift()
 {
-	Pos = { -100,-100 };
+	MapPos = { -100,-100 };
 	Size = { 0,0 };
 	ID = OBJ_ID::GIMMICK;
 	G_ID = GIMMICK_ID::LIFT;
@@ -15,7 +15,7 @@ Lift::Lift()
 
 Lift::Lift(Vec2double pos, Vec2double StartPos, Vec2double EndPos,int Movetime)
 {
-	Pos = pos;
+	MapPos = pos;
 	Size = { 96,16 };
 	ID = OBJ_ID::GIMMICK;
 	G_ID = GIMMICK_ID::LIFT;
@@ -38,12 +38,12 @@ void Lift::UpDate()
 
 void Lift::Draw()
 {
-	lpSceneMng.addDrawQue(std::make_tuple(Pos,1.0,0.0,Image,LAYER::MAP,999));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos,1.0,0.0,Image,LAYER::MAP,999));
 }
 
 void Lift::Move()
 {
-	Pos += Speed;
+	MapPos += Speed;
 	MovingTime++;
 	if (MovingTime>=MoveTime)
 	{

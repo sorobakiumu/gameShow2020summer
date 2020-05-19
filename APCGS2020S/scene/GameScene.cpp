@@ -21,40 +21,22 @@ unique_Base GameScene::Update(unique_Base own)
 		obj->UpDate();
 		if (obj->GetID()==OBJ_ID::PLAYER)
 		{
-			plPos = obj->GetPos();
 			FuncCheckHit()(Cnt,this,MapPos);		// ObjListの何番目かとゲームシーンのポインタを渡す
+			plPos = obj->GetPos();
 		}
 		Cnt++;
 	}
-	if (ScrCenter.x-5<=plPos.x&&plPos.x<=ScrCenter.x+5)
+
+	MapPos= { plPos.x,ScrCenter.y };
+
+	if (MapPos.x<ScrCenter.x)
 	{
-		MapPos.x = MapPos.x-(plPos.x-plPosOld.x);
+		MapPos.x = ScrCenter.x;
 	}
-
-
-	plPosOld = plPos;
-	if (MapPos.x< -ScrCenter.x)
+	else if (MapPos.x>MapSize.x-ScrCenter.x)
 	{
-		MapPos.x = -ScrCenter.x;
+		MapPos.x = MapSize.x - ScrCenter.x;
 	}
-	else if (MapPos.x > (MapSize.x - ScrSize.x - ScrCenter.x))
-	{
-		MapPos.x = MapSize.x-ScrSize.x-ScrCenter.x;
-	}
-	else if(MapPos.x>-ScrCenter.x&&MapPos.x< (MapSize.x - ScrSize.x - ScrCenter.x))
-	{
-		for (auto obj : ObjList)
-		{
-			if (obj->GetID() == OBJ_ID::PLAYER)
-			{
-				obj->SetPos(ScrCenter);
-				plPosOld = ScrCenter;
-			}
-		}
-
-	}
-
-
 	for (auto enemy : enemyList)
 	{
 		(*enemy).UpDate();
@@ -87,7 +69,7 @@ GameScene::GameScene()
 	enemyList.emplace_back(new Enemy(ENEMY_ID::WOLF));
 	LoadDivGraph("image/tile.png", 9, 3, 3, 32, 32, bgImage);
 	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, 300));
-	ObjList.emplace_back(new player(ScrCenter, { 32,32 }));
+	ObjList.emplace_back(new player(ScrCenter, { 32,32 },MapSize));
 
 	FILE* fp;
 	fopen_s(&fp,"Data/tester.dat","rb");

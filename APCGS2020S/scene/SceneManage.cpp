@@ -26,7 +26,7 @@ void SceneManage::Draw()
 	for (auto dque : _drawList)
 	{
 		std::tie(pos, size, angle, image,layer,std::ignore)=dque;
-		if (layer==LAYER::PLYER)
+		if (layer==LAYER::PLAYER)
 		{
 			tmpPosX = pos.x - ScreenCenter.x;
 			pos.x = ScreenCenter.x;

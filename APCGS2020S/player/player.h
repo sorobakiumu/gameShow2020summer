@@ -19,7 +19,7 @@ class player :
 {
 public:
 	player();								// ｺﾝｽﾄﾗｸﾀ
-	player(Vec2double pos, Vec2Int size);	// 指定付きｺﾝｽﾄﾗｸﾀ
+	player(Vec2double pos, Vec2Int size,Vec2Int MSize);	// 指定付きｺﾝｽﾄﾗｸﾀ
 	~player();								// playerのﾃﾞｽﾄﾗｸﾀ
 
 	void UpDate() override;				// player更新用関数
@@ -46,5 +46,7 @@ private:
 	bool atkFlag;
 
 	int ptn;
+
+	Vec2Int MapSize;
 };
 
