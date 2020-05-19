@@ -1,5 +1,5 @@
 #pragma once
-#include <DxLib.h>
+#include "DxLib.h"
 #include <memory>
 #include "..\Common\Vector2.h"
 #include <map>
@@ -18,7 +18,7 @@ class SEManage
 
 
 
-	const void readMusic(std::string key, std::string str);
+	const void SEManage::readMusic(std::string& key, std::string& str);
 
 private:
 

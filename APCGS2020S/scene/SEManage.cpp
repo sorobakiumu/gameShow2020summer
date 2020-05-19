@@ -1,4 +1,5 @@
 #include "SEManage.h"
+#include "DxLib.h"
 
 std::unique_ptr<SEManage, SEManage::SEManageDeleter> SEManage::sInstance(new SEManage);
 
@@ -15,15 +16,15 @@ SEManage::~SEManage()
 
 }
 
-const void SEManage::readMusic(std::string key , std::string str)
+const void SEManage::readMusic(std::string& key , std::string& str)
 {
-	if (seMap.find(key) == seMap.end())
-	{
-		seNum = LoadSoundMem(str.c_str);
+	//if (seMap.find(key) == seMap.end())
+	//{
+	//	seNum = LoadSoundMem(str.c_str());
 
-		seMap[key] = seNum;
+	//	seMap[key] = seNum;
 
-	}
+	//}
 
 	// ‰¹‚ğ—¬‚µ‚½‚¢Û‚ÍˆÈ‰º‚Ìº°ÄŞ‚ğg—p‚·‚é‚±‚Æ
 	// Ù°Ìß–³A“ª‚©‚çÄ¶
