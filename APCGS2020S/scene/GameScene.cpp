@@ -99,7 +99,7 @@ GameScene::GameScene()
 		{
 			for (int j=0;j<x;j++)
 			{
-				DrawRotaGraph(j * 32,i*32,1.0,0,bgImage[Map[j+i*x]],true);
+				DrawRotaGraph(j * 32,i*32,1.0,0,bgImage[Map[j+i*x]-1],true);
 			}
 		}
 		SetDrawScreen(DX_SCREEN_BACK);
