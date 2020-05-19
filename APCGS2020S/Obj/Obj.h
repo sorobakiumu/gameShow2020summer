@@ -2,6 +2,10 @@
 #include<memory>
 #include "../Common/Vector2.h"
 #include <vector>
+#include <string>
+#include <memory>
+#include <map>
+#include "../scene/LAYER.h"
 
 enum class OBJ_ID
 {
@@ -37,6 +41,7 @@ public:
 
 	virtual void Draw(void) = 0;
 
+	// ID取得用関数
 	const OBJ_ID GetID()const { return ID; }
 
 	// 座標取得用関数
@@ -48,19 +53,28 @@ public:
 	// 死亡確定用関数
 	const bool Getdead()const { return dead; }
 
+	// 生存取得用関数
+	bool GetAlive(void) { return alive; };
+
 	void SetPos(Vec2double pos) { Pos = pos; }
 
-	void Draw(int id);
+	// ｱﾆﾒｰｼｮﾝ抜きの描画を行う関数
+	void Draw(Vec2double pos, int id  );
 
+	// ｱﾆﾒｰｼｮﾝ変更関数
 	bool State(const STATE state);
 
+	// 現在の状態を取得する
 	const STATE animKey(void) const;
 
+	// ID毎のｱﾆﾒｰｼｮﾝ番号とｱﾆﾒｰｼｮﾝﾌﾚｰﾑ数を譲渡
 	bool SetAnim(const STATE state, AnimVector& data);
 
+	// 死亡時ｱﾆﾒｰｼｮﾝ終了確認用関数
 	bool isAnimEnd(void);
 
-	bool isAlive(void);
+	// 生存ｽﾃｰﾀｽ変更用関数
+	virtual bool SetAlive(bool alive);		// 生存ｽﾃｰﾀｽ変更用関数
 
 
 
@@ -70,12 +84,30 @@ protected:
 	Vec2double Pos;
 	Vec2Int Size;
 
+	// 完全に消していいかを判断する
 	bool dead;
+	
+	// 生きているかどうかを判断する
 	bool alive;
+
+	int _zOrder;											// 描画する順番(奥行、Z軸)を指定
+	double _rad;
+
+	// 完全に削除可能かを識別する関数
+	bool Destroyproc(void);
 
 private:
 
-	//std::map<STATE , Anim
+	// ｱﾆﾒｰｼｮﾝの構造を管理するSTL
+	std::map<STATE, AnimVector> _animMap;
+
+	STATE _state = STATE::NORMAL;
+	
+	// ｱﾆﾒｰｼｮﾝの何コマ目か
+	unsigned int _animFlam;									
+	
+	// 何回ループしたか
+	unsigned int _animCnt;								
 
 };
 
