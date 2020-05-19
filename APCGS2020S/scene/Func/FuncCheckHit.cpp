@@ -1,5 +1,6 @@
 #include "FuncCheckHit.h"
 #include "../GameScene.h"
+#include "../SceneManage.h"
 
 void FuncCheckHit::operator()(int no, void* scene)
 {
@@ -56,6 +57,17 @@ void FuncCheckHit::operator()(int no, void* scene)
 				{
 					obj->SetPos({ Pos.x,Pos.y - 1 });
 					Pos = obj->GetPos();
+				}
+
+				if (CheckHit[0] && CheckHit[1] && CheckHit[2] && CheckHit[3])
+				{
+					for (auto obj: ((GameScene*)scene)->ObjList)
+					{
+						if (obj->GetID()==OBJ_ID::PLAYER)
+						{
+							obj->SetPos(ScrCenter);
+						}
+					}
 				}
 			}
 
