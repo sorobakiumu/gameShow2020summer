@@ -3,7 +3,7 @@
 
 struct FuncCheckHit
 {
-	void operator()(int no,void* scene);
+	void operator()(int no,void* scene,Vec2double pos);
 private:
 	Vec2double Pos;
 	Vec2Int Size;

@@ -2,7 +2,7 @@
 #include "../GameScene.h"
 #include "../SceneManage.h"
 
-void FuncCheckHit::operator()(int no, void* scene)
+void FuncCheckHit::operator()(int no, void* scene,Vec2double pos)
 {
 	int Cnt = 0;
 	for (auto obj : ((GameScene*)scene)->ObjList)
