@@ -2,6 +2,7 @@
 #include <vector>
 #include "../Common/Vector2.h"
 #include <map>
+#include "../Obj/Obj.h"
 
 
 #define lpEnemy Enemy::GetInstance()
@@ -21,35 +22,34 @@ enum class ENEMY_ID
 	MAX
 };
 
-class Enemy
-{
-public:
-	Enemy(ENEMY_ID enemyId);
-	~Enemy();
-	void UpDate();
-	static bool initFlag;
+class Enemy:
+	public Obj
+	{
+		public:
+		Enemy(ENEMY_ID enemyId);
+		~Enemy();
+		void UpDate();
+		static bool initFlag;
 
-private:
-	static Enemy* sInstance;		//動的に作るために、ポインターで、実体が入るものを作る
-	ENEMY_ID _enemyID;
-	void EnemyInit();
-	bool flag;
-	Vec2double pos;
+		private:
+		static Enemy* sInstance;		//動的に作るために、ポインターで、実体が入るものを作る
+		ENEMY_ID _enemyID;
+		void EnemyInit();
+		bool flag;
 
-	int animCnt;
-	int frmCnt;
+		int animCnt;
+		int frmCnt;
 
 
-	std::map<ENEMY_ID, std::vector<int>> enemyImage;
+		std::map<ENEMY_ID, std::vector<int>> enemyImage;
 
-	void wolff();
-	void ghost();
-	void man();
-	void black();
-	void burst();
-	void baze();
-	void boss();
-	void rare();
-
+		void wolff();
+		void ghost();
+		void man();
+		void black();
+		void burst();
+		void baze();
+		void boss();
+		void rare();
 };
 

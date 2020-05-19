@@ -76,19 +76,19 @@ void Enemy::EnemyInit()
 void Enemy::wolff()
 {
 	animCnt = (frmCnt / 30) % 3;
-	lpSceneMng.addDrawQue(std::make_tuple(pos,1.0,0.0,enemyImage[ENEMY_ID::WOLF][animCnt],LAYER::CHARA,999));
+	lpSceneMng.addDrawQue(std::make_tuple(Pos,1.0,0.0,enemyImage[ENEMY_ID::WOLF][animCnt],LAYER::CHARA,999));
 }
 
 void Enemy::ghost()
 {
 	animCnt = (frmCnt / 30) % 6;
-	lpSceneMng.addDrawQue(std::make_tuple(pos, 1.0, 0.0, enemyImage[ENEMY_ID::GHOST][animCnt], LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::GHOST][animCnt], LAYER::CHARA, 999));
 }
 
 Enemy::Enemy(ENEMY_ID enemyId)
 {
 	_enemyID = enemyId;
-	pos = { 10,10 };
+	Pos = { 10,10 };
 	flag = true;
 
 	frmCnt =lpSceneMng.FrmCnt();
@@ -107,36 +107,36 @@ Enemy::~Enemy()
 void Enemy::man()
 {
 	animCnt = (frmCnt / 30) % 3;
-	lpSceneMng.addDrawQue(std::make_tuple(pos, 1.0, 0.0, enemyImage[ENEMY_ID::MAN][animCnt], LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::MAN][animCnt], LAYER::CHARA, 999));
 }
 
 void Enemy::black()
 {
 	animCnt = (frmCnt / 30) % 3;
-	lpSceneMng.addDrawQue(std::make_tuple(pos, 1.0, 0.0, enemyImage[ENEMY_ID::BLACK][animCnt], LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::BLACK][animCnt], LAYER::CHARA, 999));
 }
 
 void Enemy::burst()
 {
 	animCnt = (frmCnt / 30) % 2;
-	lpSceneMng.addDrawQue(std::make_tuple(pos, 1.0, 0.0, enemyImage[ENEMY_ID::BURST][animCnt], LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::BURST][animCnt], LAYER::CHARA, 999));
 }
 
 void Enemy::baze()
 {
 	animCnt = (frmCnt / 30) % 4;
-	lpSceneMng.addDrawQue(std::make_tuple(pos, 1.0, 0.0, enemyImage[ENEMY_ID::BAZE][animCnt], LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::BAZE][animCnt], LAYER::CHARA, 999));
 }
 
 void Enemy::boss()
 {
 	animCnt = (frmCnt / 30) % 3;
-	lpSceneMng.addDrawQue(std::make_tuple(pos, 1.0, 0.0, enemyImage[ENEMY_ID::BOSS][animCnt], LAYER::CHARA, 998));
-	lpSceneMng.addDrawQue(std::make_tuple(pos, 1.0, 0.0, enemyImage[ENEMY_ID::PIT][0], LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::BOSS][animCnt], LAYER::CHARA, 998));
+	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::PIT][0], LAYER::CHARA, 999));
 }
 
 void Enemy::rare()
 {
 	animCnt = (frmCnt / 30) % 4;
-	lpSceneMng.addDrawQue(std::make_tuple(pos, 1.0, 0.0, enemyImage[ENEMY_ID::RARE][animCnt], LAYER::CHARA, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(Pos, 1.0, 0.0, enemyImage[ENEMY_ID::RARE][animCnt], LAYER::CHARA, 999));
 }
