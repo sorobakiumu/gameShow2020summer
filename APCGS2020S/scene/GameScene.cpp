@@ -69,7 +69,7 @@ GameScene::GameScene()
 	enemyList.emplace_back(new Enemy(ENEMY_ID::WOLF));
 	LoadDivGraph("image/tile.png", 9, 3, 3, 32, 32, bgImage);
 	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, 300));
-	ObjList.emplace_back(new player(ScrCenter, { 32,32 },MapSize));
+
 
 	FILE* fp;
 	fopen_s(&fp,"Data/tester.dat","rb");
@@ -96,6 +96,7 @@ GameScene::GameScene()
 		}
 		SetDrawScreen(DX_SCREEN_BACK);
 	}
+	ObjList.emplace_back(new player(ScrCenter, { 32,32 },MapSize));
 	MapPos = { MapSize.x/2-ScrCenter.x,ScrCenter.y};
 }
 
