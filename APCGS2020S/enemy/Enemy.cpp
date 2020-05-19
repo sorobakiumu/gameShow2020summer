@@ -69,6 +69,8 @@ void Enemy::EnemyInit()
 	LoadDivGraph("É{ÉX.png", 3, 3, 1, 64, 64, &enemyImage[ENEMY_ID::BOSS][0]);
 	//RARE
 	LoadDivGraph("ÉåÉA.bmp", 4, 4, 1, 32, 32, &enemyImage[ENEMY_ID::RARE][0]);
+
+	initFlag = false;
 }
 
 void Enemy::wolff()
