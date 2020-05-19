@@ -3,6 +3,7 @@
 #include "GameScene.h"
 #include "SceneManage.h"
 #include "TitleScene.h"
+#include "../Obj/Obj.h"
 
 #include "../Obj/Gimmick/Lift.h"
 #include "../player/player.h"
@@ -53,6 +54,13 @@ unique_Base GameScene::Update(unique_Base own)
 
 	}
 
+
+	for (auto enemy : enemyList)
+	{
+		(*enemy).UpDate();
+	}
+
+
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos,1.0,0.0,MapScreen,LAYER::MAP,0));
 
 	auto itr = std::remove_if(ObjList.begin(),				// チェックの開始地点
@@ -75,6 +83,8 @@ unique_Base GameScene::Update(unique_Base own)
 GameScene::GameScene()
 {
 	MapScreen = 0;
+
+	enemyList.emplace_back(new Enemy(ENEMY_ID::WOLF));
 	LoadDivGraph("image/tile.png", 9, 3, 3, 32, 32, bgImage);
 	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, 300));
 	ObjList.emplace_back(new player(ScrCenter, { 32,32 }));

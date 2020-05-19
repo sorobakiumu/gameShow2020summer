@@ -2,6 +2,7 @@
 #include "TitleScene.h"
 #include "SceneManage.h"
 #include "algorithm"
+#include "../enemy/Enemy.h"
 
 SceneManage* SceneManage::sInstance = nullptr;
 
@@ -17,7 +18,7 @@ void SceneManage::Draw()
 
 
 
-	Vec2double pos;
+  	Vec2double pos;
 	double size, angle;
 	int image;
 	for (auto dque : _drawList)
@@ -65,6 +66,8 @@ bool SceneManage::SysInit()
 {
 	bool rtnFlag = true;
 
+	Enemy::initFlag = true;
+
 	// ｼｽﾃﾑ処理
 
 	//SetWindowText("エナドリ");
@@ -77,6 +80,8 @@ bool SceneManage::SysInit()
 		return false;
 	}
 	SetDrawScreen(DX_SCREEN_BACK);						// 描画先をバックバッファに設定
+
+	frmCnt = 0;
 
 	return rtnFlag;
 }

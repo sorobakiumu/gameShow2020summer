@@ -23,7 +23,7 @@ enum class ENEMY_ID
 };
 
 class Enemy:
-	public Obj
+public Obj
 	{
 		public:
 		Enemy(ENEMY_ID enemyId);
@@ -40,6 +40,7 @@ class Enemy:
 		int animCnt;
 		int frmCnt;
 
+		void Draw();
 
 		std::map<ENEMY_ID, std::vector<int>> enemyImage;
 
