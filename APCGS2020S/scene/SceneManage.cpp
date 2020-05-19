@@ -21,14 +21,31 @@ void SceneManage::Draw()
   	Vec2double pos;
 	double size, angle;
 	int image;
+	LAYER layer;
+	int tmpPosX;
 	for (auto dque : _drawList)
 	{
-	double size,angle;
-	int image;
-	std::tie(pos, size, angle, image,std::ignore,std::ignore)=dque;
+		std::tie(pos, size, angle, image,layer,std::ignore)=dque;
+		if (layer==LAYER::PLYER)
+		{
+			tmpPosX = pos.x - ScreenCenter.x;
+			pos.x = ScreenCenter.x;
+			for (auto dque : _drawList)
+			{
+				std::tie(pos, size, angle, image, layer, std::ignore) = dque;
+				if (layer == LAYER::ENEMY||layer==LAYER::MAP)
+				{
+					pos.x -= tmpPosX;
+				}
+			}
+		}
+	}
+	for (auto dque : _drawList)
+	{
+		std::tie(pos, size, angle, image, layer, std::ignore) = dque;
 		DrawRotaGraph(pos.x, pos.y,
 			size, angle,
-			image, true,false);
+			image, true, false);
 	}
 	ScreenFlip();
 }

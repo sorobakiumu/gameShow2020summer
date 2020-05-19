@@ -4,7 +4,8 @@ enum class LAYER
 {
 	BG,
 	MAP,
-	CHARA,
+	PLYER,
+	ENEMY,
 	UI,
 	MAX,
 };
