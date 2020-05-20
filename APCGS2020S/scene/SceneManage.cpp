@@ -37,7 +37,7 @@ void SceneManage::Draw()
 				{
 					pos.x -= tmpPosX;
 				}
-				else if(layer == LAYER::PLAYER)
+				else if(layer == LAYER::PLAYER && pos.x>=ScreenCenter.x)
 				{
 					pos.x = ScreenCenter.x;
 				}
