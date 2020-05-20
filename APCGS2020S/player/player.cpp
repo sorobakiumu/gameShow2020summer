@@ -89,11 +89,11 @@ void player::UpDate()
 	}
 
 	// âÊñ äOÇ…çsÇ©Ç»Ç¢ÇÊÇ§Ç…Ç∑ÇÈêßå‰
-	if ( MapPos.x <= Size.x/2 )
+	if ( MapPos.x < Size.x/2 )
 	{
-		MapPos.x = 0;
+		MapPos.x = Size.x / 2;
 	}
-	if (MapPos.x >= MapSize.x-Size.x/2)
+	if (MapPos.x > MapSize.x-Size.x/2)
 	{
 		MapPos.x = MapSize.x - Size.x / 2;
 	}
