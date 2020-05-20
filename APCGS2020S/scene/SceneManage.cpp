@@ -29,7 +29,7 @@ void SceneManage::Draw()
 		if (layer==LAYER::PLAYER)
 		{
 			tmpPosX = pos.x - ScreenCenter.x;
-			pos.x = ScreenCenter.x;
+
 			for (auto dque : _drawList)
 			{
 				std::tie(pos, size, angle, image, layer, std::ignore) = dque;
@@ -37,15 +37,13 @@ void SceneManage::Draw()
 				{
 					pos.x -= tmpPosX;
 				}
+				else if(layer == LAYER::PLAYER)
+				{
+					pos.x = ScreenCenter.x;
+				}
+				DrawRotaGraph(pos.x, pos.y,size, angle,image, true, false);
 			}
 		}
-	}
-	for (auto dque : _drawList)
-	{
-		std::tie(pos, size, angle, image, layer, std::ignore) = dque;
-		DrawRotaGraph(pos.x, pos.y,
-			size, angle,
-			image, true, false);
 	}
 	ScreenFlip();
 }
