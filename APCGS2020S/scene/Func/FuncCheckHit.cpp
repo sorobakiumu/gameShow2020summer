@@ -48,4 +48,10 @@ bool FuncCheckHit::operator()(int no, void* scene)
 		}
 	}
 
+	// ¶‚Ì”»’è
+	if ((((GameScene*)scene)->Map[((plPos.y-plSize.y)*MapSize.x/32)+(plPos.x-plSize.x/2)]!=0)||
+		 ((GameScene*)scene)->Map[((plPos.y+plSize.y)*MapSize.x/32)+(plPos.x-plSize.x/2)]!=0)
+	{
+		return true;
+	}
 }
