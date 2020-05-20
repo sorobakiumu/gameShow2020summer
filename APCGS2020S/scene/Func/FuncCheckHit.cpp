@@ -26,10 +26,10 @@ bool FuncCheckHit::operator()(int no, void* scene)
 		case OBJ_ID::GIMMICK:
 			ObjPos = obj->GetPos();
 			ObjSize = obj->GetSize();
-			if ((((plPos.x-plSize.x/2)<(ObjPos.x+ObjSize.x))&&((plPos.x+plSize.x/2)>(ObjPos.x-ObjSize.x/2))
-			   ||((plPos.x+plSize.x/2)<(ObjPos.x-ObjSize.x))&&((plPos.x-plSize.x/2)>(ObjPos.x+ObjSize.x/2)))
-			  &&(((plPos.y-plSize.y/2)<(ObjPos.y+ObjSize.y))&&((plPos.y+plSize.y/2)>(ObjPos.y-ObjSize.y/2))
-			   ||((plPos.y+plSize.y/2)<(ObjPos.y-ObjSize.y))&&((plPos.y-plSize.y/2)>(ObjPos.y+ObjSize.y/2)))
+			if ((((plPos.x-plSize.x/2)<(ObjPos.x+ObjSize.x/2))&&((plPos.x+plSize.x/2)>(ObjPos.x-ObjSize.x/2))
+			   ||((plPos.x+plSize.x/2)<(ObjPos.x-ObjSize.x/2))&&((plPos.x-plSize.x/2)>(ObjPos.x+ObjSize.x/2)))
+			  &&(((plPos.y-plSize.y/2)<(ObjPos.y+ObjSize.y/2))&&((plPos.y+plSize.y/2)>(ObjPos.y-ObjSize.y/2))
+			   ||((plPos.y+plSize.y/2)<(ObjPos.y-ObjSize.y/2))&&((plPos.y-plSize.y/2)>(ObjPos.y+ObjSize.y/2)))
 				)
 			{
 				return true;

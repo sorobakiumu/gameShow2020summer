@@ -109,7 +109,7 @@ GameScene::GameScene()
 		}
 		SetDrawScreen(DX_SCREEN_BACK);
 	}
-	ObjList.emplace_back(new player(ScrCenter, { 32,32 },MapSize));
+	ObjList.emplace_back(new player(ScrCenter, { 32,32 }));
 	MapPos = { MapSize.x/2-ScrCenter.x,ScrCenter.y};
 }
 
