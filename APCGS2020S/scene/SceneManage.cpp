@@ -33,7 +33,7 @@ void SceneManage::Draw()
 			for (auto dque : _drawList)
 			{
 				std::tie(pos, size, angle, image, layer, std::ignore) = dque;
-				if (layer == LAYER::ENEMY)
+				if (layer == LAYER::ENEMY||layer==LAYER::MAP)
 				{
 					pos.x -= tmpPosX;
 				}
