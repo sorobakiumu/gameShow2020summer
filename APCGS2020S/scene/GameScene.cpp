@@ -27,7 +27,7 @@ unique_Base GameScene::Update(unique_Base own)
 		Cnt++;
 	}
 
-	MapPos= { plPos.x,ScrCenter.y };
+	MapPos= { MapSize.x-plPos.x,ScrCenter.y };
 
 	if (MapPos.x<ScrCenter.x)
 	{
