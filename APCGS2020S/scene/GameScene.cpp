@@ -7,8 +7,6 @@
 
 #include "../Obj/Gimmick/Lift.h"
 #include "../player/player.h"
-#include "../scene/SEManage.h"
-
 
 unique_Base GameScene::Update(unique_Base own)
 {
@@ -111,11 +109,8 @@ GameScene::GameScene()
 		}
 		SetDrawScreen(DX_SCREEN_BACK);
 	}
-	ObjList.emplace_back(new player(ScrCenter, { 32,32 }));
+	ObjList.emplace_back(new player(ScrCenter, { 32,32 },MapSize));
 	MapPos = { MapSize.x/2-ScrCenter.x,ScrCenter.y};
-
-	lpSEMng
-
 }
 
 GameScene::~GameScene()

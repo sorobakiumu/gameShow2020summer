@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 
-#define lpSEMng  SEManage::GetInstance();
+#define lpSEMng  SEManage::GetInstance;
 
 class SEManage
 {

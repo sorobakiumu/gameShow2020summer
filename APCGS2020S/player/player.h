@@ -18,11 +18,11 @@ class player :
 	public Obj
 {
 public:
-	player();												// ｺﾝｽﾄﾗｸﾀ
-	player(Vec2double pos, Vec2Int size);		// 指定付きｺﾝｽﾄﾗｸﾀ
-	~player();												// playerのﾃﾞｽﾄﾗｸﾀ
+	player();								// ｺﾝｽﾄﾗｸﾀ
+	player(Vec2double pos, Vec2Int size,Vec2Int MSize);	// 指定付きｺﾝｽﾄﾗｸﾀ
+	~player();								// playerのﾃﾞｽﾄﾗｸﾀ
 
-	void UpDate() override;									// player更新用関数
+	void UpDate() override;				// player更新用関数
 
 	void shot(void);
 	void attack(void);

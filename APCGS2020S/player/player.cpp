@@ -8,7 +8,7 @@ player::player()
 }
 
 // player‚Ì‰ŠúÀ•W‚Æsize‚ğİ’è
-player::player(Vec2double _pos, Vec2Int _size)
+player::player(Vec2double _pos, Vec2Int _size,Vec2Int MSize)
 {
 	// player‚Ì‰ŠúÀ•W‚Æsize‚ğİ’è
 	MapPos = _pos;
@@ -16,6 +16,7 @@ player::player(Vec2double _pos, Vec2Int _size)
 	// »²½Ş‘ã“ü
 	Size = _size;
 
+	MapSize = MSize;
 
 	// ‘ÎÛ¯•Ê•t—^
 	ID = OBJ_ID::PLAYER;

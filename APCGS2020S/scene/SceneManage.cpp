@@ -98,7 +98,7 @@ bool SceneManage::SysInit()
 
 	// ｼｽﾃﾑ処理
 
-	SetWindowText("エナドリ");
+	//SetWindowText("エナドリ");
 	SetGraphMode(ScreenSize.x, ScreenSize.y, 16);		// 640×480ﾄﾞｯﾄ、65536色ﾓｰﾄﾞに設定
 	ChangeWindowMode(true);								// true.window false.ﾌﾙｽｸﾘｰﾝ
 

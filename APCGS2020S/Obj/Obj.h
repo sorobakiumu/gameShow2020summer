@@ -7,8 +7,6 @@
 #include <map>
 #include "../scene/LAYER.h"
 
-#define SIZE 32;
-
 enum class OBJ_ID
 {
 	PLAYER,
