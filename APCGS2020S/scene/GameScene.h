@@ -22,5 +22,4 @@ private:
 	std::vector<SharedObj> ObjList;
 	std::vector<int> Map;
 	Vec2double plPos,plPosOld, MapPos;
-	Vec2Int MapSize;
 };

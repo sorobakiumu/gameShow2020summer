@@ -105,7 +105,7 @@ void Enemy::ghost()
 Enemy::Enemy(ENEMY_ID enemyId)
 {
 	_enemyID = enemyId;
-	MapPos = { 10,10 };
+	MapPos = {1800,10 };
 	flag = true;
 
 	frmCnt =lpSceneMng.FrmCnt();

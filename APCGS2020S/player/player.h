@@ -46,7 +46,5 @@ private:
 	bool atkFlag;
 
 	int ptn;
-
-	Vec2Int MapSize;
 };
 

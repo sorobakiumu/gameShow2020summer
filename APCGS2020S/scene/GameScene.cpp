@@ -64,9 +64,9 @@ unique_Base GameScene::Update(unique_Base own)
 
 	ObjList.erase(itr,
 		ObjList.end());
-	Vec2double MSizeD;
-	MSizeD = { static_cast<double>(MapSize.x),static_cast<double>(MapSize.y) };
-	lpSceneMng.addDrawQue(std::make_tuple(MSizeD, 1.0, 0.0,0, LAYER::MAX, 0));
+	//Vec2double MSizeD;
+	//MSizeD = { static_cast<double>(MapSize.x),static_cast<double>(MapSize.y) };
+	//lpSceneMng.addDrawQue(std::make_tuple(MSizeD, 1.0, 0.0,0, LAYER::MAX, 0));
 	return std::move(own);
 }
 

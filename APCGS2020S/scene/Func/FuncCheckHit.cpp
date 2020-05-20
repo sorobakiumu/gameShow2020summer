@@ -10,7 +10,7 @@ void FuncCheckHit::operator()(int no, void* scene,Vec2double pos)
 		if (Cnt == no)
 		{
 			Size = obj->GetSize();
-			MapPos = { (((GameScene*)scene)->MapSize.x / 2 - ((GameScene*)scene)->MapPos.x) + obj->GetPos().x,obj->GetPos().y };
+			MapPos = { MapSize.x / 2 - MapPos.x + obj->GetPos().x,obj->GetPos().y };
 			// プレイヤーのサイズと座標(マップ座標)を取得する
 		}
 		Cnt++;

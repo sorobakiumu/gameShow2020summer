@@ -23,20 +23,25 @@ void SceneManage::Draw()
 	int image;
 	LAYER layer;
 	int tmpPosX;
+
 	for (auto dque : _drawList)
 	{
 		std::tie(pos, size, angle, image,layer,std::ignore)=dque;
 		if (layer==LAYER::PLAYER)
 		{
 			tmpPosX = pos.x - ScreenCenter.x;
+			if (pos.x < ScreenCenter.x )
+			{
+				tmpPosX = 0;
+			}
+			else if (pos.x > MapSize.x - ScreenCenter.x)
+			{
+				tmpPosX = MapSize.x-ScreenSize.x;
+			}
 
 			for (auto dque : _drawList)
 			{
 				std::tie(pos, size, angle, image, layer, std::ignore) = dque;
-				if (layer == LAYER::MAX)
-				{
-					MapSize = pos;
-				}
 				if (layer == LAYER::ENEMY||layer==LAYER::MAP)
 				{
 					pos.x -= tmpPosX;
@@ -45,9 +50,9 @@ void SceneManage::Draw()
 				{
 					pos.x = ScreenCenter.x;
 				}
-				if (layer == LAYER::PLAYER && pos.x > MapSize.x - ScreenCenter.x)
+				else if (layer == LAYER::PLAYER && pos.x > MapSize.x - ScreenCenter.x)
 				{
-					pos.x = pos.x - (MapSize.x - ScreenSize.x);
+					pos.x = pos.x - static_cast<double>(MapSize.x - ScreenSize.x);
 				}
 				DrawRotaGraph(pos.x, pos.y,size, angle,image, true, false);
 			}
@@ -56,7 +61,7 @@ void SceneManage::Draw()
 	ScreenFlip();
 }
 
-SceneManage::SceneManage() :ScreenSize{ 640,480 }, ScreenCenter{ ScreenSize.x / 2,ScreenSize.y / 2 }
+SceneManage::SceneManage() :ScreenSize{ 640,480 }, ScreenCenter{ ScreenSize.x / 2,ScreenSize.y / 2 }, frmCnt{0}
 {
 
 }

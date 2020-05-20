@@ -10,6 +10,7 @@ using DRAW_QUE = std::tuple<Vec2double, double, double, int,LAYER,int>;		//ç¿ïWÅ
 #define lpSceneMng SceneManage::GetInstance()
 #define ScrSize lpSceneMng.ScreenSize
 #define ScrCenter lpSceneMng.ScreenCenter
+#define MapSize lpSceneMng._mapSize
 
 class SceneManage
 {
@@ -44,7 +45,7 @@ public:
 	void addDrawQue(DRAW_QUE dque);
 
 	int FrmCnt() { return frmCnt; }
-
+	Vec2Int _mapSize;
 	void Run();
 private:
 	static SceneManage* sInstance;
@@ -59,5 +60,5 @@ private:
 	~SceneManage();
 
 	bool SysInit();
-	Vec2double MapSize;
+
 };
