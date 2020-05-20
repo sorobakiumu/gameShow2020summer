@@ -21,7 +21,11 @@ unique_Base GameScene::Update(unique_Base own)
 		obj->UpDate();
 		if (obj->GetID()==OBJ_ID::PLAYER)
 		{
-			FuncCheckHit()(Cnt,this,MapPos);		// ObjListの何番目かとゲームシーンのポインタを渡す
+			if (FuncCheckHit()(Cnt, this))
+			{
+				obj->SetPos({640,ScrCenter.y});
+			}
+			// ObjListの何番目かとゲームシーンのポインタを渡す
 			plPos = obj->GetPos();
 		}
 		Cnt++;

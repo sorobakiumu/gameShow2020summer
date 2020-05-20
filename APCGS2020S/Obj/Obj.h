@@ -76,8 +76,6 @@ public:
 	// 生存ｽﾃｰﾀｽ変更用関数
 	virtual bool SetAlive(bool alive);		// 生存ｽﾃｰﾀｽ変更用関数
 
-
-
 	virtual void UpDate() = 0;
 protected:
 	OBJ_ID ID;

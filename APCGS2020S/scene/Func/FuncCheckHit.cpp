@@ -2,16 +2,16 @@
 #include "../GameScene.h"
 #include "../SceneManage.h"
 
-void FuncCheckHit::operator()(int no, void* scene,Vec2double pos)
+bool FuncCheckHit::operator()(int no, void* scene)
 {
 	int Cnt = 0;
 	for (auto obj : ((GameScene*)scene)->ObjList)
 	{
 		if (Cnt == no)
 		{
-			Size = obj->GetSize();
-			MapPos = { MapSize.x / 2 - MapPos.x + obj->GetPos().x,obj->GetPos().y };
-			// プレイヤーのサイズと座標(マップ座標)を取得する
+			plSize = obj->GetSize();
+			plPos = obj->GetPos();
+			// プレイヤーのサイズと座標を取得する
 		}
 		Cnt++;
 	}
@@ -24,6 +24,16 @@ void FuncCheckHit::operator()(int no, void* scene,Vec2double pos)
 
 			break;
 		case OBJ_ID::GIMMICK:
+			ObjPos = obj->GetPos();
+			ObjSize = obj->GetSize();
+			if ((((plPos.x-plSize.x/2)<(ObjPos.x+ObjSize.x))&&((plPos.x+plSize.x/2)>(ObjPos.x-ObjSize.x/2))
+			   ||((plPos.x+plSize.x/2)<(ObjPos.x-ObjSize.x))&&((plPos.x-plSize.x/2)>(ObjPos.x+ObjSize.x/2)))
+			  &&(((plPos.y-plSize.y/2)<(ObjPos.y+ObjSize.y))&&((plPos.y+plSize.y/2)>(ObjPos.y-ObjSize.y/2))
+			   ||((plPos.y+plSize.y/2)<(ObjPos.y-ObjSize.y))&&((plPos.y-plSize.y/2)>(ObjPos.y+ObjSize.y/2)))
+				)
+			{
+				return true;
+			}
 			//switch (obj->GetG_ID())
 			//{
 			//default:
