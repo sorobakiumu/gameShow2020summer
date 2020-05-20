@@ -1,6 +1,6 @@
 #include "FuncCheckHit.h"
 #include "../GameScene.h"
-#include "../SceneManage.h"
+#include "../../manager/SceneManage.h"
 
 bool FuncCheckHit::operator()(int no, void* scene)
 {

@@ -1,7 +1,7 @@
 #include <DxLib.h>
 #include <vector>
 #include "GameScene.h"
-#include "SceneManage.h"
+#include "../manager/SceneManage.h"
 #include "TitleScene.h"
 #include "../Obj/Obj.h"
 
@@ -109,7 +109,7 @@ GameScene::GameScene()
 		}
 		SetDrawScreen(DX_SCREEN_BACK);
 	}
-	ObjList.emplace_back(new player(ScrCenter, { 32,32 },MapSize));
+	ObjList.emplace_back(new player(ScrCenter, { 32,32 }));
 	MapPos = { MapSize.x/2-ScrCenter.x,ScrCenter.y};
 }
 

@@ -1,6 +1,6 @@
 #include <DxLib.h>
 #include "Lift.h"
-#include "../../scene/SceneManage.h"
+#include "../../manager/SceneManage.h"
 
 Lift::Lift()
 {

@@ -9,6 +9,7 @@
 
 #define lpSEMng  SEManage::GetInstance();
 
+#define CHIP_SIZE 32
 
 class CheckHitManage
 {

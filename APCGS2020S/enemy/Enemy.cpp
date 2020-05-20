@@ -1,5 +1,5 @@
 #include "Enemy.h"
-#include "../scene/SceneManage.h"
+#include "../manager/SceneManage.h"
 #include "../scene/LAYER.h"
 #include <DxLib.h>
 
