@@ -1,9 +1,9 @@
 #pragma once
 #include "..\Common\Vector2.h"
 #include "../Obj/Obj.h"
-#include "../scene/SceneManage.h"
+#include "../manager/SceneManage.h"
 #include "../scene/GameScene.h"
-#include "../scene/ImageManage.h"
+#include "../manager/ImageManage.h"
 
 // ‘€ì¯•Ê\‘¢‘Ì
 enum Ctl

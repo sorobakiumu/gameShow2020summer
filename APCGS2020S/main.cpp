@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <Windows.h>
-#include "Scene/SceneManage.h"
+#include "manager/SceneManage.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 //int main()
