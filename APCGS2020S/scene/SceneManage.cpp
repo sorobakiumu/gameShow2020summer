@@ -1,6 +1,5 @@
 #include "DxLib.h"
 #include "TitleScene.h"
-#include "GameScene.h"
 #include "SceneManage.h"
 #include "algorithm"
 #include "../enemy/Enemy.h"
@@ -34,13 +33,21 @@ void SceneManage::Draw()
 			for (auto dque : _drawList)
 			{
 				std::tie(pos, size, angle, image, layer, std::ignore) = dque;
+				if (layer == LAYER::MAX)
+				{
+					MapSize = pos;
+				}
 				if (layer == LAYER::ENEMY||layer==LAYER::MAP)
 				{
 					pos.x -= tmpPosX;
 				}
-				else if(layer == LAYER::PLAYER && pos.x>=ScreenCenter.x && pos.x<=MapSize.x)
+				else if(layer == LAYER::PLAYER && pos.x>=ScreenCenter.x && pos.x<=MapSize.x-ScreenCenter.x)
 				{
 					pos.x = ScreenCenter.x;
+				}
+				if (layer == LAYER::PLAYER && pos.x > MapSize.x - ScreenCenter.x)
+				{
+					pos.x = pos.x - (MapSize.x - ScreenSize.x);
 				}
 				DrawRotaGraph(pos.x, pos.y,size, angle,image, true, false);
 			}

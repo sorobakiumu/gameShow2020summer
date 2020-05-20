@@ -59,5 +59,5 @@ private:
 	~SceneManage();
 
 	bool SysInit();
-
+	Vec2double MapSize;
 };

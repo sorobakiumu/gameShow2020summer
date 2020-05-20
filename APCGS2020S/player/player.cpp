@@ -93,9 +93,9 @@ void player::UpDate()
 	{
 		MapPos.x = Size.x / 2;
 	}
-	if (MapPos.x > MapSize.x)
+	if (MapPos.x > MapSize.x- Size.x / 2)
 	{
-		MapPos.x = MapSize.x;
+		MapPos.x = MapSize.x- Size.x / 2;
 	}
 
 

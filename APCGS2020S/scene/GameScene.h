@@ -14,7 +14,6 @@ public:
 	~GameScene();
 private:
 	friend FuncCheckHit;
-	friend SceneManage;
 
 	int bgImage[9];
 	int MapScreen;
