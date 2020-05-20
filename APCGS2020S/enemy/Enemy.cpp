@@ -69,15 +69,15 @@ void Enemy::EnemyInit()
 	//MAN
 	LoadDivGraph("image/男.png", 6, 3, 2, 32, 32, &enemyImage[ENEMY_ID::MAN][0]);
 	//BLACK
-	LoadDivGraph("image/ブラックアンドホワイト.png", 6, 6, 1, 32, 32, &enemyImage[ENEMY_ID::BLACK][0]);
+	LoadDivGraph("image/ブラックアンドホワイト.png", 6, 3, 2, 32, 32, &enemyImage[ENEMY_ID::BLACK][0]);
 	//BURST
-	LoadDivGraph("image/爆弾.bmp", 8, 8, 1, 32, 32, &enemyImage[ENEMY_ID::BURST][0]);
+	LoadDivGraph("image/自爆マン.bmp", 8, 8, 1, 32, 32, &enemyImage[ENEMY_ID::BURST][0]);
 	//BAZE
 	LoadDivGraph("image/バゼ.bmp", 4, 4, 1, 32, 32, &enemyImage[ENEMY_ID::BAZE][0]);
 	//PIT
 	enemyImage[ENEMY_ID::PIT][0] =LoadGraph("image/ピット.bmp");
 	//BOSS
-	LoadDivGraph("image/ボス.png", 3, 3, 1, 64, 64, &enemyImage[ENEMY_ID::BOSS][0]);
+	LoadDivGraph("image/ボス.png", 2, 2, 1, 64, 64, &enemyImage[ENEMY_ID::BOSS][0]);
 	//RARE
 	LoadDivGraph("image/レア.bmp", 4, 4, 1, 32, 32, &enemyImage[ENEMY_ID::RARE][0]);
 
@@ -147,7 +147,7 @@ void Enemy::baze()
 
 void Enemy::boss()
 {
-	animCnt = (lpSceneMng.FrmCnt() / 30) % 3;
+	animCnt = (lpSceneMng.FrmCnt() / 30) % 2;
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::BOSS][animCnt], LAYER::ENEMY, 998));
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::PIT][0], LAYER::ENEMY, 999));
 }
