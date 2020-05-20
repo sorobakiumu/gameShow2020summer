@@ -1,5 +1,5 @@
 #include "Obj.h"
-#include "../scene/SceneManage.h"
+#include "../manager/SceneManage.h"
 
 Obj::Obj()
 {

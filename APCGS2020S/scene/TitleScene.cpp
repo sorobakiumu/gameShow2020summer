@@ -2,7 +2,8 @@
 #include "TitleScene.h"
 #include "DxLib.h"
 #include "GameScene.h"
-#include "SceneManage.h"
+#include "../manager/SceneManage.h"
+
 
 unique_Base TitleScene::Update(unique_Base own)
 {

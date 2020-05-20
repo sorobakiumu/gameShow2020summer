@@ -1,6 +1,6 @@
 #include "FallLift.h"
 #include "DxLib.h"
-#include "../../scene/SceneManage.h"
+#include "../../manager/SceneManage.h"
 
 FallLift::FallLift()
 {
