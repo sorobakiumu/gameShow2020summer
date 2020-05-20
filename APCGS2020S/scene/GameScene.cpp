@@ -28,15 +28,20 @@ unique_Base GameScene::Update(unique_Base own)
 	}
 	if (plPos.x >= ScrCenter.x && plPos.x <= MapSize.x-ScrCenter.x)
 	{
-		MapPos = { MapSize.x / 2 - plPos.x,ScrCenter.y };
+		MapPos = { MapSize.x/2 - plPos.x+ScrCenter.x,ScrCenter.y };
 	}
-	if (MapPos.x<ScrCenter.x)
+	if (MapPos.x == 0)
 	{
-		MapPos.x = ScrCenter.x;
+		bool test= true;
 	}
-	else if (MapPos.x>MapSize.x-ScrCenter.x)
+
+	if (MapPos.x<-MapSize.x+ScrCenter.x)
 	{
-		MapPos.x = MapSize.x - ScrCenter.x;
+		MapPos.x = -MapSize.x + ScrCenter.x;
+	}
+	else if (MapPos.x>MapSize.x/2)
+	{
+		MapPos.x = MapSize.x/2;
 	}
 	for (auto enemy : enemyList)
 	{
@@ -45,7 +50,7 @@ unique_Base GameScene::Update(unique_Base own)
 
 	
 
-	lpSceneMng.addDrawQue(std::make_tuple(MapPos,1.0,0.0,MapScreen,LAYER::MAP,0));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos,1.0,0.0,MapScreen,LAYER::BG,0));
 
 	auto itr = std::remove_if(ObjList.begin(),				// チェックの開始地点
 		ObjList.end(),								// チェックの終了地点

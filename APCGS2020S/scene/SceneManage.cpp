@@ -1,5 +1,6 @@
 #include "DxLib.h"
 #include "TitleScene.h"
+#include "GameScene.h"
 #include "SceneManage.h"
 #include "algorithm"
 #include "../enemy/Enemy.h"
@@ -37,7 +38,7 @@ void SceneManage::Draw()
 				{
 					pos.x -= tmpPosX;
 				}
-				else if(layer == LAYER::PLAYER && pos.x>=ScreenCenter.x)
+				else if(layer == LAYER::PLAYER && pos.x>=ScreenCenter.x && pos.x<=MapSize.x)
 				{
 					pos.x = ScreenCenter.x;
 				}
