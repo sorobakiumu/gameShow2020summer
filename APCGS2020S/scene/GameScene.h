@@ -4,6 +4,7 @@
 #include "../Obj/Obj.h"
 #include "Func/FuncCheckHit.h"
 #include "../enemy/Enemy.h"
+#include "../manager/SEManage.h"
 
 class GameScene :
 	public BaseScene

@@ -7,15 +7,14 @@
 #include <vector>
 #include <string>
 
-#define lpSEMng  SEManage::GetInstance();
+#define lpSEMng SEManage::GetInstance();
 
-#define CHIP_SIZE 32
 
 class CheckHitManage
 {
 public:
 
-	// sInstanceの中に入っている、SEMのﾎﾟｲﾝﾀ(ｱﾄﾞﾚｽ)を返す
+	// sInstanceの中に入っている、CheckHItManageのﾎﾟｲﾝﾀ(ｱﾄﾞﾚｽ)を返す
 	static CheckHitManage& GetInstance(void)
 	{
 		return *sInstance;
@@ -23,6 +22,7 @@ public:
 
 private:
 
+	// ChackHitMangeのDeleter
 	struct CheckHitManageDeleter
 	{
 		void operator()(CheckHitManage* chMng) const
@@ -31,7 +31,7 @@ private:
 		}
 	};
 
-
+	// 衝突識別関数(識別したいもの同士の座標を入れる)
 	bool CheckHit( Vec2double pos1 , Vec2double pos2);
 
 
@@ -41,9 +41,12 @@ private:
 
 	static std::unique_ptr<CheckHitManage, CheckHitManageDeleter> sInstance;
 
+
+	// 座標代入変数
 	Vec2double _pos1;
 	Vec2double _pos2;
-
+	
+	// 矩形を取るための
 	Vec2double regu;
 
 };

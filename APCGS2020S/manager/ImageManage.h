@@ -7,7 +7,7 @@
 
 using VecInt = std::vector<int>;
 
-#define lpImageMng  ImageManage::GetInstance;
+#define lpImageMng  ImageManage::GetInstance();
 
 class ImageManage
 {

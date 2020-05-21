@@ -52,6 +52,7 @@ unique_Base GameScene::Update(unique_Base own)
 		(*enemy).UpDate();
 	}
 
+	// BGM‘}“ü
 	
 
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos,1.0,0.0,MapScreen,LAYER::BG,0));
