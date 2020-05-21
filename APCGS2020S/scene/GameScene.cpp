@@ -23,7 +23,7 @@ unique_Base GameScene::Update(unique_Base own)
 		{
 			if (FuncCheckHit()(Cnt, this))
 			{
-				//obj->SetPos({640,ScrCenter.y});
+				obj->SetPos({640,ScrCenter.y});
 			}
 			// ObjListの何番目かとゲームシーンのポインタを渡す
 			plPos = obj->GetPos();
