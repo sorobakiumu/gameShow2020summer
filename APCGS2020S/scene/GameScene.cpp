@@ -7,6 +7,8 @@
 
 #include "../Obj/Gimmick/Lift.h"
 #include "../player/player.h"
+#include "..\manager\SEManage.h"
+
 
 unique_Base GameScene::Update(unique_Base own)
 {
@@ -21,7 +23,7 @@ unique_Base GameScene::Update(unique_Base own)
 		obj->UpDate();
 		if (obj->GetID()==OBJ_ID::PLAYER)
 		{
-			if (FuncCheckHit()(Cnt, this))
+			if (FuncCheckHit()(obj->GetPos(), obj->GetSize()))
 			{
 				obj->SetPos({640,ScrCenter.y});
 			}
@@ -53,7 +55,7 @@ unique_Base GameScene::Update(unique_Base own)
 	}
 
 	// BGM‘}“ü
-	
+//	lpSEMng.readMusic("BGM" , );
 
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos,1.0,0.0,MapScreen,LAYER::BG,0));
 

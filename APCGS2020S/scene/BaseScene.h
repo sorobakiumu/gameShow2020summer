@@ -1,5 +1,7 @@
 #pragma once
 #include<memory>
+#include <string>
+
 class BaseScene;
 using unique_Base = std::unique_ptr<BaseScene>;
 class BaseScene

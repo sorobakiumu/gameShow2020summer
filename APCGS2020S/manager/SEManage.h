@@ -10,8 +10,9 @@
 
 class SEManage
 {
+public:
 	// sInstance‚Ì’†‚É“ü‚Á‚Ä‚¢‚éASEM‚ÌÎß²İÀ(±ÄŞÚ½)‚ğ•Ô‚·
-	static SEManage& GetInstance(void)
+	static SEManage &GetInstance(void)
 	{
 		return *sInstance;
 	}

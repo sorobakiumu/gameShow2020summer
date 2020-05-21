@@ -4,7 +4,6 @@
 #include "../Obj/Obj.h"
 #include "Func/FuncCheckHit.h"
 #include "../enemy/Enemy.h"
-#include "../manager/SEManage.h"
 
 class GameScene :
 	public BaseScene
@@ -21,6 +20,6 @@ private:
 
 	std::vector<std::shared_ptr<Enemy>> enemyList;
 	std::vector<SharedObj> ObjList;
-	std::vector<int> Map;
+	static std::vector<int> Map;
 	Vec2double plPos,plPosOld, MapPos;
 };
