@@ -1,5 +1,5 @@
 #include "DxLib.h"
-#include "TitleScene.h"
+#include "../scene/TitleScene.h"
 #include "SceneManage.h"
 #include "algorithm"
 #include "../enemy/Enemy.h"
