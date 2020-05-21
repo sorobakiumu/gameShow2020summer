@@ -1,6 +1,4 @@
 #include "CheckHitManage.h"
-#include "DxLib.h"
-
 
 std::unique_ptr<CheckHitManage, CheckHitManage::CheckHitManageDeleter> CheckHitManage::sInstance(new CheckHitManage);
 
