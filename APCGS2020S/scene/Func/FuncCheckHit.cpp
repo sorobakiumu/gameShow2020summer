@@ -47,5 +47,5 @@ bool FuncCheckHit::operator()(int no, void* scene)
 			break;
 		}
 	}
-
+	return false;
 }
