@@ -3,11 +3,9 @@
 
 struct FuncCheckHit
 {
-	bool operator()(int no,void* scene);
+	bool operator()(Vec2double pos,Vec2double size);
 private:
 	Vec2double plPos;
-	Vec2double ObjPos;
 	Vec2Int plSize;
-	Vec2Int ObjSize;
 };
 
