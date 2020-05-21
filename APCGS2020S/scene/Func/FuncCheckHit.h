@@ -3,7 +3,7 @@
 
 struct FuncCheckHit
 {
-	bool operator()(Vec2double pos,Vec2double size);
+	bool operator()(Vec2double pos,Vec2Int size);
 private:
 	Vec2double plPos;
 	Vec2Int plSize;
