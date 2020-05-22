@@ -102,7 +102,7 @@ void player::UpDate()
 	if (jpCtlFlag == true)
 	{
 		// 跳躍山なり移動用2次関数
-		MapPos.y = pow((sec - jmpCnt), 2)/3 + 96;
+		MapPos.y = pow((sec - jmpCnt), 2)/12 + 96;
 		// 経過時間計測
 		sec++;
 		// もし、着地したら
@@ -187,7 +187,7 @@ void player::Init(void)
 {
 	ptn = KeyBoard;
 
-	jmpCnt = 20;
+	jmpCnt = 40;
 
 	sec = 0;
 
