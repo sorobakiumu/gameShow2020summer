@@ -3,6 +3,7 @@
 class FallNeedle :
     public Gimmick
 {
+public:
     FallNeedle();
     FallNeedle(Vec2double pos);
     ~FallNeedle();

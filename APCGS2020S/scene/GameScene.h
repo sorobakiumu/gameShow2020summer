@@ -24,5 +24,5 @@ private:
 	std::vector<SharedObj> ObjList;
 
 	Vec2double plPos,plPosOld, MapPos;
-	static std::vector<int> Map;
+/*	static */std::vector<int> Map;
 };
