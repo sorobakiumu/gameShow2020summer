@@ -56,9 +56,6 @@ unique_Base GameScene::Update(unique_Base own)
 		(*enemy).UpDate();
 	}
 
-	// ﾙｰﾌﾟ有、頭から再生(BGM推奨)
-	PlaySoundMem(lpSEMng.loadBGM("BGM"), DX_PLAYTYPE_LOOP, true);
-
 
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos,1.0,0.0,MapScreen,LAYER::BG,0));
 
@@ -117,8 +114,13 @@ GameScene::GameScene()
 		SetDrawScreen(DX_SCREEN_BACK);
 	}
 
+
+
 	// BGM挿入
 	lpSEMng.readMusic("BGM" , "sound/魔王魂改変戦闘用BGM(改).mp3");
+
+	// ﾙｰﾌﾟ有、頭から再生(BGM推奨)
+	PlaySoundMem(lpSEMng.loadBGM("BGM"), DX_PLAYTYPE_LOOP, true);
 
 
 	ObjList.emplace_back(new player(ScrCenter, { 32,32 }));
