@@ -20,4 +20,5 @@ bool FuncCheckHit::operator()(Vec2double pos,Vec2Int size)
 	{
 		return true;
 	}
+	return false;
 }

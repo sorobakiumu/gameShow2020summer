@@ -12,6 +12,8 @@ public:
 	unique_Base Update(unique_Base own) override;			//シーンを、更新する。
 	GameScene();
 	~GameScene();
+
+	
 private:
 	friend FuncCheckHit;
 
@@ -20,6 +22,7 @@ private:
 
 	std::vector<std::shared_ptr<Enemy>> enemyList;
 	std::vector<SharedObj> ObjList;
-	static std::vector<int> Map;
+
 	Vec2double plPos,plPosOld, MapPos;
+	static std::vector<int> Map;
 };
