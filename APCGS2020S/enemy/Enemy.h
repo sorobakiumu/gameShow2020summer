@@ -44,6 +44,8 @@ public Obj
 
 		std::map<ENEMY_ID, std::vector<int>> enemyImage;
 
+		Vec2double pitCnt[4];
+
 		void wolff();
 		void ghost();
 		void man();
@@ -52,5 +54,6 @@ public Obj
 		void baze();
 		void boss();
 		void rare();
+		void pit(int num);
 };
 
