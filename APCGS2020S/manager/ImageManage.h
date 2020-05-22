@@ -7,7 +7,7 @@
 
 using VecInt = std::vector<int>;
 
-#define lpImageMng  ImageManage::GetInstance();
+#define lpImageMng  ImageManage::GetInstance()
 
 class ImageManage
 {
@@ -30,6 +30,7 @@ public:
 		const Vec2Int& divsize,
 		const Vec2Int& divCnt);
 
+	const int GetMap(const std::string& key);
 
 private:
 	struct ImageManageDeleter
@@ -47,6 +48,7 @@ private:
 	static std::unique_ptr<ImageManage, ImageManageDeleter> sInstance;
 
 	std::map <std::string, VecInt> imgMap;
+	std::map <std::string, int> sImgMap;
 
 };
 

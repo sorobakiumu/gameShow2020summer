@@ -3,6 +3,7 @@
 #include "SceneManage.h"
 #include "algorithm"
 #include "../enemy/Enemy.h"
+#include "ImageManage.h"
 
 SceneManage* SceneManage::sInstance = nullptr;
 
@@ -108,6 +109,9 @@ bool SceneManage::SysInit()
 		return false;
 	}
 	SetDrawScreen(DX_SCREEN_BACK);						// 描画先をバックバッファに設定
+
+	// ﾀｲﾄﾙ画面読み込み
+	lpImageMng.GetID("タイトル" , "タイトル(仮).png");
 
 	frmCnt = 0;
 

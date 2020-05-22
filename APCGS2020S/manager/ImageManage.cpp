@@ -43,6 +43,11 @@ const VecInt& ImageManage::GetID(const std::string & key, const std::string & fi
 
 }
 
+const int ImageManage::GetMap(const std::string& key)
+{
+	return imgMap[key][0];
+}
+
 // ImageManage‚Ìºİ½Ä×¸À
 ImageManage::ImageManage()
 {
