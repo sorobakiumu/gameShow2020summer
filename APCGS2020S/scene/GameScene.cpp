@@ -27,7 +27,7 @@ unique_Base GameScene::Update(unique_Base own)
 		{
 			if (FuncCheckHit()(obj->GetPos(), obj->GetSize()))
 			{
-				
+				obj->SetPos({640,ScrCenter.y});
 			}
 			// ObjListの何番目かとゲームシーンのポインタを渡す
 			plPos = obj->GetPos();
@@ -77,6 +77,10 @@ unique_Base GameScene::Update(unique_Base own)
 	return std::move(own);
 }
 
+void GameScene::AddObjList(SharedObj obj)
+{
+	ObjList.emplace_back(obj);
+}
 
 GameScene::GameScene()
 {

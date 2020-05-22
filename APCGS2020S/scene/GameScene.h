@@ -14,6 +14,8 @@ public:
 	GameScene();
 	~GameScene();
 
+	std::vector<int> GetMap() { return Map; }
+	void AddObjList(SharedObj obj);
 	
 private:
 	friend FuncCheckHit;
@@ -26,5 +28,5 @@ private:
 	std::vector<SharedObj> ObjList;
 
 	Vec2double plPos,plPosOld, MapPos;
-/*	static */std::vector<int> Map;
+	std::vector<int> Map;
 };

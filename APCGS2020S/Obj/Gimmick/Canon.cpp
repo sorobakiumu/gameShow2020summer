@@ -1,7 +1,9 @@
-#include "DxLib.h"
+#include <DxLib.h>
+#include "../Obj.h"
 #include "Canon.h"
 #include "../../manager/SceneManage.h"
 #include "../../scene/GameScene.h"
+#include "Bullet.h"
 
 Canon::Canon()
 {
@@ -40,6 +42,7 @@ void Canon::UpDate()
 	if (Cnt>=Speed)
 	{
 		Cnt = 0;
+		//GameScene().AddObjList(new Bullet(MapPos,5,Rad));
 	}
 }
 
