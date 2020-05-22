@@ -51,9 +51,9 @@ void player::UpDate()
 		}
         
 		// 十字ｷｰ(上)入力時、跳躍
-		if (CheckHitKey(KEY_INPUT_UP) == 1 && jmpFlg == 0)
+		if (CheckHitKey(KEY_INPUT_UP) == 1 && jmpFlg == false)
 		{
-			jpCtlFlag = 1;
+			jpCtlFlag = true;
 		}
 		break;
 
@@ -99,22 +99,20 @@ void player::UpDate()
 
 
 	// 跳躍ﾌﾗｸﾞが立っているとき
-	if (jpCtlFlag == 1)
+	if (jpCtlFlag == true)
 	{
 		// 跳躍山なり移動用2次関数
-		MapPos.y = pow((sec - jmpCnt), 2) * (64 / jmpCnt) + lpSceneMng.ScreenSize.y - Size.y;
-
+		MapPos.y = pow((sec - 60), 2) + 96;
 		// 経過時間計測
 		sec++;
-
 		// もし、着地したら
-		if (MapPos.y >= lpSceneMng.ScreenSize.y )
+		if (sec == jmpCnt)
 		{
 			// めり込まないように再調整
-			MapPos.y = lpSceneMng.ScreenSize.y;
+			MapPos.y = lpSceneMng.ScreenCenter.y;
 			
 			// 跳躍ﾌﾗｸﾞ戻し
-			jpCtlFlag = 0;
+			jpCtlFlag = false;
 
 			// 経過時間観測用変数初期化
 			sec = 0;
@@ -183,10 +181,10 @@ void player::shot(void)
 void player::Init(void)
 {
 	ptn = KeyBoard;
-	
-	sec = 0;
 
-	jmpCnt = 180;
+	jmpCnt = 60;
+
+	sec = 0;
 
 	jmpFlg = false;
 
