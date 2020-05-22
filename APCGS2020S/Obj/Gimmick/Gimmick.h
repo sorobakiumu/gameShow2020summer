@@ -5,6 +5,10 @@ enum class GIMMICK_ID
 {
 	LIFT,
 	FALL_LIFT,
+	NEEDLE,
+	FALLNEEDLE,
+	CANON,
+	BULLET,
 	MAX,
 };
 

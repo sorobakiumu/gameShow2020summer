@@ -4,6 +4,7 @@
 #include "../Obj/Obj.h"
 #include "Func/FuncCheckHit.h"
 #include "../enemy/Enemy.h"
+#include "../Obj/Gimmick/Canon.h"
 
 class GameScene :
 	public BaseScene
@@ -16,6 +17,7 @@ public:
 	
 private:
 	friend FuncCheckHit;
+	friend Canon;
 
 	int bgImage[9];
 	int MapScreen;
