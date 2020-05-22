@@ -86,7 +86,16 @@ GameScene::GameScene()
 {
 	MapScreen = 0;
 
+
 	enemyList.emplace_back(new Enemy(ENEMY_ID::BOSS));
+	//enemyList.emplace_back(new Enemy(ENEMY_ID::MAN));
+	//enemyList.emplace_back(new Enemy(ENEMY_ID::GHOST));
+	//enemyList.emplace_back(new Enemy(ENEMY_ID::BAZE));
+	//enemyList.emplace_back(new Enemy(ENEMY_ID::BLACK));
+	//enemyList.emplace_back(new Enemy(ENEMY_ID::BURST));
+	//enemyList.emplace_back(new Enemy(ENEMY_ID::WOLF));
+	//enemyList.emplace_back(new Enemy(ENEMY_ID::RARE));
+	//enemyList.emplace_back(new Enemy(ENEMY_ID::WOLF));
 	LoadDivGraph("image/tile.png", 9, 3, 3, 32, 32, bgImage);
 	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, 300));
 	ObjList.emplace_back(new FallLift({ 640.0,ScrCenter.y},3));
