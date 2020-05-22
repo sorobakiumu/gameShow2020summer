@@ -6,6 +6,7 @@
 #include "../Obj/Obj.h"
 
 #include "../Obj/Gimmick/Lift.h"
+#include "../Obj/Gimmick/FallLift.h"
 #include "../Obj/Gimmick/FallNeedle.h"
 #include "../player/player.h"
 #include "..\manager\SEManage.h"
@@ -87,6 +88,7 @@ GameScene::GameScene()
 	enemyList.emplace_back(new Enemy(ENEMY_ID::BOSS));
 	LoadDivGraph("image/tile.png", 9, 3, 3, 32, 32, bgImage);
 	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, 300));
+	ObjList.emplace_back(new FallLift({ 640.0,ScrCenter.y},3));
 	ObjList.emplace_back(new FallNeedle({640.0,32.0}));
 
 	FILE* fp;

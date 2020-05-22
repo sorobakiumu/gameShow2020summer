@@ -3,6 +3,7 @@
 class FallLift :
 	public Gimmick
 {
+public:
 	FallLift();
 	FallLift(Vec2double pos,int speed);
 	~FallLift();
