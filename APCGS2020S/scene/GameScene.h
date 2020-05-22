@@ -6,37 +6,13 @@
 #include "../enemy/Enemy.h"
 #include "../Obj/Gimmick/Canon.h"
 
-#define lpGameScene GameScene::GetInstance()
-
 class GameScene :
 	public BaseScene
 {
 public:
-	static GameScene& GetInstance(void)
-	{
-		Create();
-		return *sInstance;
-	}
 
-	static void Create()
-	{
-		if (sInstance == nullptr)
-		{
-			sInstance = new GameScene();
-		}
-	}
-
-	static void Destroy()
-	{
-		if (sInstance != nullptr)
-		{
-			delete sInstance;
-		}
-		sInstance = nullptr;
-	}
-
-
-
+	GameScene();
+	~GameScene();
 	unique_Base Update(unique_Base own) override;			//シーンを、更新する。
 
 
@@ -47,8 +23,6 @@ private:
 	friend FuncCheckHit;
 	friend Canon;
 
-	GameScene();
-	~GameScene();
 
 	int bgImage[9];
 	int MapScreen;
