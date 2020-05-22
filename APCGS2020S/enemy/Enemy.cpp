@@ -74,7 +74,7 @@ void Enemy::EnemyInit()
 	//BLACK
 	LoadDivGraph("image/ブラックアンドホワイト.png", 6, 3, 2, 32, 32, &enemyImage[ENEMY_ID::BLACK][0]);
 	//BURST
-	LoadDivGraph("image/自爆マン.bmp", 8, 8, 1, 32, 32, &enemyImage[ENEMY_ID::BURST][0]);
+	LoadDivGraph("image/自爆マン.bmp", 2, 2, 1, 32, 32, &enemyImage[ENEMY_ID::BURST][0]);
 	//BAZE
 	LoadDivGraph("image/バゼ.bmp", 4, 4, 1, 32, 32, &enemyImage[ENEMY_ID::BAZE][0]);
 	//PIT
@@ -108,7 +108,7 @@ void Enemy::ghost()
 Enemy::Enemy(ENEMY_ID enemyId)
 {
 	_enemyID = enemyId;
-	MapPos = {1800,10 };
+	MapPos = {1800,200 };
 	flag = true;
 
 	frmCnt =lpSceneMng.FrmCnt();
@@ -135,8 +135,8 @@ void Enemy::man()
 
 
 	MapPos.x--;				
-	animCnt = (lpSceneMng.FrmCnt() / 30) % 3;
-	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::MAN][animCnt], LAYER::ENEMY, 999));
+	animCnt = (lpSceneMng.FrmCnt() / 30) % 1;
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::MAN][animCnt], LAYER::ENEMY, 996));
 }
 
 void Enemy::black()

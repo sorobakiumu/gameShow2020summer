@@ -32,7 +32,7 @@ public Obj
 		static bool initFlag;
 
 		private:
-		static Enemy* sInstance;		//動的に作るために、ポインターで、実体が入るものを作る
+
 		ENEMY_ID _enemyID;
 		void EnemyInit();
 		bool flag;
