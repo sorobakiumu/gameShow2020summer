@@ -54,8 +54,9 @@ unique_Base GameScene::Update(unique_Base own)
 		(*enemy).UpDate();
 	}
 
-	// BGM‘}“ü
-//	lpSEMng.readMusic("BGM" , );
+	// Ù°Ìß—LA“ª‚©‚çÄ¶(BGM„§)
+	PlaySoundMem(lpSEMng.loadBGM("BGM"), DX_PLAYTYPE_LOOP, true);
+
 
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos,1.0,0.0,MapScreen,LAYER::BG,0));
 
@@ -112,6 +113,11 @@ GameScene::GameScene()
 		}
 		SetDrawScreen(DX_SCREEN_BACK);
 	}
+
+	// BGM‘}“ü
+	lpSEMng.readMusic("BGM" , "sound/–‚‰¤°‰ü•Ïí“¬—pBGM(‰ü).mp3");
+
+
 	ObjList.emplace_back(new player(ScrCenter, { 32,32 }));
 	MapPos = { MapSize.x/2-ScrCenter.x,ScrCenter.y};
 }

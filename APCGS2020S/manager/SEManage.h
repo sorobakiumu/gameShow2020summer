@@ -17,9 +17,9 @@ public:
 		return *sInstance;
 	}
 
+	const void SEManage::readMusic(const std::string& key, const std::string& str);
 
-
-	const void SEManage::readMusic(std::string& key, std::string& str);
+	const int SEManage::loadBGM(const std::string& key);
 
 private:
 

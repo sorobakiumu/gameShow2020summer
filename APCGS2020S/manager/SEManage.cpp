@@ -16,7 +16,7 @@ SEManage::~SEManage()
 
 }
 
-const void SEManage::readMusic(std::string& key , std::string& str)
+const void SEManage::readMusic(const std::string& key, const std::string& str)
 {
 	if (seMap.find(key) == seMap.end())
 	{
@@ -32,5 +32,11 @@ const void SEManage::readMusic(std::string& key , std::string& str)
 
 	// Ù°Ìß—LA“ª‚©‚çÄ¶(BGM„§)
 	// PlaySoundMem(seMap[key], DX_PLAYTYPE_LOOP , true);
+}
+
+const int SEManage::loadBGM(const std::string& key)
+{
+
+	return seMap[key];
 }
 
