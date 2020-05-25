@@ -79,6 +79,7 @@ void GameScene::AddObjList(SharedObj obj)
 
 GameScene::GameScene()
 {
+
 	MapScreen = 0;
 	LoadDivGraph("image/tile.png", 9, 3, 3, 32, 32, bgImage);
 	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, 300));

@@ -22,7 +22,6 @@ public:
 private:
 	friend Canon;
 
-
 	int bgImage[9];
 	int MapScreen;
 
