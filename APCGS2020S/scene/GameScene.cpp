@@ -26,7 +26,7 @@ unique_Base GameScene::Update(unique_Base own)
 		obj->UpDate();
 		if (obj->GetID()==OBJ_ID::PLAYER)
 		{
-			obj->SetPos(CheckHit(obj->GetPos(), obj->GetSize()));
+			obj->SetPos(CheckHit(obj->GetPos(), obj->GetSize(),0));
 			plPos = obj->GetPos();
 		}
 		Cnt++;
@@ -74,42 +74,55 @@ void GameScene::AddObjList(SharedObj obj)
 	ObjList.emplace_back(obj);
 }
 
-Vec2double GameScene::CheckHit(Vec2double pos, Vec2Int size)
+Vec2double GameScene::CheckHit(Vec2double pos, Vec2Int size,int Cnt)
 {
+	if (Cnt>=20)
+	{
+		return pos;
+	}
 	bool Check[4] = { false,false,false,false };
-	if (Map[(((static_cast<int>((pos.y-size.y/2)/32)*MapSize.x)/32)+static_cast<int>((pos.x-size.x/2)/32))] != 0)
+	if (Map[(static_cast<int>((((pos.y-size.y/2)/32)*MapSize.x)/32)+static_cast<int>((pos.x-size.x/2)/32))] != 0)
 	{
 		Check[0] = true;
 	}
-	if (Map[(pos.y - size.y / 2) / 32 * MapSize.x / 32 + (pos.x + size.x / 2) / 32] != 0)
+	if (Map[(static_cast<int>((((pos.y-size.y/2)/32)*MapSize.x)/32)+static_cast<int>((pos.x+size.x/2)/32))] != 0)
 	{
 		Check[1] = true;
 	}
-	if (Map[(pos.y + size.y / 2) / 32 * MapSize.x / 32 + (pos.x - size.x / 2) / 32] != 0)
+	if (Map[(static_cast<int>((((pos.y+size.y/2)/32)*MapSize.x)/32)+static_cast<int>((pos.x-size.x/2)/32))] != 0)
 	{
 		Check[2] = true;
 	}
-	if (Map[(pos.y + size.y / 2) / 32 * MapSize.x / 32 + (pos.x + size.x / 2) / 32] != 0)
+	if (Map[(static_cast<int>((((pos.y+size.y/2)/32)*MapSize.x)/32)+static_cast<int>((pos.x+size.x/2)/32))] != 0)
 	{
 		Check[3] = true;
 	}
+
 	// 4隅の状態を獲得(当たってるかどうか)
 	if (Check[0]==true&&Check[1]==true)
 	{
-		return CheckHit({ pos.x,pos.y + 1 }, size);
+		return CheckHit({ pos.x,pos.y + 1 }, size,Cnt+1);
 	}
 	else if (Check[2] == true&&Check[3] == true)
 	{
-		return CheckHit({ pos.x,pos.y - 1 }, size);
+		return CheckHit({ pos.x,pos.y - 1 }, size,Cnt + 1);
+	}
+	else if (Check[2] == false && Check[3] == false )
+	{
+		if (CheckHit({ pos.x,pos.y + 1 }, size, Cnt + 1) == pos)
+		{
+			return pos;
+		}
+		return CheckHit({ pos.x,pos.y + 1 }, size, Cnt + 1);
 	}
 
 	if (Check[0] == true&&Check[2] == true)
 	{
-		return CheckHit({ pos.x + 1,pos.y }, size);
+		return CheckHit({ pos.x + 1,pos.y }, size, Cnt + 1);
 	}
 	else if (Check[1] == true&&Check[3] == true)
 	{
-		return CheckHit({ pos.x - 1,pos.y }, size);
+		return CheckHit({ pos.x - 1,pos.y }, size, Cnt + 1);
 	}
 
 
@@ -122,43 +135,43 @@ GameScene::GameScene()
 	MapScreen = 0;
 	LoadDivGraph("image/tile.png", 9, 3, 3, 32, 32, bgImage);
 	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, 300));
-	ObjList.emplace_back(new FallLift({ 640.0,ScrCenter.y},3));
-	ObjList.emplace_back(new FallNeedle({640.0,32.0}));
+	ObjList.emplace_back(new FallLift({ 640.0,ScrCenter.y }, 3));
+	ObjList.emplace_back(new FallNeedle({ 640.0,32.0 }));
 
 	FILE* fp;
-	fopen_s(&fp,"Data/tester.dat","rb");
- 	if (fp != nullptr)
+	fopen_s(&fp, "Data/tester.dat", "rb");
+	if (fp != nullptr)
 	{
-		int x, y,i=0;
-		fscanf(fp,"%d %d",&x,&y);
-		Map.resize(x*y);
-		while (i<x*y)
+		int x, y, i = 0;
+		fscanf(fp, "%d %d", &x, &y);
+		Map.resize(x * y);
+		while (i < x * y)
 		{
 			fscanf(fp, "%d", &Map[i]);
 			i++;
 		}
 		fclose(fp);
-		MapSize = {x*32,y*32};
-		MapScreen = MakeScreen(MapSize.x,MapSize.y, true);
+		MapSize = { x * 32,y * 32 };
+		MapScreen = MakeScreen(MapSize.x, MapSize.y, true);
 		SetDrawScreen(MapScreen);
-		for (i = 0; i <y; i++)
+		for (i = 0; i < y; i++)
 		{
-			for (int j=0;j<x;j++)
+			for (int j = 0; j < x; j++)
 			{
-				DrawRotaGraph(j * 32,i*32,1.0,0,bgImage[Map[j+i*x]-1],true);
+				DrawRotaGraph(j * 32+16, i * 32+16, 1.0, 0, bgImage[Map[j + i * x] - 1], true);
 			}
 		}
 		SetDrawScreen(DX_SCREEN_BACK);
 	}
 
 	// BGM挿入
-	lpSEMng.readMusic("BGM" , "sound/魔王魂改変戦闘用BGM(改).mp3");
+	lpSEMng.readMusic("BGM", "sound/魔王魂改変戦闘用BGM(改).mp3");
 
 	// ﾙｰﾌﾟ有、頭から再生(BGM推奨)
 	PlaySoundMem(lpSEMng.loadBGM("BGM"), DX_PLAYTYPE_LOOP, true);
 
 
-	ObjList.emplace_back(new player(ScrCenter, { 32,32 }));
+	ObjList.emplace_back(new player({320,380}, { 32,32 }));
 	MapPos = { MapSize.x/2-ScrCenter.x,ScrCenter.y};
 }
 

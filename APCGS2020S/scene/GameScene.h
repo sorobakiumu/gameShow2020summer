@@ -19,7 +19,7 @@ public:
 	std::vector<int> GetMap() { return Map; }
 	void AddObjList(SharedObj obj);
 
-	Vec2double CheckHit(Vec2double pos, Vec2Int size);
+	Vec2double CheckHit(Vec2double pos, Vec2Int size,int Cnt);
 
 
 private:
