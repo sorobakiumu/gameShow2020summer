@@ -21,7 +21,7 @@ unique_Base TitleScene::Update(unique_Base own)
 
 TitleScene::TitleScene()
 {
-	//bgImage = LoadGraph();
+	bgImage = 0;
 
 
 }

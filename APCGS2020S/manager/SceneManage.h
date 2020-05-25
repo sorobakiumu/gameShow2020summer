@@ -5,6 +5,7 @@
 #include "../Common/Vector2.h"
 #include "../scene/BaseScene.h"
 #include "../scene/LAYER.h"
+#include "../scene/Func/FuncCheckHit.h"
 
 using DRAW_QUE = std::tuple<Vec2double, double, double, int,LAYER,int>;		//座標、サイズ（倍率）、角度、ハンドル、レイヤー,Zオーダー
 #define lpSceneMng SceneManage::GetInstance()
@@ -48,6 +49,7 @@ public:
 	Vec2Int _mapSize;
 	void Run();
 private:
+
 	static SceneManage* sInstance;
 	unique_Base _activeScene;		//<BaseScene>を、使っているのがいなくなったら消える
 

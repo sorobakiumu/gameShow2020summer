@@ -20,7 +20,6 @@ public:
 	void AddObjList(SharedObj obj);
 
 private:
-	friend FuncCheckHit;
 	friend Canon;
 
 
@@ -31,6 +30,4 @@ private:
 
 	Vec2double plPos, plPosOld, MapPos;
 	std::vector<int> Map;
-
-	static GameScene* sInstance;
 };

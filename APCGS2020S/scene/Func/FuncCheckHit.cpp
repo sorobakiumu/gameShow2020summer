@@ -2,7 +2,7 @@
 #include "../GameScene.h"
 #include "../../manager/SceneManage.h"
 
-bool FuncCheckHit::operator()(Vec2double pos,Vec2Int size)
+bool FuncCheckHit::CheckHit(Vec2double pos,Vec2Int size)
 {
 	std::vector<int> Map;
 	Map.resize((MapSize.x/32+1) * (MapSize.y / 32+1));
@@ -26,4 +26,12 @@ bool FuncCheckHit::operator()(Vec2double pos,Vec2Int size)
 	//}
 
 	return false;
+}
+
+FuncCheckHit::FuncCheckHit()
+{
+}
+
+FuncCheckHit::~FuncCheckHit()
+{
 }

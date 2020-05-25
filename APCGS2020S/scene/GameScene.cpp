@@ -25,10 +25,10 @@ unique_Base GameScene::Update(unique_Base own)
 		obj->UpDate();
 		if (obj->GetID()==OBJ_ID::PLAYER)
 		{
-			if (FuncCheckHit()(obj->GetPos(), obj->GetSize()))
-			{
-				obj->SetPos({640,ScrCenter.y});
-			}
+			//if (lpCheckHit.CheckHit(obj->GetPos(), obj->GetSize())0)
+			//{
+			//	obj->SetPos({640,ScrCenter.y});
+			//}
 			// ObjListの何番目かとゲームシーンのポインタを渡す
 			plPos = obj->GetPos();
 		}
@@ -111,7 +111,7 @@ GameScene::GameScene()
 		SetDrawScreen(DX_SCREEN_BACK);
 	}
 
-
+	lpCheckHit.map = Map;
 
 	// BGM挿入
 	lpSEMng.readMusic("BGM" , "sound/魔王魂改変戦闘用BGM(改).mp3");
