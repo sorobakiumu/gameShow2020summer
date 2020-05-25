@@ -4,3 +4,7 @@
 BaseEnemy::BaseEnemy()
 {
 }
+
+BaseEnemy::~BaseEnemy()
+{
+}

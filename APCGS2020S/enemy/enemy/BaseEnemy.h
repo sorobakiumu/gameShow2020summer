@@ -22,7 +22,7 @@ public:
 	virtual void UpDate(Vec2double pPos) = 0;
 //	virtual void Draw() = 0;
 	BaseEnemy();
-	//virtual ~BaseScene();
+	virtual ~BaseEnemy();
 protected:
 	Vec2double _pos;
 	bool _aliveflag;
