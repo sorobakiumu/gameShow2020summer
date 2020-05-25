@@ -27,7 +27,6 @@ private:
 	int bgImage[9];
 	int MapScreen;
 
-	std::vector<std::shared_ptr<Enemy>> enemyList;
 	std::vector<SharedObj> ObjList;
 
 	Vec2double plPos, plPosOld, MapPos;

@@ -8,6 +8,9 @@
 
 
 bool Enemy::initFlag;
+Enemy* Enemy::sInstance = nullptr;
+
+
 
 void Enemy::UpDate()
 {
@@ -105,9 +108,9 @@ void Enemy::ghost()
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::GHOST][animCnt], LAYER::ENEMY, 999));
 }
 
-Enemy::Enemy(ENEMY_ID enemyId)
+Enemy::Enemy()
 {
-	_enemyID = enemyId;
+
 	MapPos = {1800,200 };
 	flag = true;
 

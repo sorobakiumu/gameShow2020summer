@@ -3,10 +3,11 @@
 #include "../Common/Vector2.h"
 #include <map>
 #include "../Obj/Obj.h"
+#include "enemy/BaseEnemy.h"
+//#include <Windows.h>
 
 
 #define lpEnemy Enemy::GetInstance()
-
 
 enum class ENEMY_ID
 {
@@ -26,13 +27,40 @@ class Enemy:
 public Obj
 	{
 		public:
-		Enemy(ENEMY_ID enemyId);
-		~Enemy();
+			static Enemy& GetInstance(void)
+			{
+				Create();
+				return *sInstance;
+			}
+
+			static void Create()
+			{
+				if (sInstance == nullptr)
+				{
+					sInstance = new Enemy();
+				}
+			}
+
+			static void Destroy()
+			{
+				if (sInstance != nullptr)
+				{
+					delete sInstance;
+				}
+				sInstance = nullptr;
+			}
+
+
+
+
 		void UpDate();
 		static bool initFlag;
 
 		private:
 
+		Enemy();
+		~Enemy();
+		static Enemy* sInstance;
 		ENEMY_ID _enemyID;
 		void EnemyInit();
 		bool flag;
