@@ -3,7 +3,7 @@
 #include "../Common/Vector2.h"
 #include <map>
 #include "../Obj/Obj.h"
-#include "enemy/BaseEnemy.h"
+//#include "enemy/BaseEnemy.h"
 //#include <Windows.h>
 
 

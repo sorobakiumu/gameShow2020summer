@@ -2,7 +2,7 @@
 #include <vector>
 #include "BaseScene.h"
 #include "../Obj/Obj.h"
-#include "Func/FuncCheckHit.h"
+
 //#include "../enemy/Enemy.h"
 #include "../Obj/Gimmick/Canon.h"
 
@@ -18,6 +18,9 @@ public:
 
 	std::vector<int> GetMap() { return Map; }
 	void AddObjList(SharedObj obj);
+
+	Vec2double CheckHit(Vec2double pos, Vec2Int size);
+
 
 private:
 	friend Canon;

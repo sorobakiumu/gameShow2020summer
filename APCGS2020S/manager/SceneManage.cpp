@@ -95,7 +95,7 @@ bool SceneManage::SysInit()
 {
 	bool rtnFlag = true;
 
-	Enemy::initFlag = true;
+	//Enemy::initFlag = true;
 
 	// ¼½ÃÑˆ—
 
@@ -117,3 +117,4 @@ bool SceneManage::SysInit()
 
 	return rtnFlag;
 }
+

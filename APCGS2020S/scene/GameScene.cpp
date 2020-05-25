@@ -4,6 +4,7 @@
 #include "../manager/SceneManage.h"
 #include "TitleScene.h"
 #include "../Obj/Obj.h"
+#include "Func/FuncCheckHit.h"
 
 #include "../Obj/Gimmick/Lift.h"
 #include "../Obj/Gimmick/FallLift.h"
@@ -25,11 +26,7 @@ unique_Base GameScene::Update(unique_Base own)
 		obj->UpDate();
 		if (obj->GetID()==OBJ_ID::PLAYER)
 		{
-			//if (lpCheckHit.CheckHit(obj->GetPos(), obj->GetSize())0)
-			//{
-			//	obj->SetPos({640,ScrCenter.y});
-			//}
-			// ObjListの何番目かとゲームシーンのポインタを渡す
+			obj->SetPos(CheckHit(obj->GetPos(), obj->GetSize()));
 			plPos = obj->GetPos();
 		}
 		Cnt++;
@@ -77,6 +74,48 @@ void GameScene::AddObjList(SharedObj obj)
 	ObjList.emplace_back(obj);
 }
 
+Vec2double GameScene::CheckHit(Vec2double pos, Vec2Int size)
+{
+	bool Check[4] = { false,false,false,false };
+	if (Map[(((static_cast<int>((pos.y-size.y/2)/32)*MapSize.x)/32)+static_cast<int>((pos.x-size.x/2)/32))] != 0)
+	{
+		Check[0] = true;
+	}
+	if (Map[(pos.y - size.y / 2) / 32 * MapSize.x / 32 + (pos.x + size.x / 2) / 32] != 0)
+	{
+		Check[1] = true;
+	}
+	if (Map[(pos.y + size.y / 2) / 32 * MapSize.x / 32 + (pos.x - size.x / 2) / 32] != 0)
+	{
+		Check[2] = true;
+	}
+	if (Map[(pos.y + size.y / 2) / 32 * MapSize.x / 32 + (pos.x + size.x / 2) / 32] != 0)
+	{
+		Check[3] = true;
+	}
+	// 4隅の状態を獲得(当たってるかどうか)
+	if (Check[0]==true&&Check[1]==true)
+	{
+		return CheckHit({ pos.x,pos.y + 1 }, size);
+	}
+	else if (Check[2] == true&&Check[3] == true)
+	{
+		return CheckHit({ pos.x,pos.y - 1 }, size);
+	}
+
+	if (Check[0] == true&&Check[2] == true)
+	{
+		return CheckHit({ pos.x + 1,pos.y }, size);
+	}
+	else if (Check[1] == true&&Check[3] == true)
+	{
+		return CheckHit({ pos.x - 1,pos.y }, size);
+	}
+
+
+	return pos;
+}
+
 GameScene::GameScene()
 {
 
@@ -111,8 +150,6 @@ GameScene::GameScene()
 		}
 		SetDrawScreen(DX_SCREEN_BACK);
 	}
-
-	lpCheckHit.map = Map;
 
 	// BGM挿入
 	lpSEMng.readMusic("BGM" , "sound/魔王魂改変戦闘用BGM(改).mp3");

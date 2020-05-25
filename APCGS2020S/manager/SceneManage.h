@@ -48,6 +48,7 @@ public:
 	int FrmCnt() { return frmCnt; }
 	Vec2Int _mapSize;
 	void Run();
+
 private:
 
 	static SceneManage* sInstance;

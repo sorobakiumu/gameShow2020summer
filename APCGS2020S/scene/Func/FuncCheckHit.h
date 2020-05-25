@@ -3,8 +3,9 @@
 
 #define lpCheckHit FuncCheckHit::GetInstance()
 
-struct FuncCheckHit
+class FuncCheckHit
 {
+public:
 	bool CheckHit(Vec2double pos,Vec2Int size);
 
 	static FuncCheckHit& GetInstance(void)
@@ -28,12 +29,18 @@ struct FuncCheckHit
 		sInstance = nullptr;
 	}
 
-	std::vector<int> map;
+	static void SetMap(Vec2Int size, std::vector<int> Map);
+
+	static FuncCheckHit* sInstance;
+
+	static std::vector<int> map;
 private:
 	FuncCheckHit();
 	~FuncCheckHit();
 
-	static FuncCheckHit* sInstance;
+
+
+
 
 	Vec2double plPos;
 	Vec2Int plSize;

@@ -6,24 +6,8 @@ bool FuncCheckHit::CheckHit(Vec2double pos,Vec2Int size)
 {
 	std::vector<int> Map;
 	Map.resize((MapSize.x/32+1) * (MapSize.y / 32+1));
-	//Map = 
 
-	//if (Map[((pos.y-size.y/2)/32*MapSize.x/32+(pos.x-size.x/2)/32)] != 0)
-	//{
-	//	return true;
-	//}
-	//if (Map[(pos.y - size.y / 2)/32 * MapSize.x / 32 + (pos.x + size.x / 2)/32] != 0)
-	//{
-	//	return true;
-	//}
-	//if (Map[(pos.y + size.y / 2)/32 * MapSize.x / 32 + (pos.x - size.x / 2)/32] != 0)
-	//{
-	//	return true;
-	//}
-	//if (Map[(pos.y + size.y / 2)/32 * MapSize.x / 32 + (pos.x + size.x / 2)/32] != 0)
-	//{
-	//	return true;
-	//}
+
 
 	return false;
 }
@@ -34,4 +18,10 @@ FuncCheckHit::FuncCheckHit()
 
 FuncCheckHit::~FuncCheckHit()
 {
+}
+
+void FuncCheckHit::SetMap(Vec2Int size, std::vector<int> Map)
+{
+	map.resize(size.x/32*size.y/32);
+	map = Map;
 }
