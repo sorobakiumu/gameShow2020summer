@@ -3,7 +3,7 @@
 #include "BaseScene.h"
 #include "../Obj/Obj.h"
 #include "Func/FuncCheckHit.h"
-#include "../enemy/Enemy.h"
+//#include "../enemy/Enemy.h"
 #include "../Obj/Gimmick/Canon.h"
 
 class GameScene :
