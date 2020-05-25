@@ -3,7 +3,7 @@
 #include "../Common/Vector2.h"
 #include <map>
 #include "../Obj/Obj.h"
-//#include "enemy/BaseEnemy.h"
+#include "enemy/BaseEnemy.h"
 //#include <Windows.h>
 
 
@@ -23,65 +23,42 @@ enum class ENEMY_ID
 	MAX
 };
 
-class Enemy:
-public Obj
-	{
-		public:
-			static Enemy& GetInstance(void)
+class Enemy
+{
+	public:
+		static Enemy& GetInstance(void)
+		{
+			Create();
+			return *sInstance;
+		}
+
+		static void Create()
+		{
+			if (sInstance == nullptr)
 			{
-				Create();
-				return *sInstance;
+				sInstance = new Enemy();
 			}
+		}
 
-			static void Create()
+		static void Destroy()
+		{
+			if (sInstance != nullptr)
 			{
-				if (sInstance == nullptr)
-				{
-					sInstance = new Enemy();
-				}
+				delete sInstance;
 			}
-
-			static void Destroy()
-			{
-				if (sInstance != nullptr)
-				{
-					delete sInstance;
-				}
-				sInstance = nullptr;
-			}
+			sInstance = nullptr;
+		}
 
 
+	std::map<ENEMY_ID, std::vector<int>> enemyImage;
 
+	void UpDate(Vec2double pPos);
 
-		void UpDate();
-		static bool initFlag;
-
-		private:
-
-		Enemy();
-		~Enemy();
-		static Enemy* sInstance;
-		ENEMY_ID _enemyID;
-		void EnemyInit();
-		bool flag;
-
-		int animCnt;
-		int frmCnt;
-
-		void Draw();
-
-		std::map<ENEMY_ID, std::vector<int>> enemyImage;
-
-		Vec2double pitCnt[4];
-
-		void wolff();
-		void ghost();
-		void man();
-		void black();
-		void burst();
-		void baze();
-		void boss();
-		void rare();
-		void pit(int num);
+private:
+	Enemy();
+	~Enemy();
+	std::vector<shared_BaseEnemy> _enemylist;
+	static Enemy* sInstance;
+	ENEMY_ID _enemyID;
 };
 

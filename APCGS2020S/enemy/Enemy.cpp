@@ -5,57 +5,65 @@
 #include "../manager/CheckHitManage.h"
 #include <DxLib.h>
 #include<math.h>
+#include "enemy/baze.h"
+#include "enemy/black.h"
+#include "enemy/boss.h"
+#include "enemy/burst.h"
+#include "enemy/ghost.h"
+#include "enemy/man.h"
+#include "enemy/rare.h"
+#include "enemy/wolf.h"
 
-
-bool Enemy::initFlag;
 Enemy* Enemy::sInstance = nullptr;
 
-
-
-void Enemy::UpDate()
+void Enemy::UpDate(Vec2double pPos)
 {
 
 
-	//当たり判定処理
-	//{
-	//delete this;
-	//}
-	//else
-//	{
 	switch (_enemyID)
 	{
 	case (ENEMY_ID::WOLF):
-		wolff();
+		_enemylist.emplace_back(new wolf());
 		break;
 	case (ENEMY_ID::GHOST):
-		ghost();
+		_enemylist.emplace_back(new ghost());
 		break;
 	case (ENEMY_ID::MAN):
-		man();
+		_enemylist.emplace_back(new man());
 		break;
 	case (ENEMY_ID::BLACK):
-		black();
+		_enemylist.emplace_back(new black());
 		break;
 	case (ENEMY_ID::BURST):
-		burst();
+		_enemylist.emplace_back(new burst());
 		break;
 	case (ENEMY_ID::BAZE):
-		baze();
+		_enemylist.emplace_back(new baze());
 		break;
 	case (ENEMY_ID::BOSS):
-		boss();
+		_enemylist.emplace_back(new boss());
 		break;
 	case (ENEMY_ID::RARE):
-		rare();
+		_enemylist.emplace_back(new rare());
 		break;
 	default:
 		break;
 	}
-//	}
+
+
+	for (auto eQue : _enemylist)
+	{
+		(*eQue).UpDate(pPos);
+	}
+
+	auto itr = std::remove_if(_enemylist.begin(),				// チェックの開始地点
+		_enemylist.end(),								// チェックの終了地点
+		/* ラムダ式*/  [](shared_BaseEnemy& enemy) {return (*enemy).Dead(); }	// removeの条件
+	);
 
 }
 
-void Enemy::EnemyInit()
+Enemy::Enemy()
 {
 	enemyImage[ENEMY_ID::WOLF].resize(10);
 	enemyImage[ENEMY_ID::GHOST].resize(10);
@@ -81,50 +89,14 @@ void Enemy::EnemyInit()
 	//BAZE
 	LoadDivGraph("image/バゼ.bmp", 4, 4, 1, 32, 32, &enemyImage[ENEMY_ID::BAZE][0]);
 	//PIT
-	enemyImage[ENEMY_ID::PIT][0] =LoadGraph("image/ピット.bmp");
+	enemyImage[ENEMY_ID::PIT][0] = LoadGraph("image/ピット.bmp");
 	//BOSS
 	LoadDivGraph("image/ボス.png", 2, 2, 1, 64, 64, &enemyImage[ENEMY_ID::BOSS][0]);
 	//RARE
 	LoadDivGraph("image/レア.bmp", 4, 4, 1, 32, 32, &enemyImage[ENEMY_ID::RARE][0]);
 
-	initFlag = false;
-}
 
-void Enemy::Draw()
-{
-}
-
-void Enemy::wolff()
-{
-	MapPos.x--;
-	animCnt = (lpSceneMng.FrmCnt() / 30) % 3;
-	lpSceneMng.addDrawQue(std::make_tuple(MapPos,1.0,0.0,enemyImage[ENEMY_ID::WOLF][animCnt],LAYER::ENEMY,999));
-}
-
-void Enemy::ghost()
-{
-	MapPos.x--;
-	animCnt = (lpSceneMng.FrmCnt() / 30) % 6;
-	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::GHOST][animCnt], LAYER::ENEMY, 999));
-}
-
-Enemy::Enemy()
-{
-
-	MapPos = {1800,200 };
-	flag = true;
-
-	frmCnt =lpSceneMng.FrmCnt();
-
-	for (int x = 0; x < 4; x++)
-	{
-		pitCnt[x] = {0.0,0.0};
-	}
-
-	if (initFlag)
-	{
-		EnemyInit();
-	}
+	_enemyID = ENEMY_ID::BOSS;
 }
 
 Enemy::~Enemy()
@@ -132,70 +104,3 @@ Enemy::~Enemy()
 	
 }
 
-void Enemy::man()
-{
-	
-
-
-	MapPos.x--;				
-	animCnt = (lpSceneMng.FrmCnt() / 30) % 1;
-	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::MAN][animCnt], LAYER::ENEMY, 996));
-}
-
-void Enemy::black()
-{
-	animCnt = (lpSceneMng.FrmCnt() / 30) % 3;
-	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::BLACK][animCnt], LAYER::ENEMY, 999));
-}
-
-void Enemy::burst()
-{
-	MapPos.x -= 5;
-	animCnt = (lpSceneMng.FrmCnt() / 30) % 2;
-	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::BURST][animCnt], LAYER::ENEMY, 999));
-}
-
-void Enemy::baze()
-{
-	MapPos.x -= 3;
-	animCnt = (lpSceneMng.FrmCnt() / 30) % 4;
-	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::BAZE][animCnt], LAYER::ENEMY, 999));
-}
-
-void Enemy::boss()
-{
-	MapPos.x+=static_cast<double>((((lpSceneMng.FrmCnt() / 60) % 2)*2)-1);
-	animCnt = (lpSceneMng.FrmCnt() / 30) % 2;
-	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::BOSS][animCnt], LAYER::ENEMY, 998));
-
-	for (int x = 0; x < 4; x++)
-	{
-		if (pitCnt[x].x == 0.0)
-		{
-			pitCnt[x].x = 1.0;
-		}
-		else
-		{
-			pit(x);
-
-			//当たり判定式
-			lpSceneMng.addDrawQue(std::make_tuple(pitCnt[x], 1.0, 0.0, enemyImage[ENEMY_ID::PIT][0], LAYER::ENEMY, 999));
-		}
-	}
-
-
-}
-
-void Enemy::rare()
-{
-	MapPos.x -= 10;
-	animCnt = (lpSceneMng.FrmCnt() / 30) % 4;
-	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, enemyImage[ENEMY_ID::RARE][animCnt], LAYER::ENEMY, 999));
-}
-
-void Enemy::pit(int num)
-{	
-	animCnt=((lpSceneMng.FrmCnt())) % 375 + 90 * num;
-	pitCnt[num].x = 64 * sin(animCnt*3.1415*180) + MapPos.x;
-	pitCnt[num].y = 64 * cos(animCnt*3.1415*180) + MapPos.y;
-}
