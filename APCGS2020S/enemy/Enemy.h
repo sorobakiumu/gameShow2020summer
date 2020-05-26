@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "../Common/Vector2.h"
+#include <memory>
 #include <map>
 #include "../Obj/Obj.h"
 #include "enemy/BaseEnemy.h"
@@ -57,7 +58,7 @@ class Enemy
 private:
 	Enemy();
 	~Enemy();
-	std::vector<shared_BaseEnemy> _enemylist;
+	std::vector<sharedEnemy> _enemylist;
 	static Enemy* sInstance;
 	ENEMY_ID _enemyID;
 };

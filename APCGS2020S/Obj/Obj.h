@@ -1,5 +1,4 @@
 #pragma once
-#include<memory>
 #include "../Common/Vector2.h"
 #include <vector>
 #include <string>

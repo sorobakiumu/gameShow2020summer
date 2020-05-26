@@ -2,11 +2,11 @@
 #include "../Enemy.h"
 #include"../../Common/Vector2.h"
 #include"../../player/player.h"
-
+#include <memory>
 
 class BaseEnemy;
 
-using shared_BaseEnemy = std::shared_ptr  <BaseEnemy>;
+using sharedEnemy = std::shared_ptr<BaseEnemy>;
 
 
 class BaseEnemy
@@ -20,7 +20,6 @@ public:
 	const bool Dead()const { return _deadFlag; }
 
 	virtual void UpDate(Vec2double pPos) = 0;
-//	virtual void Draw() = 0;
 	BaseEnemy();
 	virtual ~BaseEnemy();
 protected:

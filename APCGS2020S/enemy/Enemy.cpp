@@ -58,7 +58,7 @@ void Enemy::UpDate(Vec2double pPos)
 
 	auto itr = std::remove_if(_enemylist.begin(),				// チェックの開始地点
 		_enemylist.end(),								// チェックの終了地点
-		/* ラムダ式*/  [](shared_BaseEnemy& enemy) {return (*enemy).Dead(); }	// removeの条件
+		/* ラムダ式*/  [](sharedEnemy& enemy) {return (*enemy).Dead(); }	// removeの条件
 	);
 
 }
