@@ -15,8 +15,6 @@ public:
 	~GameScene();
 	unique_Base Update(unique_Base own) override;			//シーンを、更新する。
 
-
-	std::vector<int> GetMap() { return Map; }
 	void AddObjList(SharedObj obj);
 
 	Vec2double CheckHit(Vec2double pos, Vec2Int size,int Cnt);
@@ -31,5 +29,5 @@ private:
 	std::vector<SharedObj> ObjList;
 
 	Vec2double plPos, plPosOld, MapPos;
-	std::vector<int> Map;
+	std::vector<std::vector<int>> Map;
 };
