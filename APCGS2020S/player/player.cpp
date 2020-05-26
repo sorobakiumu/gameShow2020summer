@@ -51,9 +51,9 @@ void player::UpDate()
 		}
         
 		// 十字ｷｰ(上)入力時、跳躍
-		if (CheckHitKey(KEY_INPUT_UP) == 1 && jmpFlg == false)
+		if (CheckHitKey(KEY_INPUT_UP) == 1 && AnyFlag == false)
 		{
-			jpCtlFlag = true;
+			AnyFlag = true;
 			jmpPos = MapPos;
 		}
 		break;
@@ -76,7 +76,7 @@ void player::UpDate()
 		// ﾊﾟｯﾄﾞ(上)入力時、跳躍
 		if (GetJoypadInputState(PAD_INPUT_UP) == 1)
 		{
-			jpCtlFlag = 1;
+			AnyFlag = 1;
 			jmpPos = MapPos;
 		}
 
@@ -101,7 +101,7 @@ void player::UpDate()
 
 
 	// 跳躍ﾌﾗｸﾞが立っているとき
-	if (jpCtlFlag == true)
+	if (AnyFlag == true)
 	{
 		// 跳躍山なり移動用2次関数
 		MapPos.y = -pow((sec - jmpCnt), 2)/128 + jmpPos.y;
@@ -114,7 +114,7 @@ void player::UpDate()
 			MapPos.y = lpSceneMng.ScrSize.y-96;
 			
 			// 跳躍ﾌﾗｸﾞ戻し
-			jpCtlFlag = false;
+			AnyFlag = false;
 
 			// 経過時間観測用変数初期化
 			sec = 0;
@@ -191,9 +191,7 @@ void player::Init(void)
 
 	sec = 0;
 
-	jmpFlg = false;
-
-	jpCtlFlag = false;
+	AnyFlag = false;
 
 	shotFlag = false;
 
