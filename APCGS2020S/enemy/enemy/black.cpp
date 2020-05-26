@@ -1,10 +1,10 @@
 #include "black.h"
 
-void black::UpDate(Vec2double pPos)
+void black::UpDate()
 {
-	_pos.x -= 3;
+	MapPos.x -= 3;
 	int animCnt = (lpSceneMng.FrmCnt() / 30) % 3;
-	lpSceneMng.addDrawQue(std::make_tuple(_pos, 1.0, 0.0, lpEnemy.enemyImage[ENEMY_ID::BLACK][animCnt], LAYER::ENEMY, 996));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, lpEnemy.enemyImage[ENEMY_ID::BLACK][animCnt], LAYER::ENEMY, 996));
 }
 
 void black::Draw()

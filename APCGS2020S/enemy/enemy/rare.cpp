@@ -1,10 +1,10 @@
 #include "rare.h"
 
-void rare::UpDate(Vec2double pPos)
+void rare::UpDate()
 {
-	_pos.x -= 10;
+	MapPos.x -= 10;
 	int animCnt = (lpSceneMng.FrmCnt() / 30) % 4;
-	lpSceneMng.addDrawQue(std::make_tuple(_pos, 1.0, 0.0, lpEnemy.enemyImage[ENEMY_ID::RARE][animCnt], LAYER::ENEMY, 996));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, lpEnemy.enemyImage[ENEMY_ID::RARE][animCnt], LAYER::ENEMY, 996));
 }
 
 void rare::Draw()

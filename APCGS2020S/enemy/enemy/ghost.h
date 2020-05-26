@@ -1,10 +1,12 @@
 #pragma once
-#include "BaseEnemy.h"
-class ghost :
-	public BaseEnemy
+#include "../../Obj/Obj.h"
+#include"../../manager/SceneManage.h"
+#include"../Enemy.h"
+class ghost:
+	public Obj
 {
 public:
-	void UpDate(Vec2double pPos) override;
+	void UpDate() override;
 	void Draw() override;
 	ghost();
 	~ghost();

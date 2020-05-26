@@ -13,6 +13,16 @@
 #include "..\manager\SEManage.h"
 
 
+#include "../enemy/enemy/baze.h"
+#include "../enemy/enemy/black.h"
+#include "../enemy/enemy/boss.h"
+#include "../enemy/enemy/burst.h"
+#include "../enemy/enemy/ghost.h"
+#include "../enemy/enemy/man.h"
+#include "../enemy/enemy/rare.h"
+#include "../enemy/enemy/wolf.h"
+
+
 unique_Base GameScene::Update(unique_Base own)
 {
 	if (CheckHitKey(KEY_INPUT_LSHIFT))
@@ -39,6 +49,14 @@ unique_Base GameScene::Update(unique_Base own)
 	{
 		bool test= true;
 	}
+
+
+
+
+
+
+
+
 
 	if (MapPos.x<-MapSize.x+ScrCenter.x)
 	{
@@ -131,7 +149,7 @@ Vec2double GameScene::CheckHit(Vec2double pos, Vec2Int size,int Cnt)
 
 GameScene::GameScene()
 {
-
+	ObjList.emplace_back(new wolf());
 	MapScreen = 0;
 	LoadDivGraph("image/tile.png", 9, 3, 3, 32, 32, bgImage);
 	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, 300));

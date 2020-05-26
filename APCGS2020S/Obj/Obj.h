@@ -6,6 +6,8 @@
 #include <map>
 #include "../scene/LAYER.h"
 
+#include"../manager/CheckHitManage.h"
+
 
 #define CHIP_SIZE 32
 
@@ -59,6 +61,7 @@ public:
 	bool GetAlive(void) { return alive; };
 
 	void SetPos(Vec2double pos) { MapPos = pos; }
+
 
 	// ±ÆÒ°¼®İ”²‚«‚Ì•`‰æ‚ğs‚¤ŠÖ”
 	void Draw(Vec2double pos, int id  );

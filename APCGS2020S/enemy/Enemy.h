@@ -4,7 +4,7 @@
 #include <memory>
 #include <map>
 #include "../Obj/Obj.h"
-#include "enemy/BaseEnemy.h"
+//#include "enemy/BaseEnemy.h"
 //#include <Windows.h>
 
 
@@ -51,14 +51,15 @@ class Enemy
 		}
 
 
+
 	std::map<ENEMY_ID, std::vector<int>> enemyImage;
 
-	void UpDate(Vec2double pPos);
+	//Obj UpDate(Vec2double pPos);
 
 private:
 	Enemy();
 	~Enemy();
-	std::vector<sharedEnemy> _enemylist;
+	//std::vector<sharedEnemy> _enemylist;
 	static Enemy* sInstance;
 	ENEMY_ID _enemyID;
 };
