@@ -99,19 +99,19 @@ Vec2double GameScene::CheckHit(Vec2double pos, Vec2Int size,int Cnt)
 		return pos;
 	}
 	bool Check[4] = { false,false,false,false };
-	if (Map[(static_cast<int>((((pos.y-size.y/2)/32)*MapSize.x)/32)+static_cast<int>((pos.x-size.x/2)/32))] != 0)
+	if (Map[(static_cast<int>((((pos.y-size.y/2)/32)*MapSize.x)/32)+static_cast<int>((pos.x-size.x/2)/32))] < 0)
 	{
 		Check[0] = true;
 	}
-	if (Map[(static_cast<int>((((pos.y-size.y/2)/32)*MapSize.x)/32)+static_cast<int>((pos.x+size.x/2)/32))] != 0)
+	if (Map[(static_cast<int>((((pos.y-size.y/2)/32)*MapSize.x)/32)+static_cast<int>((pos.x+size.x/2)/32))] > 0)
 	{
 		Check[1] = true;
 	}
-	if (Map[(static_cast<int>((((pos.y+size.y/2)/32)*MapSize.x)/32)+static_cast<int>((pos.x-size.x/2)/32))] != 0)
+	if (Map[(static_cast<int>((((pos.y+size.y/2)/32)*MapSize.x)/32)+static_cast<int>((pos.x-size.x/2)/32))] > 0)
 	{
 		Check[2] = true;
 	}
-	if (Map[(static_cast<int>((((pos.y+size.y/2)/32)*MapSize.x)/32)+static_cast<int>((pos.x+size.x/2)/32))] != 0)
+	if (Map[(static_cast<int>((((pos.y+size.y/2)/32)*MapSize.x)/32)+static_cast<int>((pos.x+size.x/2)/32))] > 0)
 	{
 		Check[3] = true;
 	}
@@ -123,15 +123,7 @@ Vec2double GameScene::CheckHit(Vec2double pos, Vec2Int size,int Cnt)
 	}
 	else if (Check[2] == true&&Check[3] == true)
 	{
-		return CheckHit({ pos.x,pos.y - 1 }, size,Cnt + 1);
-	}
-	else if (Check[2] == false && Check[3] == false )
-	{
-		if (CheckHit({ pos.x,pos.y + 1 }, size, Cnt + 1) == pos)
-		{
-			return pos;
-		}
-		return CheckHit({ pos.x,pos.y + 1 }, size, Cnt + 1);
+ 		return CheckHit({ pos.x,pos.y - 1 }, size,Cnt + 1);
 	}
 
 	if (Check[0] == true&&Check[2] == true)

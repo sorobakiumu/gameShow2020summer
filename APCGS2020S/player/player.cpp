@@ -54,6 +54,7 @@ void player::UpDate()
 		if (CheckHitKey(KEY_INPUT_UP) == 1 && jmpFlg == false)
 		{
 			jpCtlFlag = true;
+			jmpPos = MapPos;
 		}
 		break;
 
@@ -76,6 +77,7 @@ void player::UpDate()
 		if (GetJoypadInputState(PAD_INPUT_UP) == 1)
 		{
 			jpCtlFlag = 1;
+			jmpPos = MapPos;
 		}
 
 		break;
@@ -102,14 +104,14 @@ void player::UpDate()
 	if (jpCtlFlag == true)
 	{
 		// 跳躍山なり移動用2次関数
-		MapPos.y = pow((sec - jmpCnt), 2)/12 + 96;
+		MapPos.y = -pow((sec - jmpCnt), 2)/128 + jmpPos.y;
 		// 経過時間計測
 		sec++;
 		// もし、着地したら
 		if (sec == jmpCnt)
 		{
 			// めり込まないように再調整
-			MapPos.y = lpSceneMng.ScreenCenter.y;
+			MapPos.y = lpSceneMng.ScrSize.y-96;
 			
 			// 跳躍ﾌﾗｸﾞ戻し
 			jpCtlFlag = false;
@@ -179,8 +181,6 @@ void player::shot(void)
 		shotFlag = false;
 	}
 }
-
-
 
 // player初期化
 void player::Init(void)
