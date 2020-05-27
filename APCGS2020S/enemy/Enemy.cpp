@@ -33,21 +33,21 @@ Enemy::Enemy()
 	//WOLF
 	LoadDivGraph("image/ウルフ.png", 3, 3, 1, 32, 32, &enemyImage[ENEMY_ID::WOLF][0]);
 	//GHOST
-	LoadDivGraph("image/ゴースト.bmp", 6, 6, 1, 32, 32, &enemyImage[ENEMY_ID::GHOST][0]);
+	LoadDivGraph("image/ゴースト.png", 6, 6, 1, 32, 32, &enemyImage[ENEMY_ID::GHOST][0]);
 	//MAN
 	LoadDivGraph("image/男.png", 6, 3, 2, 32, 32, &enemyImage[ENEMY_ID::MAN][0]);
 	//BLACK
 	LoadDivGraph("image/ブラックアンドホワイト.png", 6, 3, 2, 32, 32, &enemyImage[ENEMY_ID::BLACK][0]);
 	//BURST
-	LoadDivGraph("image/自爆マン.bmp", 2, 2, 1, 32, 32, &enemyImage[ENEMY_ID::BURST][0]);
+	LoadDivGraph("image/自爆マン.png", 2, 2, 1, 32, 32, &enemyImage[ENEMY_ID::BURST][0]);
 	//BAZE
-	LoadDivGraph("image/バゼ.bmp", 4, 4, 1, 32, 32, &enemyImage[ENEMY_ID::BAZE][0]);
+	LoadDivGraph("image/バゼ.png", 4, 4, 1, 32, 32, &enemyImage[ENEMY_ID::BAZE][0]);
 	//PIT
-	enemyImage[ENEMY_ID::PIT][0] = LoadGraph("image/ピット.bmp");
+	enemyImage[ENEMY_ID::PIT][0] = LoadGraph("image/ピット.png");
 	//BOSS
 	LoadDivGraph("image/ボス.png", 2, 2, 1, 64, 64, &enemyImage[ENEMY_ID::BOSS][0]);
 	//RARE
-	LoadDivGraph("image/レア.bmp", 4, 4, 1, 32, 32, &enemyImage[ENEMY_ID::RARE][0]);
+	LoadDivGraph("image/レア.png", 4, 4, 1, 32, 32, &enemyImage[ENEMY_ID::RARE][0]);
 
 
 	_enemyID = ENEMY_ID::BOSS;
