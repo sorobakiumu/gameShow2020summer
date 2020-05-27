@@ -104,15 +104,12 @@ void player::UpDate()
 	if (AnyFlag == true)
 	{
 		// 跳躍山なり移動用2次関数
-		MapPos.y -= 20;
+		MapPos.y = pow((sec-jmpCnt),2)/15+jmpPos.y-96;
 		// 経過時間計測
 		sec++;
 		// もし、着地したら
 		if (sec == jmpCnt)
 		{
-			// めり込まないように再調整
-			MapPos.y = lpSceneMng.ScrSize.y-96;
-			
 			// 跳躍ﾌﾗｸﾞ戻し
 			AnyFlag = false;
 
