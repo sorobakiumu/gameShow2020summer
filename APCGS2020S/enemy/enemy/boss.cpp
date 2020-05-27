@@ -37,6 +37,7 @@ boss::boss(double pos)
 	MapPos.x = pos + lpSceneMng.ScreenSize.x;
 	dead = false;
 	alive = true;
+	Rad = 0;
 }
 
 boss::~boss()

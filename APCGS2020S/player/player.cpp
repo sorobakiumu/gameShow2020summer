@@ -182,6 +182,8 @@ void player::shot(void)
 // player‰Šú‰»
 void player::Init(void)
 {
+	Rad = 0;
+
 	ptn = KeyBoard;
 
 	jmpCnt = 40;

@@ -8,7 +8,11 @@
 
 #include "../Obj/Gimmick/Lift.h"
 #include "../Obj/Gimmick/FallLift.h"
+#include "../Obj/Gimmick/Needle.h"
 #include "../Obj/Gimmick/FallNeedle.h"
+#include "../Obj/Gimmick/Generator.h"
+#include "../Obj/Gimmick/Canon.h"
+#include "../Obj/Gimmick/Bullet.h"
 #include "../player/player.h"
 #include "..\manager\SEManage.h"
 
@@ -40,6 +44,54 @@ unique_Base GameScene::Update(unique_Base own)
 			obj->SetPos(CheckHit(obj->GetPos(), obj->GetSize(), 0));
 			plPos = obj->GetPos();
 			tmppos = (*obj).GetPos();
+			if (obj->CheckFlag()==false)
+			{
+				// —Ž‰ºˆ—
+			}
+		}
+		else if (obj->GetID() == OBJ_ID::GIMMICK)
+		{
+			switch (obj->GetGID())
+			{
+			case GIMMICK_ID::CANON:
+				if (obj->CheckFlag())
+				{
+					ObjList.emplace_back(new Bullet(obj->GetPos(),3,obj->GetRad()));
+				}
+				break;
+			case GIMMICK_ID::GENERATOR:
+					if (obj->CheckFlag())
+					{
+						switch (rand() % 7)
+						{
+						case 0:
+							ObjList.emplace_back(new man(obj->GetPos().x));
+							break;
+						case 1:
+							ObjList.emplace_back(new burst(obj->GetPos().x));
+							break;
+						case 2:
+							ObjList.emplace_back(new baze(obj->GetPos().x));
+							break;
+						case 3:
+							ObjList.emplace_back(new black(obj->GetPos().x));
+							break;
+						case 4:
+							ObjList.emplace_back(new ghost(obj->GetPos().x));
+							break;
+						case 5:
+							ObjList.emplace_back(new rare(obj->GetPos().x));
+							break;
+						case 6:
+							ObjList.emplace_back(new wolf(obj->GetPos().x));
+							break;
+						}
+					}
+					break;
+			default:
+				break;
+
+			}
 		}
 	}
 
@@ -168,10 +220,11 @@ GameScene::GameScene()
 {
 	MapScreen = 0;
 	LoadDivGraph("image/tile.png", 9, 3, 3, 32, 32, bgImage);
+	ObjList.emplace_back(new player({ 320,380 }, { 32,32 }));
 	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, 300));
 	ObjList.emplace_back(new FallLift({ 640.0,ScrCenter.y }, 3));
 	ObjList.emplace_back(new FallNeedle({ 640.0,32.0 }));
-
+	ObjList.emplace_back(new Generator({480.0,120.0},120));
 	FILE* fp;
 	fopen_s(&fp, "Data/tester.dat", "rb");
 	if (fp != nullptr)
@@ -218,7 +271,6 @@ GameScene::GameScene()
 	PlaySoundMem(lpSEMng.loadBGM("BGM"), DX_PLAYTYPE_LOOP, true);
 
 
-	ObjList.emplace_back(new player({320,380}, { 32,32 }));
 	MapPos = { MapSize.x/2-ScrCenter.x,ScrCenter.y};
 }
 

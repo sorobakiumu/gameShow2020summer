@@ -14,6 +14,7 @@ FallNeedle::FallNeedle()
 	Image = 0;
 	dead = false;
 	AnyFlag = false;
+	Rad = 0;
 }
 
 FallNeedle::FallNeedle(Vec2double pos)

@@ -17,6 +17,7 @@ baze::baze(double pos)
 	MapPos.y = CHIP_SIZE;
 	dead = false;
 	alive = true;
+	Rad = 0;
 }
 
 baze::~baze()

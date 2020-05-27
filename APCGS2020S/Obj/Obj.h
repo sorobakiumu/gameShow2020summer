@@ -7,7 +7,7 @@
 #include "../scene/LAYER.h"
 
 #include"../manager/CheckHitManage.h"
-
+#include "Gimmick\Gimmick.h"
 
 #define CHIP_SIZE 32
 
@@ -84,11 +84,15 @@ public:
 	virtual void UpDate() = 0;
 
 	bool CheckFlag() { return AnyFlag; }
+
+	GIMMICK_ID GetGID() { return G_ID; }
+
+	double GetRad() { return Rad; }
 protected:
 	OBJ_ID ID;
 	Vec2double MapPos;
 	Vec2Int Size;
-
+	double Rad;
 	// Š®‘S‚ÉÁ‚µ‚Ä‚¢‚¢‚©‚ğ”»’f‚·‚é
 	bool dead;
 	
@@ -103,6 +107,7 @@ protected:
 
 	bool AnyFlag;
 
+	GIMMICK_ID G_ID;
 private:
 
 	// ±ÆÒ°¼®İ‚Ì\‘¢‚ğŠÇ—‚·‚éSTL

@@ -14,7 +14,7 @@ enum Ctl
 
 };
 
-enum STATE
+enum PLSTATE
 {
 	STOPL,
 	WORKL,

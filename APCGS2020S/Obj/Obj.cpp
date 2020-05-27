@@ -11,6 +11,7 @@ Obj::Obj()
 	_state = STATE::NORMAL;
 	_rad = 0.0;
 	ID = OBJ_ID::MAX;
+	G_ID = GIMMICK_ID::NON;
 }
 
 Obj::~Obj()

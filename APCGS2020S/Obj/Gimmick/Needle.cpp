@@ -16,6 +16,7 @@ Needle::Needle(Vec2double pos)
 	Image = LoadGraph("");
 	dead = false;
 	AnyFlag = false;
+	Rad = 0;
 }
 
 Needle::~Needle()

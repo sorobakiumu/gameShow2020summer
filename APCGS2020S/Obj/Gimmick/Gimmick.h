@@ -1,8 +1,8 @@
 #pragma once
-#include "../Obj.h"
 
 enum class GIMMICK_ID
 {
+	NON,
 	LIFT,
 	FALL_LIFT,
 	NEEDLE,
@@ -13,6 +13,8 @@ enum class GIMMICK_ID
 	MAX,
 };
 
+#include "../Obj.h"
+
 class Gimmick :
 	public Obj
 {
@@ -21,6 +23,5 @@ public:
 	~Gimmick();
 
 protected:
-	GIMMICK_ID G_ID;
 };
 

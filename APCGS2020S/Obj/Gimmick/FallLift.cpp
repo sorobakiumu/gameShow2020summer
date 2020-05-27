@@ -13,6 +13,7 @@ FallLift::FallLift()
 	Image = LoadGraph("image/リフト.png");
 	dead = false;
 	AnyFlag = false;
+	Rad = 0;
 }
 
 FallLift::FallLift(Vec2double pos, int speed)
@@ -26,6 +27,7 @@ FallLift::FallLift(Vec2double pos, int speed)
 	Image = LoadGraph("image/リフト.png");
 	dead = false;
 	AnyFlag = false;
+	Rad = 0;
 }
 
 FallLift::~FallLift()

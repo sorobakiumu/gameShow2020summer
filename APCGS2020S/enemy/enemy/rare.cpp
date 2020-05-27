@@ -17,6 +17,7 @@ rare::rare(double pos)
 	MapPos.y = rand() % static_cast<int>(lpSceneMng.ScreenCenter.y + lpSceneMng.ScreenCenter.y / 2);
 	dead = false;
 	alive = true;
+	Rad = 0;
 }
 
 rare::~rare()
