@@ -14,6 +14,17 @@ enum Ctl
 
 };
 
+enum STATE
+{
+	STOPL,
+	WORKL,
+	JUMPL,
+	STOPR,
+	WORKR,
+	JUMPR,
+	MAX,
+};
+
 class player :
 	public Obj
 {
@@ -33,7 +44,7 @@ public:
 
 	int plImage[12];
 private:
-	int Image;
+	int Image[6];
 	
 	void attackCtl(void);
 	void Init(void);						// ‰Šú‰»ŠÖ”

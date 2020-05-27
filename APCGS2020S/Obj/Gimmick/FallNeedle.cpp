@@ -49,7 +49,7 @@ void FallNeedle::UpDate()
 	else
 	{
 		MapPos.y+=5;
-		if (/*lpCheckHit.CheckHit(MapPos,Size)||*/MapPos.y>ScrSize.y+64)
+		if (MapPos.y>ScrSize.y+64)
 		{
 			FallFlag = false;
 			MapPos.y = 32;

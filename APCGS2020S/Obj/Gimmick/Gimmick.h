@@ -9,6 +9,7 @@ enum class GIMMICK_ID
 	FALLNEEDLE,
 	CANON,
 	BULLET,
+	GENERATOR,
 	MAX,
 };
 

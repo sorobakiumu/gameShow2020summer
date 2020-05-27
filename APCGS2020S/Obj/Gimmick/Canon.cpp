@@ -40,11 +40,12 @@ Canon::~Canon()
 
 void Canon::UpDate()
 {
+	AnyFlag = false;
 	Cnt++;
 	if (Cnt>=Speed)
 	{
 		Cnt = 0;
-		//GameScene().AddObjList(new Bullet(MapPos,5,Rad));
+		AnyFlag = true;
 	}
 }
 
