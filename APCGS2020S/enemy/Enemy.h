@@ -54,12 +54,10 @@ class Enemy
 
 	std::map<ENEMY_ID, std::vector<int>> enemyImage;
 
-	//Obj UpDate(Vec2double pPos);
-
 private:
 	Enemy();
 	~Enemy();
-	//std::vector<sharedEnemy> _enemylist;
+
 	static Enemy* sInstance;
 	ENEMY_ID _enemyID;
 };

@@ -11,8 +11,12 @@ void baze::Draw()
 {
 }
 
-baze::baze()
+baze::baze(double pos)
 {
+	MapPos.x = pos+lpSceneMng.ScreenSize.x;
+	MapPos.y = CHIP_SIZE;
+	dead = false;
+	alive = true;
 }
 
 baze::~baze()

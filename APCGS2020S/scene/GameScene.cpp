@@ -31,16 +31,19 @@ unique_Base GameScene::Update(unique_Base own)
 	}
 
 	int Cnt=0;
+	Vec2double tmppos;
 	for (auto obj : ObjList)
 	{
 		obj->UpDate();
-		if (obj->GetID()==OBJ_ID::PLAYER)
+		if (obj->GetID() == OBJ_ID::PLAYER)
 		{
-			obj->SetPos(CheckHit(obj->GetPos(), obj->GetSize(),0));
+			obj->SetPos(CheckHit(obj->GetPos(), obj->GetSize(), 0));
 			plPos = obj->GetPos();
+			tmppos = (*obj).GetPos();
 		}
-		Cnt++;
 	}
+
+	CheckEnemy(tmppos);
 	if (plPos.x >= ScrCenter.x && plPos.x <= MapSize.x-ScrCenter.x)
 	{
 		MapPos = { MapSize.x/2 - plPos.x+ScrCenter.x,ScrCenter.y };
@@ -132,9 +135,37 @@ Vec2double GameScene::CheckHit(Vec2double pos, Vec2Int size,int Cnt)
 	return pos;
 }
 
+void GameScene::CheckEnemy(Vec2double pos)
+{
+
+	PL_POS plPos = PL_POS::LOW;
+
+		switch (plPos)
+	{
+	case (PL_POS::LOW):
+		if (rand() % 300 == 0)
+		{
+			ObjList.emplace_back(new man(pos.x));
+			ObjList.emplace_back(new burst(pos.x));
+			ObjList.emplace_back(new baze(pos.x));
+			ObjList.emplace_back(new black(pos.x));
+			ObjList.emplace_back(new ghost(pos.x));
+			ObjList.emplace_back(new rare(pos.x));
+			ObjList.emplace_back(new wolf(pos.x));
+			ObjList.emplace_back(new boss(pos.x));
+		}
+		break;
+	case (PL_POS::CENTER):
+		break;
+	case (PL_POS::HIGH):
+		break;
+	default:
+		break;
+	}
+}
+
 GameScene::GameScene()
 {
-	ObjList.emplace_back(new wolf());
 	MapScreen = 0;
 	LoadDivGraph("image/tile.png", 9, 3, 3, 32, 32, bgImage);
 	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, 300));

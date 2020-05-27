@@ -27,13 +27,16 @@ void boss::Draw()
 {
 }
 
-boss::boss()
+boss::boss(double pos)
 {
 	for (int x = 0; x < 4; x++)
 	{
 		pitCnt[x] = { 0.0,0.0 };
 	}
-
+	MapPos = {500,220};
+	MapPos.x = pos + lpSceneMng.ScreenSize.x;
+	dead = false;
+	alive = true;
 }
 
 boss::~boss()

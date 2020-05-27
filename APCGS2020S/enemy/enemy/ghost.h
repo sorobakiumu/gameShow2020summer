@@ -8,7 +8,7 @@ class ghost:
 public:
 	void UpDate() override;
 	void Draw() override;
-	ghost();
+	ghost(double pos);
 	~ghost();
 };
 

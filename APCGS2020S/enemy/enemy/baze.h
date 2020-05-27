@@ -8,7 +8,7 @@ public Obj
 public:
 	void UpDate() override;
 	void Draw() override;
-	baze();
+	baze(double pos);
 	~baze();
 };
 

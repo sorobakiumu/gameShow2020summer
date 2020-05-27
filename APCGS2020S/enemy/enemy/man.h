@@ -8,7 +8,7 @@ class man :
 public:
 	void UpDate() override;
 	void Draw() override;
-	man();
+	man(double pos);
 	~man();
 };
 

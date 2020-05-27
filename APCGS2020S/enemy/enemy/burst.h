@@ -8,7 +8,7 @@ class burst:
 public:
 	void UpDate() override;
 	void Draw() override;
-	burst();
+	burst(double pos);
 	~burst();
 };
 

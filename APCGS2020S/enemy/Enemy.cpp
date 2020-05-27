@@ -16,48 +16,6 @@
 #include "../scene/GameScene.h"
 
 Enemy* Enemy::sInstance = nullptr;
-//
-//Enemy::UpDate(Vec2double pPos)
-//{ 
-//
-//
-//	switch (_enemyID)
-//	{
-//	case (ENEMY_ID::WOLF):
-//		return wolf();
-//		break;
-//	case (ENEMY_ID::GHOST):
-//		return ghost();
-//		break;
-//	case (ENEMY_ID::MAN):
-//		return man());
-//		break;
-//	case (ENEMY_ID::BLACK):
-//		_enemylist.emplace_back(new black());
-//		break;
-//	case (ENEMY_ID::BURST):
-//		_enemylist.emplace_back(new burst());
-//		break;
-//	case (ENEMY_ID::BAZE):
-//		_enemylist.emplace_back(new baze());
-//		break;
-//	case (ENEMY_ID::BOSS):
-//		_enemylist.emplace_back(new boss());
-//		break;
-//	case (ENEMY_ID::RARE):
-//		_enemylist.emplace_back(new rare());
-//		break;
-//	default:
-//		break;
-//	}
-//
-//
-//	for (auto eQue : _enemylist)
-//	{
-//		(*eQue).UpDate(pPos);
-//	}
-//
-//}
 
 Enemy::Enemy()
 {

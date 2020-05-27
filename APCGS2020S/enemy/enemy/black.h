@@ -8,7 +8,7 @@ class black :
 public:
 	void UpDate() override;
 	void Draw() override;
-	black();
+	black(double pos);
 	~black();
 };
 

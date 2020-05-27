@@ -11,9 +11,13 @@ void wolf::Draw()
 {
 }
 
-wolf::wolf()
+wolf::wolf(double pos)
 {
-	MapPos = {200,200};
+	MapPos.x = pos + lpSceneMng.ScreenSize.x;
+	MapPos.y = rand()%static_cast<int>(lpSceneMng.ScreenCenter.y+lpSceneMng.ScreenCenter.y/2);
+	dead = false;
+	alive = true;
+	
 }
 
 wolf::~wolf()

@@ -8,7 +8,7 @@ class wolf:
 public:
 	void UpDate() override;
 	void Draw() override;
-	wolf();
+	wolf(double pos);
 	~wolf();
 };
 

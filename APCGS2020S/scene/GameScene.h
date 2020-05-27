@@ -6,6 +6,18 @@
 //#include "../enemy/Enemy.h"
 #include "../Obj/Gimmick/Canon.h"
 
+enum class PL_POS
+{
+	LOW,
+	CENTER,
+	HIGH,
+	BOSS,
+	MAX,
+};
+
+
+
+
 class GameScene :
 	public BaseScene
 {
@@ -25,6 +37,8 @@ private:
 
 	int bgImage[9];
 	int MapScreen;
+
+	void CheckEnemy(Vec2double pos);
 
 	std::vector<SharedObj> ObjList;
 

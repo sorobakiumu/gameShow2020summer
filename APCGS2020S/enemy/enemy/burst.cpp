@@ -11,8 +11,12 @@ void burst::Draw()
 {
 }
 
-burst::burst()
+burst::burst(double pos)
 {
+	MapPos.x = pos + lpSceneMng.ScreenSize.x;
+	MapPos.y = rand() % static_cast<int>(lpSceneMng.ScreenCenter.y + lpSceneMng.ScreenCenter.y / 2);
+	dead = false;
+	alive = true;
 }
 
 burst::~burst()

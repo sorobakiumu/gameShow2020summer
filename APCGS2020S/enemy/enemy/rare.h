@@ -8,7 +8,7 @@ class rare :
 public:
 	void UpDate() override;
 	void Draw() override;
-	rare();
+	rare(double pos);
 	~rare();
 };
 

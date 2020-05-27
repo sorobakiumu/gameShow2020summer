@@ -8,7 +8,7 @@ class boss :
 public:
 	void UpDate() override;
 	void Draw() override;
-	boss();
+	boss(double pos);
 	~boss();
 private:
 	void pit(int num);
