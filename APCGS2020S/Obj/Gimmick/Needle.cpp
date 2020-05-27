@@ -4,7 +4,14 @@
 
 Needle::Needle()
 {
-
+	MapPos = {0,0};
+	Size = { 0,0 };
+	ID = OBJ_ID::GIMMICK;
+	G_ID = GIMMICK_ID::MAX;
+	Image = 0;
+	dead = false;
+	AnyFlag = false;
+	Rad = 0;
 }
 
 Needle::Needle(Vec2double pos)

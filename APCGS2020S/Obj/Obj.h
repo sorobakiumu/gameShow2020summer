@@ -7,9 +7,21 @@
 #include "../scene/LAYER.h"
 
 #include"../manager/CheckHitManage.h"
-#include "Gimmick\Gimmick.h"
 
 #define CHIP_SIZE 32
+
+enum class GIMMICK_ID
+{
+	NON,
+	LIFT,
+	FALL_LIFT,
+	NEEDLE,
+	FALLNEEDLE,
+	CANON,
+	BULLET,
+	GENERATOR,
+	MAX,
+};
 
 enum class OBJ_ID
 {
@@ -100,7 +112,6 @@ protected:
 	bool alive;
 
 	int _zOrder;											// 描画する順番(奥行、Z軸)を指定
-	double _rad;
 
 	// 完全に削除可能かを識別する関数
 	bool Destroyproc(void);

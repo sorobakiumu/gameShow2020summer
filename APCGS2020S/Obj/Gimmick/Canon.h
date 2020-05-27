@@ -12,7 +12,6 @@ public:
 private:
     int Image;
     int Speed;
-    double Rad;
     int Cnt;
 };
 

@@ -95,7 +95,7 @@ unique_Base GameScene::Update(unique_Base own)
 		}
 	}
 
-	CheckEnemy(tmppos);
+	//CheckEnemy(tmppos);
 	if (plPos.x >= ScrCenter.x && plPos.x <= MapSize.x-ScrCenter.x)
 	{
 		MapPos = { MapSize.x/2 - plPos.x+ScrCenter.x,ScrCenter.y };

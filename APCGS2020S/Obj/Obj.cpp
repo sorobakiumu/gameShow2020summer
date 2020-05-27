@@ -9,7 +9,7 @@ Obj::Obj()
 	_animCnt = 0;
 	_zOrder = 0;
 	_state = STATE::NORMAL;
-	_rad = 0.0;
+	Rad = 0.0;
 	ID = OBJ_ID::MAX;
 	G_ID = GIMMICK_ID::NON;
 }
@@ -22,7 +22,7 @@ Obj::~Obj()
 // ˆê–‡ŠG(±ÆÒ°¼®İ‚È‚µ)‚ğ•`‰æ‚·‚éŠÖ”
 void Obj::Draw(Vec2double pos, int id)
 {
-	lpSceneMng.addDrawQue({ pos , _rad , _zOrder, id , LAYER::MAP , 900 });
+	lpSceneMng.addDrawQue({ pos , Rad , _zOrder, id , LAYER::MAP , 900 });
 }
 
 // ±ÆÒ°¼®İ•ÏXŠÖ”
