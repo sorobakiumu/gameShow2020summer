@@ -18,6 +18,7 @@ ghost::ghost(double pos)
 	dead = false;
 	alive = true;
 	Rad = 0;
+	ID = OBJ_ID::ENEMY;
 }
 
 ghost::~ghost()

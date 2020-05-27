@@ -22,7 +22,7 @@ Obj::~Obj()
 // ˆê–‡ŠG(±ÆÒ°¼®İ‚È‚µ)‚ğ•`‰æ‚·‚éŠÖ”
 void Obj::Draw(Vec2double pos, int id)
 {
-	lpSceneMng.addDrawQue({ pos , Rad , _zOrder, id , LAYER::MAP , 900 });
+	lpSceneMng.addDrawQue({ pos ,1.0 ,Rad,id, LAYER::ENEMY , 900 });
 }
 
 // ±ÆÒ°¼®İ•ÏXŠÖ”

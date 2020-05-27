@@ -19,6 +19,7 @@ man::man(double pos)
 	dead = false;
 	alive = true;
 	Rad = 0;
+	ID = OBJ_ID::ENEMY;
 }
 
 man::~man()

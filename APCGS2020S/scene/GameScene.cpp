@@ -34,68 +34,76 @@ unique_Base GameScene::Update(unique_Base own)
 		return std::move(std::make_unique<TitleScene>());
 	}
 
-	int Cnt=0;
+	int ECnt=0;
 	Vec2double tmppos;
 	for (auto obj : ObjList)
 	{
 		obj->UpDate();
-		if (obj->GetID() == OBJ_ID::PLAYER)
+		switch (obj->GetID())
 		{
+		case OBJ_ID::PLAYER:
 			obj->SetPos(CheckHit(obj->GetPos(), obj->GetSize(), 0));
 			plPos = obj->GetPos();
 			tmppos = (*obj).GetPos();
-			if (obj->CheckFlag()==false)
+			if (obj->CheckFlag() == false)
 			{
 				// —Ž‰ºˆ—
 			}
-		}
-		else if (obj->GetID() == OBJ_ID::GIMMICK)
-		{
+			break;
+		case OBJ_ID::GIMMICK:
 			switch (obj->GetGID())
 			{
 			case GIMMICK_ID::CANON:
 				if (obj->CheckFlag())
 				{
-					ObjList.emplace_back(new Bullet(obj->GetPos(),3,obj->GetRad()));
+					ObjList.emplace_back(new Bullet(obj->GetPos(), 3, obj->GetRad()));
 				}
 				break;
 			case GIMMICK_ID::GENERATOR:
-					if (obj->CheckFlag())
+				if (obj->CheckFlag())
+				{
+					switch (rand() % 7)
 					{
-						switch (rand() % 7)
-						{
-						case 0:
-							ObjList.emplace_back(new man(obj->GetPos().x));
-							break;
-						case 1:
-							ObjList.emplace_back(new burst(obj->GetPos().x));
-							break;
-						case 2:
-							ObjList.emplace_back(new baze(obj->GetPos().x));
-							break;
-						case 3:
-							ObjList.emplace_back(new black(obj->GetPos().x));
-							break;
-						case 4:
-							ObjList.emplace_back(new ghost(obj->GetPos().x));
-							break;
-						case 5:
-							ObjList.emplace_back(new rare(obj->GetPos().x));
-							break;
-						case 6:
-							ObjList.emplace_back(new wolf(obj->GetPos().x));
-							break;
-						}
+					case 0:
+						ObjList.emplace_back(new man(320.0));
+						break;
+					case 1:
+						ObjList.emplace_back(new burst(320.0));
+						break;
+					case 2:
+						ObjList.emplace_back(new baze(320.0));
+						break;
+					case 3:
+						ObjList.emplace_back(new black(320.0));
+						break;
+					case 4:
+						ObjList.emplace_back(new ghost(320.0));
+						break;
+					case 5:
+						ObjList.emplace_back(new rare(320.0));
+						break;
+					case 6:
+						ObjList.emplace_back(new wolf(320.0));
+						break;
 					}
-					break;
+				}
+				break;
 			default:
 				break;
 
 			}
+			break;
+		case OBJ_ID::ENEMY:
+			ECnt++;
+			break;
+		default:
+			break;
 		}
 	}
-
-	//CheckEnemy(tmppos);
+	if (ECnt <= 0)
+	{
+		CheckEnemy(tmppos);
+	}
 	if (plPos.x >= ScrCenter.x && plPos.x <= MapSize.x-ScrCenter.x)
 	{
 		MapPos = { MapSize.x/2 - plPos.x+ScrCenter.x,ScrCenter.y };

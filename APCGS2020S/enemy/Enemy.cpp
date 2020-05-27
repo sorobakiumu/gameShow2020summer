@@ -49,7 +49,6 @@ Enemy::Enemy()
 	//RARE
 	LoadDivGraph("image/ƒŒƒA.png", 4, 4, 1, 32, 32, &enemyImage[ENEMY_ID::RARE][0]);
 
-
 	_enemyID = ENEMY_ID::BOSS;
 }
 

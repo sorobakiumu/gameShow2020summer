@@ -38,6 +38,7 @@ boss::boss(double pos)
 	dead = false;
 	alive = true;
 	Rad = 0;
+	ID = OBJ_ID::ENEMY;
 }
 
 boss::~boss()
