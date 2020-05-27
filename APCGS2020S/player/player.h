@@ -42,7 +42,7 @@ public:
 
 	void Draw();
 
-	int plImage[12];
+	int plHP;					// ÌßÚ²Ô°HP§Œä•Ï”			
 private:
 	int Image[6];
 	
@@ -56,5 +56,9 @@ private:
 	bool atkFlag;
 
 	int ptn;
+	int pushCtl[3];
+
+	int bulletImage;			// ËŒ‚‰æ‘œŠi”[•Ï”
+
 };
 

@@ -127,6 +127,11 @@ void player::UpDate()
 void player::Draw()
 {
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, Image[0], LAYER::PLAYER, 999));
+	
+	if (shotFlag == true)
+	{
+		lpSceneMng.addDrawQue(std::make_tuple(shotPos, 1.0, 0.0, bulletImage, LAYER::PLAYER, 999));
+	}
 }
 
 // çUåÇêßå‰ä÷êî
@@ -134,7 +139,7 @@ void player::attackCtl(void)
 {
 
 	// éÀåÇÃ◊∏ﬁä«óù
-	if (shotFlag == false && CheckHitKey(KEY_INPUT_A))
+	if (shotFlag == false && CheckHitKey(KEY_INPUT_D) != pushCtl[0] && CheckHitKey(KEY_INPUT_D) == 1)
 	{
 		shotPos = MapPos;
 
@@ -142,7 +147,7 @@ void player::attackCtl(void)
 	}
 
 	// ãﬂê⁄Ã◊∏ﬁä«óù
-	if (atkFlag == false && CheckHitKey(KEY_INPUT_B))
+	if (atkFlag == false && CheckHitKey(KEY_INPUT_S) != pushCtl[1] && CheckHitKey(KEY_INPUT_S) == 1)
 	{
 		shotPos = MapPos;
 		atkFlag = true;
@@ -198,6 +203,13 @@ void player::Init(void)
 
 	LoadDivGraph("image/test.png",6,3,2,32,32,Image);
 	//Image = LoadGraph("image/test.png", true);
+
+	bulletImage = LoadGraph("image/íe.png");
+
+	for (int i = 0; i < 3; i++)
+	{
+		pushCtl[i] = 0;
+	}
 
 	dead = false;
 }
