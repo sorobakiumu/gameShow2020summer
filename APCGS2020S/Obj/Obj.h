@@ -68,9 +68,7 @@ public:
 
 	// €–SŠm’è—pŠÖ”
 	const bool Getdead()const { return dead; }
-
-	// ¶‘¶æ“¾—pŠÖ”
-	bool GetAlive(void) { return alive; };
+	void SetDead(bool num) { dead = num; }
 
 	void SetPos(Vec2double pos) { MapPos = pos; }
 

@@ -55,10 +55,10 @@ unique_Base GameScene::Update(unique_Base own)
 				if (obj->CheckFlag())
 				{
 					
-/*					switch (rand() % 7)
+					switch (rand() % 7)
 					{
 					case 0:
-						//ObjList.emplace_back(new man(320.0));
+						ObjList.emplace_back(new man(320.0));
 						break;
 					case 1:
 						ObjList.emplace_back(new burst(320.0));
@@ -79,7 +79,7 @@ unique_Base GameScene::Update(unique_Base own)
 						ObjList.emplace_back(new wolf(320.0));
 						break;
 					}
-	*/			}
+				}
 				break;
 			default:
 				break;
@@ -87,13 +87,17 @@ unique_Base GameScene::Update(unique_Base own)
 			}
 			break;
 		case OBJ_ID::ENEMY:
+			if ((obj->GetPos().x <= 0) || (obj->GetPos().x < plPos.x - ScrCenter.x))
+			{
+				obj->SetDead(true);
+			}
 			ECnt++;
 			break;
 		default:
 			break;
 		}
 	}
-	if (ECnt <= 0)
+	if (ECnt <= 30)
 	{
 		CheckEnemy(tmppos);
 	}
@@ -124,7 +128,10 @@ unique_Base GameScene::Update(unique_Base own)
 
 	for (auto obj:ObjList)
 	{
-		obj->Draw();
+		if(obj!=nullptr)
+		{
+			obj->Draw();
+		}
 	}
 
 	ObjList.erase(itr,
