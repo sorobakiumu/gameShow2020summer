@@ -4,6 +4,14 @@
 #include <memory>
 #include <map>
 #include "../Obj/Obj.h"
+#include "enemy/baze.h"
+#include "enemy/black.h"
+#include "enemy/boss.h"
+#include "enemy/burst.h"
+#include "enemy/ghost.h"
+#include "enemy/man.h"
+#include "enemy/rare.h"
+#include "enemy/wolf.h"
 //#include "enemy/BaseEnemy.h"
 //#include <Windows.h>
 

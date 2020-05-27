@@ -17,15 +17,7 @@
 #include "..\manager\SEManage.h"
 
 
-#include "../enemy/enemy/baze.h"
-#include "../enemy/enemy/black.h"
-#include "../enemy/enemy/boss.h"
-#include "../enemy/enemy/burst.h"
-#include "../enemy/enemy/ghost.h"
-#include "../enemy/enemy/man.h"
-#include "../enemy/enemy/rare.h"
-#include "../enemy/enemy/wolf.h"
-
+#include "../enemy/Enemy.h"
 
 unique_Base GameScene::Update(unique_Base own)
 {
@@ -62,10 +54,11 @@ unique_Base GameScene::Update(unique_Base own)
 			case GIMMICK_ID::GENERATOR:
 				if (obj->CheckFlag())
 				{
-					switch (rand() % 7)
+					
+/*					switch (rand() % 7)
 					{
 					case 0:
-						ObjList.emplace_back(new man(320.0));
+						//ObjList.emplace_back(new man(320.0));
 						break;
 					case 1:
 						ObjList.emplace_back(new burst(320.0));
@@ -86,7 +79,7 @@ unique_Base GameScene::Update(unique_Base own)
 						ObjList.emplace_back(new wolf(320.0));
 						break;
 					}
-				}
+	*/			}
 				break;
 			default:
 				break;

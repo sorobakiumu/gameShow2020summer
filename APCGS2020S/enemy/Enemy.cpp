@@ -5,14 +5,7 @@
 #include "../manager/CheckHitManage.h"
 #include <DxLib.h>
 #include<math.h>
-#include "enemy/baze.h"
-#include "enemy/black.h"
-#include "enemy/boss.h"
-#include "enemy/burst.h"
-#include "enemy/ghost.h"
-#include "enemy/man.h"
-#include "enemy/rare.h"
-#include "enemy/wolf.h"
+
 #include "../scene/GameScene.h"
 
 Enemy* Enemy::sInstance = nullptr;
