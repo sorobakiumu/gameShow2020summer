@@ -8,6 +8,8 @@ public:
 	unique_Base Update(unique_Base own) override;			//シーンを、更新する。
 	TitleScene();
 	~TitleScene();
+
+	int tlImage;
+
 private:
-	int bgImage;
 };

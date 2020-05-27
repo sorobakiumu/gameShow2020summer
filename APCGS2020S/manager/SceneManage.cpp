@@ -58,6 +58,14 @@ void SceneManage::Draw()
 				DrawRotaGraph(pos.x, pos.y,size, angle,image, true, false);
 			}
 		}
+		else if(layer == LAYER::UI)
+		{
+			for (auto dque : _drawList)
+			{
+				std::tie(pos, size, angle, image, layer, std::ignore) = dque;
+				DrawRotaGraph(pos.x, pos.y, size, angle, image, true, false);
+			}
+		}
 	}
 	ScreenFlip();
 }

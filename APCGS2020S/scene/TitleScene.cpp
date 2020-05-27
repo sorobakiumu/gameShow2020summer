@@ -13,16 +13,15 @@ unique_Base TitleScene::Update(unique_Base own)
 		return std::move(std::make_unique<GameScene>());
 	}
 
-	lpSceneMng.addDrawQue(std::make_tuple(lpSceneMng.ScreenCenter, 1.0, 0.0, lpImageMng.GetMap("タイトル"), LAYER::BG, 999));
-
+	lpSceneMng.addDrawQue(std::make_tuple(lpSceneMng.ScreenCenter, 1.0, 0.0, tlImage, LAYER::UI, 999));
 
 	return std::move(own);
 }
 
 TitleScene::TitleScene()
 {
-	bgImage = 0;
 
+	tlImage = LoadGraph("image/タイトル(仮).png", true);
 
 }
 
