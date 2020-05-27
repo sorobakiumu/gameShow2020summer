@@ -35,13 +35,13 @@ unique_Base GameScene::Update(unique_Base own)
 		case OBJ_ID::PLAYER:
 			obj->SetPos(CheckHit(obj->GetPos(), obj->GetSize(), 0));
 			plPos = obj->GetPos();
-			if (obj->CheckFlag() == true)
+			if (1)
 			{
 				// óéâ∫èàóù
 				int Cnt = 0;
-				while((CheckFall(obj->GetPos(),obj->GetSize())==false)&&(Cnt<5))
+				while ((CheckFall(obj->GetPos(), obj->GetSize()) == false) && (Cnt < 3))
 				{
-					obj->SetPos({ obj->GetPos().x, obj->GetPos().y+1 });
+					obj->SetPos({ obj->GetPos().x, obj->GetPos().y + 1 });
 					Cnt++;
 				}
 				if (CheckFall(obj->GetPos(), obj->GetSize()) == true)
@@ -95,7 +95,7 @@ unique_Base GameScene::Update(unique_Base own)
 			}
 			break;
 		case OBJ_ID::ENEMY:
-			if ((obj->GetPos().x <= 0) || (obj->GetPos().x < plPos.x - ScrCenter.x))
+			if ((obj->GetPos().x <= 0) || (obj->GetPos().x < plPos.x - ScrSize.x))
 			{
 				obj->SetDead(true);
 			}
@@ -180,25 +180,23 @@ Vec2double GameScene::CheckHit(Vec2double pos, Vec2Int size,int Cnt)
 	}
 
 	// 4ã˜ÇÃèÛë‘Çälìæ(ìñÇΩÇ¡ÇƒÇÈÇ©Ç«Ç§Ç©)
-	if (Check[0] == true&&Check[2] == true)
+	if (Check[0] == true && Check[2] == true)
 	{
 		return CheckHit({ pos.x + 1,pos.y }, size, Cnt + 1);
 	}
-	else if (Check[1] == true&&Check[3] == true)
+	else if (Check[1] == true && Check[3] == true)
 	{
 		return CheckHit({ pos.x - 1,pos.y }, size, Cnt + 1);
 	}
 
-	if (Check[0]==true&&Check[1]==true)
+	if (Check[0] == true || Check[1] == true)
 	{
-		return CheckHit({ pos.x,pos.y + 1 }, size,Cnt+1);
+		return CheckHit({ pos.x,pos.y + 1 }, size, Cnt + 1);
 	}
-	else if (Check[2] == true&&Check[3] == true)
+	else if (Check[2] == true || Check[3] == true)
 	{
- 		return CheckHit({ pos.x,pos.y - 1 }, size,Cnt + 1);
+		return CheckHit({ pos.x,pos.y - 1 }, size, Cnt + 1);
 	}
-
-
 
 	return pos;
 }
