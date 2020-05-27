@@ -27,7 +27,6 @@ unique_Base GameScene::Update(unique_Base own)
 	}
 
 	int ECnt=0;
-	Vec2double tmppos;
 	for (auto obj : ObjList)
 	{
 		obj->UpDate();
@@ -36,10 +35,19 @@ unique_Base GameScene::Update(unique_Base own)
 		case OBJ_ID::PLAYER:
 			obj->SetPos(CheckHit(obj->GetPos(), obj->GetSize(), 0));
 			plPos = obj->GetPos();
-			tmppos = (*obj).GetPos();
-			if (obj->CheckFlag() == false)
+			if (obj->CheckFlag() == true)
 			{
 				// —Ž‰ºˆ—
+				int Cnt = 0;
+				while((CheckFall(obj->GetPos(),obj->GetSize())==false)&&(Cnt<5))
+				{
+					obj->SetPos({ obj->GetPos().x, obj->GetPos().y+1 });
+					Cnt++;
+				}
+				if (CheckFall(obj->GetPos(), obj->GetSize()) == true)
+				{
+					obj->SetFlag(false);
+				}
 			}
 			break;
 		case OBJ_ID::GIMMICK:
@@ -99,7 +107,7 @@ unique_Base GameScene::Update(unique_Base own)
 	}
 	if (ECnt <= 30)
 	{
-		CheckEnemy(tmppos);
+		CheckEnemy(plPos);
 	}
 	if (plPos.x >= ScrCenter.x && plPos.x <= MapSize.x-ScrCenter.x)
 	{
@@ -193,6 +201,15 @@ Vec2double GameScene::CheckHit(Vec2double pos, Vec2Int size,int Cnt)
 
 
 	return pos;
+}
+
+bool GameScene::CheckFall(Vec2double pos, Vec2Int size)
+{
+	if (CheckHit({ pos.x,pos.y + 1 }, size, 0)==pos)
+	{
+		return true;
+	}
+	return false;
 }
 
 void GameScene::CheckEnemy(Vec2double pos)

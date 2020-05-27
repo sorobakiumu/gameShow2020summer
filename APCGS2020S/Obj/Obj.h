@@ -93,7 +93,9 @@ public:
 
 	virtual void UpDate() = 0;
 
+	// Obj毎の各種フラグ関連
 	bool CheckFlag() { return AnyFlag; }
+	void SetFlag(bool tmp) { AnyFlag = tmp; }
 
 	GIMMICK_ID GetGID() { return G_ID; }
 

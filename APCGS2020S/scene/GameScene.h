@@ -15,9 +15,6 @@ enum class PL_POS
 	MAX,
 };
 
-
-
-
 class GameScene :
 	public BaseScene
 {
@@ -31,7 +28,7 @@ public:
 
 	Vec2double CheckHit(Vec2double pos, Vec2Int size,int Cnt);
 
-
+	bool CheckFall(Vec2double pos,Vec2Int size);
 private:
 	friend Canon;
 

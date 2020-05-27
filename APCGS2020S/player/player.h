@@ -52,6 +52,7 @@ private:
 	int jmpCnt;								// ’µ–ô§ŒäÌ×¸Ş•Ï”
 	int sec;								// ’µ–ô§ŒäÌ×¸Ş•Ï”
 	Vec2double jmpPos;
+	bool jmpFlag;
 	bool shotFlag;
 	bool atkFlag;
 
