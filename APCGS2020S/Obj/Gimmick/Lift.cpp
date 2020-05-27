@@ -11,6 +11,7 @@ Lift::Lift()
 	Speed = {0,0};
 	Image = LoadGraph("image/リフト.png");
 	dead = false;
+	AnyFlag = false;
 }
 
 Lift::Lift(Vec2double pos, Vec2double StartPos, Vec2double EndPos,int Movetime)
@@ -24,6 +25,7 @@ Lift::Lift(Vec2double pos, Vec2double StartPos, Vec2double EndPos,int Movetime)
 	MoveTime = Movetime;
 	Image = LoadGraph("image/リフト.png");
 	dead = false;
+	AnyFlag = false;
 }
 
 Lift::~Lift()

@@ -16,6 +16,7 @@ Canon::Canon()
 	dead = false;
 	Image = 0;
 	Cnt = 0;
+	AnyFlag = false;
 }
 
 Canon::Canon(Vec2double pos, double rad,int speed)
@@ -29,6 +30,7 @@ Canon::Canon(Vec2double pos, double rad,int speed)
 	dead = false;
 	Image = LoadGraph("image/CANON.png");
 	Cnt = 0;
+	AnyFlag = false;
 }
 
 Canon::~Canon()

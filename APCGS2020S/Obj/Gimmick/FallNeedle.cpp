@@ -13,6 +13,7 @@ FallNeedle::FallNeedle()
 	FallFlag = false;
 	Image = 0;
 	dead = false;
+	AnyFlag = false;
 }
 
 FallNeedle::FallNeedle(Vec2double pos)
@@ -24,6 +25,7 @@ FallNeedle::FallNeedle(Vec2double pos)
 	FallFlag = false;
 	Image = LoadGraph("image/FALLTOGE.png");
 	dead = false;
+	AnyFlag = false;
 }
 
 FallNeedle::~FallNeedle()

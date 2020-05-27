@@ -12,6 +12,7 @@ Bullet::Bullet()
 	G_ID=GIMMICK_ID::BULLET;
 	dead = true;
 	Image = 0;
+	AnyFlag = false;
 }
 
 Bullet::Bullet(Vec2double pos,int speed,double rad)
@@ -24,6 +25,7 @@ Bullet::Bullet(Vec2double pos,int speed,double rad)
 	G_ID=GIMMICK_ID::BULLET;
 	dead = false;
 	Image = 0;
+	AnyFlag = false;
 }
 
 Bullet::~Bullet()

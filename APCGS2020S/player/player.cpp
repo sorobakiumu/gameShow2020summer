@@ -104,7 +104,7 @@ void player::UpDate()
 	if (AnyFlag == true)
 	{
 		// 跳躍山なり移動用2次関数
-		MapPos.y = -pow((sec - jmpCnt), 2)/128 + jmpPos.y;
+		MapPos.y -= 20;
 		// 経過時間計測
 		sec++;
 		// もし、着地したら

@@ -15,6 +15,7 @@ Needle::Needle(Vec2double pos)
 	G_ID = GIMMICK_ID::MAX;
 	Image = LoadGraph("");
 	dead = false;
+	AnyFlag = false;
 }
 
 Needle::~Needle()
