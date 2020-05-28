@@ -45,20 +45,25 @@ public:
 
 	int plHP;					// ÌßÚ²Ô°HP§Œä•Ï”			
 
+protected:
+
+	bool shotFlag;				// ¼®¯ÄÌ×¸Ş•Ï”
+	bool atkFlag;				// ‹ßÚÌ×¸Ş•Ï”
+	bool accelFlag;				// ‰Á‘¬Ì×¸Ş•Ï”
+
+
 private:
-	int Image[6];				// 
+
+	int Image[6];				// player‰æ‘œŠi”[•Ï”
 	void attackCtl(void);		// 
 	void Init(void);			// ‰Šú‰»ŠÖ”
 
-	int jmpCnt;					// ’µ–ô§ŒäÌ×¸Ş•Ï”
-	int sec;					// ’µ–ô§ŒäÌ×¸Ş•Ï”
-	Vec2double jmpPos;			// 
-	bool jmpFlag;				// 
-	bool shotFlag;				// 
-	bool atkFlag;				// 
-	bool accelFlag;				// 
+	int jmpCnt;					// ’µ–ôŠÔ•Ï”
+	int sec;					// ’µ–ôŒo‰ßŠÔ•Ï”
+	Vec2double jmpPos;			// ’µ–ôÀ•W§Œä•Ï”
+	bool jmpFlag;				// ’µ–ôÌ×¸Ş•Ï”
 
-	int ptn;					// 
+	Ctl ptn;					// 
 	int pushCtl[3];				// 
 
 	int bulletImage;			// ËŒ‚‰æ‘œŠi”[•Ï”
