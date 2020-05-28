@@ -18,7 +18,7 @@ burst::burst(double pos)
 	dead = false;
 	alive = true;
 	Rad = 0;
-	ID = OBJ_ID::ENEMY;
+	ID = OBJ_ID::FRY_ENEMY;
 }
 
 burst::~burst()

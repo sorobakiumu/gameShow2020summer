@@ -27,9 +27,14 @@ unique_Base GameScene::Update(unique_Base own)
 	}
 
 	int ECnt=0;
+	int tmp;
+	Vec2Int size = { CHIP_SIZE,CHIP_SIZE };
 	for (auto obj : ObjList)
 	{
-		obj->UpDate();
+		if (((*obj).GetID() != OBJ_ID::ENEMY) && ((*obj).GetID() != OBJ_ID::FRY_ENEMY))
+		{
+			obj->UpDate();
+		}
 		switch (obj->GetID())
 		{
 		case OBJ_ID::PLAYER:
@@ -62,7 +67,7 @@ unique_Base GameScene::Update(unique_Base own)
 			case GIMMICK_ID::GENERATOR:
 				if (obj->CheckFlag())
 				{
-					
+
 					switch (rand() % 7)
 					{
 					case 0:
@@ -95,7 +100,26 @@ unique_Base GameScene::Update(unique_Base own)
 			}
 			break;
 		case OBJ_ID::ENEMY:
-			if ((obj->GetPos().x <= 0) || (obj->GetPos().x < plPos.x - ScrSize.x))
+			// —Ž‰ºˆ—
+
+			tmp = 0;
+			while ((CheckFall(obj->GetPos(), size) == false) && (tmp < 3))
+			{
+				obj->SetPos({ obj->GetPos().x, obj->GetPos().y + 1 });
+				tmp++;
+			}
+			if (CheckFall(obj->GetPos(), size) == true)
+			{
+				obj->SetFlag(false);
+			}
+			if ((obj->GetPos().x <= 0) || (obj->GetPos().x < plPos.x - ScrSize.x*2)||(obj->GetPos().y<0))
+			{
+				obj->SetDead(true);
+			}
+			ECnt++;
+			break;
+		case OBJ_ID::FRY_ENEMY:
+			if ((obj->GetPos().x <= 0) || (obj->GetPos().x < plPos.x - ScrSize.x * 2) || (obj->GetPos().y < 0))
 			{
 				obj->SetDead(true);
 			}
@@ -105,10 +129,19 @@ unique_Base GameScene::Update(unique_Base own)
 			break;
 		}
 	}
-	if (ECnt <= 30)
+
+	for (auto obj : ObjList)
 	{
-		CheckEnemy(plPos);
+		if (((*obj).GetID() == OBJ_ID::ENEMY) || ((*obj).GetID() == OBJ_ID::FRY_ENEMY))
+		{
+			if ((*obj).GetPos().x-plPos.x<ScrCenter.x*2)
+			{
+				obj->UpDate();
+			}
+		}
 	}
+
+
 	if (plPos.x >= ScrCenter.x && plPos.x <= MapSize.x-ScrCenter.x)
 	{
 		MapPos = { MapSize.x/2 - plPos.x+ScrCenter.x,ScrCenter.y };
@@ -210,29 +243,65 @@ bool GameScene::CheckFall(Vec2double pos, Vec2Int size)
 	return false;
 }
 
-void GameScene::CheckEnemy(Vec2double pos)
+void GameScene::CheckEnemy(double posx)
 {
 
 	PL_POS plPos = PL_POS::LOW;
+	if (posx < 500)
+	{
+		plPos = PL_POS::CENTER;
+	}
+	else if(posx < 999)
+	{
+		plPos = PL_POS::HIGH;
+	}
+	else
+	{
+		plPos = PL_POS::BOSS;
+	}
+
 
 		switch (plPos)
 	{
 	case (PL_POS::LOW):
-		if (rand() % 300 == 0)
+		//if (rand() % 300 == 0)
 		{
-			ObjList.emplace_back(new man(pos.x));
-			ObjList.emplace_back(new burst(pos.x));
-			ObjList.emplace_back(new baze(pos.x));
-			ObjList.emplace_back(new black(pos.x));
-			ObjList.emplace_back(new ghost(pos.x));
-			ObjList.emplace_back(new rare(pos.x));
-			ObjList.emplace_back(new wolf(pos.x));
-			ObjList.emplace_back(new boss(pos.x));
+			ObjList.emplace_back(new man(posx));
+
+
+			ObjList.emplace_back(new ghost(posx));
+	
+			ObjList.emplace_back(new wolf(posx));
+
 		}
 		break;
 	case (PL_POS::CENTER):
+		ObjList.emplace_back(new burst(posx));
+		ObjList.emplace_back(new rare(posx));
+
+		ObjList.emplace_back(new black(posx));
+		ObjList.emplace_back(new man(posx));
+
+
+		ObjList.emplace_back(new ghost(posx));
+
+		ObjList.emplace_back(new wolf(posx));
 		break;
 	case (PL_POS::HIGH):
+		ObjList.emplace_back(new baze(posx));
+		ObjList.emplace_back(new rare(posx));
+		ObjList.emplace_back(new burst(posx));
+
+		ObjList.emplace_back(new black(posx));
+		ObjList.emplace_back(new man(posx));
+
+
+		ObjList.emplace_back(new ghost(posx));
+
+		ObjList.emplace_back(new wolf(posx));
+		break;
+	case (PL_POS::BOSS):
+		ObjList.emplace_back(new boss(posx));
 		break;
 	default:
 		break;
@@ -241,6 +310,22 @@ void GameScene::CheckEnemy(Vec2double pos)
 
 GameScene::GameScene()
 {
+
+	for (int i = 100; i < 1000; i++)
+	{
+
+		CheckEnemy(i);
+
+		//ObjList.emplace_back(new man(i*100));
+		//ObjList.emplace_back(new burst(i * 100));
+		//ObjList.emplace_back(new baze(i * 100));
+		//ObjList.emplace_back(new black(i * 100));
+		//ObjList.emplace_back(new ghost(i * 100));
+		//ObjList.emplace_back(new rare(i * 100));
+		//ObjList.emplace_back(new wolf(i * 100));
+		//ObjList.emplace_back(new boss(i * 100));
+	}
+
 	MapScreen = 0;
 	LoadDivGraph("image/tile.png", 9, 3, 3, 32, 32, bgImage);
 	ObjList.emplace_back(new player({ 320,380 }, { 32,32 }));

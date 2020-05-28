@@ -35,7 +35,7 @@ private:
 	int bgImage[9];
 	int MapScreen;
 
-	void CheckEnemy(Vec2double pos);
+	void CheckEnemy(double posx);
 
 	std::vector<SharedObj> ObjList;
 

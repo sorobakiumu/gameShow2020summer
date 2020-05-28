@@ -27,6 +27,7 @@ enum class OBJ_ID
 {
 	PLAYER,
 	ENEMY,
+	FRY_ENEMY,
 	ITEM,
 	GIMMICK,
 	MAX,
