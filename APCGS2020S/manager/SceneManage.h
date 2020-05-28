@@ -5,7 +5,6 @@
 #include "../Common/Vector2.h"
 #include "../scene/BaseScene.h"
 #include "../scene/LAYER.h"
-#include "../scene/Func/FuncCheckHit.h"
 
 using DRAW_QUE = std::tuple<Vec2double, double, double, int,LAYER,int>;		//座標、サイズ（倍率）、角度、ハンドル、レイヤー,Zオーダー
 #define lpSceneMng SceneManage::GetInstance()

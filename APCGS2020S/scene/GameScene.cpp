@@ -4,7 +4,6 @@
 #include "../manager/SceneManage.h"
 #include "TitleScene.h"
 #include "../Obj/Obj.h"
-#include "Func/FuncCheckHit.h"
 
 #include "../Obj/Gimmick/Lift.h"
 #include "../Obj/Gimmick/FallLift.h"
@@ -65,34 +64,34 @@ unique_Base GameScene::Update(unique_Base own)
 				}
 				break;
 			case GIMMICK_ID::GENERATOR:
-				if (obj->CheckFlag())
-				{
+				//if (obj->CheckFlag())
+				//{
 
-					switch (rand() % 7)
-					{
-					case 0:
-						ObjList.emplace_back(new man(320.0));
-						break;
-					case 1:
-						ObjList.emplace_back(new burst(320.0));
-						break;
-					case 2:
-						ObjList.emplace_back(new baze(320.0));
-						break;
-					case 3:
-						ObjList.emplace_back(new black(320.0));
-						break;
-					case 4:
-						ObjList.emplace_back(new ghost(320.0));
-						break;
-					case 5:
-						ObjList.emplace_back(new rare(320.0));
-						break;
-					case 6:
-						ObjList.emplace_back(new wolf(320.0));
-						break;
-					}
-				}
+				//	switch (rand() % 7)
+				//	{
+				//	case 0:
+				//		ObjList.emplace_back(new man(0.0));
+				//		break;
+				//	case 1:
+				//		ObjList.emplace_back(new burst(0.0));
+				//		break;
+				//	case 2:
+				//		ObjList.emplace_back(new baze(0.0));
+				//		break;
+				//	case 3:
+				//		ObjList.emplace_back(new black(0.0));
+				//		break;
+				//	case 4:
+				//		ObjList.emplace_back(new ghost(0.0));
+				//		break;
+				//	case 5:
+				//		ObjList.emplace_back(new rare(0.0));
+				//		break;
+				//	case 6:
+				//		ObjList.emplace_back(new wolf(0.0));
+				//		break;
+				//	}
+				//}
 				break;
 			default:
 				break;
@@ -100,26 +99,32 @@ unique_Base GameScene::Update(unique_Base own)
 			}
 			break;
 		case OBJ_ID::ENEMY:
-			// —Ž‰ºˆ—
-
-			tmp = 0;
-			while ((CheckFall(obj->GetPos(), size) == false) && (tmp < 3))
+			if (CheckHit(obj->GetPos(), obj->GetSize(), 0) == obj->GetPos())
 			{
-				obj->SetPos({ obj->GetPos().x, obj->GetPos().y + 1 });
-				tmp++;
+				// —Ž‰ºˆ—
+				tmp = 0;
+				while ((CheckFall(obj->GetPos(), size) == false) && (tmp < 3))
+				{
+					obj->SetPos({ obj->GetPos().x, obj->GetPos().y + 1 });
+					tmp++;
+				}
+				if (CheckFall(obj->GetPos(), size) == true)
+				{
+					obj->SetFlag(false);
+				}			
 			}
-			if (CheckFall(obj->GetPos(), size) == true)
-			{
-				obj->SetFlag(false);
-			}
-			if ((obj->GetPos().x <= 0) || (obj->GetPos().x < plPos.x - ScrSize.x*2)||(obj->GetPos().y<0))
+			if ((obj->GetPos().x <= 0) || (obj->GetPos().x < plPos.x - ScrSize.x * 2) ||
+				(obj->GetPos().x >= plPos.x+ScrSize.x*2)||
+				(obj->GetPos().y < 0) || (obj->GetPos().y<0)||obj->GetPos().y>ScrSize.y)
 			{
 				obj->SetDead(true);
 			}
 			ECnt++;
+			obj->SetPos(CheckHit(obj->GetPos(), obj->GetSize(), 0));
 			break;
 		case OBJ_ID::FRY_ENEMY:
-			if ((obj->GetPos().x <= 0) || (obj->GetPos().x < plPos.x - ScrSize.x * 2) || (obj->GetPos().y < 0))
+			if ((obj->GetPos().x <= 0) || (obj->GetPos().x < plPos.x - ScrSize.x * 2) ||
+			    (obj->GetPos().x>=MapSize.x)||(obj->GetPos().y < 0)||(obj->GetPos().y>ScrSize.y))
 			{
 				obj->SetDead(true);
 			}
@@ -288,17 +293,17 @@ void GameScene::CheckEnemy(double posx)
 		ObjList.emplace_back(new wolf(posx));
 		break;
 	case (PL_POS::HIGH):
-		ObjList.emplace_back(new baze(posx));
-		ObjList.emplace_back(new rare(posx));
-		ObjList.emplace_back(new burst(posx));
+		//ObjList.emplace_back(new baze(posx));
+		//ObjList.emplace_back(new rare(posx));
+		//ObjList.emplace_back(new burst(posx));
 
-		ObjList.emplace_back(new black(posx));
-		ObjList.emplace_back(new man(posx));
+		//ObjList.emplace_back(new black(posx));
+		//ObjList.emplace_back(new man(posx));
 
 
-		ObjList.emplace_back(new ghost(posx));
+		//ObjList.emplace_back(new ghost(posx));
 
-		ObjList.emplace_back(new wolf(posx));
+		//ObjList.emplace_back(new wolf(posx));
 		break;
 	case (PL_POS::BOSS):
 		ObjList.emplace_back(new boss(posx));
@@ -311,20 +316,8 @@ void GameScene::CheckEnemy(double posx)
 GameScene::GameScene()
 {
 
-	for (int i = 100; i < 1000; i++)
-	{
+		CheckEnemy(100);
 
-		CheckEnemy(i);
-
-		//ObjList.emplace_back(new man(i*100));
-		//ObjList.emplace_back(new burst(i * 100));
-		//ObjList.emplace_back(new baze(i * 100));
-		//ObjList.emplace_back(new black(i * 100));
-		//ObjList.emplace_back(new ghost(i * 100));
-		//ObjList.emplace_back(new rare(i * 100));
-		//ObjList.emplace_back(new wolf(i * 100));
-		//ObjList.emplace_back(new boss(i * 100));
-	}
 
 	MapScreen = 0;
 	LoadDivGraph("image/tile.png", 9, 3, 3, 32, 32, bgImage);

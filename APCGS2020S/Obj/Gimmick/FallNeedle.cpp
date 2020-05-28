@@ -2,7 +2,6 @@
 #include "FallNeedle.h"
 #include "../../manager/SceneManage.h"
 #include "../../manager/CheckHitManage.h"
-#include "../../scene/Func/FuncCheckHit.h"
 
 FallNeedle::FallNeedle()
 {
