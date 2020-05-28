@@ -27,10 +27,36 @@ enum PLSTATE
 	MAX,
 };
 
-class player :
+#define lpplayer player::GetInstance()
+
+class player:
 	public Obj
 {
 public:
+
+	static player& GetInstance(void)
+	{
+		Create();
+		return *sInstance;
+	}
+
+	static void Create()
+	{
+		if (sInstance == nullptr)
+		{
+			sInstance = new player();
+		}
+	}
+
+	static void Destroy()
+	{
+		if (sInstance != nullptr)
+		{
+			delete sInstance;
+		}
+		sInstance = nullptr;
+	}
+
 	player();								// ºİ½Ä×¸À
 	player(Vec2double pos, Vec2Int size);	// w’è•t‚«ºİ½Ä×¸À
 	~player();								// player‚ÌÃŞ½Ä×¸À
@@ -53,6 +79,7 @@ protected:
 
 
 private:
+	static player* sInstance;
 
 	int Image[6];				// player‰æ‘œŠi”[•Ï”
 	void attackCtl(void);		// 
