@@ -120,8 +120,21 @@ void player::UpDate()
 		
 	}
 
+	// UŒ‚ŠÖ˜AŠÖ”ŒÄ‚Ño‚µ
+	attackCtl();
+
+	//// ‰Á‘¬pŽ®ŠÖ”ŠÇ—
+	//if (shotFlag == false && CheckHitKey(KEY_INPUT_D) != pushCtl[0] && CheckHitKey(KEY_INPUT_D) == 1)
+	//{
+	//	shotPos = MapPos;
+
+	//	shotFlag = true;
+	//}
+
+
 }
 
+// •`‰æŠÖ”
 void player::Draw()
 {
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, Image[0], LAYER::PLAYER, 999));
@@ -147,9 +160,11 @@ void player::attackCtl(void)
 	// ‹ßÚÌ×¸ÞŠÇ—
 	if (atkFlag == false && CheckHitKey(KEY_INPUT_S) != pushCtl[1] && CheckHitKey(KEY_INPUT_S) == 1)
 	{
-		shotPos = MapPos;
+		atkPos = MapPos;
 		atkFlag = true;
 	}
+
+	
 
 	// ŽËŒ‚§ŒäŠÖ”ŒÄ‚Ño‚µ
 	if (shotFlag == true)
@@ -165,22 +180,33 @@ void player::attackCtl(void)
 
 }
 
+// ŽËŒ‚ŠÖ”
+void player::shot(void)
+{
+	shotPos.x = shotPos.x + 3.0;
+
+	if (shotPos.x >= 1200.0)
+	{
+		shotFlag = false;
+		shotPos = { 0.0,0.0 };
+	}
+}
+
+
 // ‹ßÚŠÖ”
 void player::attack(void)
 { 
 	atkPos.x = atkPos.x + 0.1;
 }
 
-// ŽËŒ‚ŠÖ”
-void player::shot(void)
-{
-	shotPos.x = shotPos.x + 3.0;
 
-	if (shotPos.x >= lpSceneMng.ScreenSize.x || shotPos.x <= 0)
-	{
-		shotFlag = false;
-	}
+// ‰Á‘¬pŽ®ŽÀ‘•ŠÖ”
+void player::accel(void)
+{
+
+
 }
+
 
 // player‰Šú‰»
 void player::Init(void)
@@ -209,5 +235,7 @@ void player::Init(void)
 		pushCtl[i] = 0;
 	}
 
+	StopSoundMem(lpSEMng.loadBGM("BGM"));
 	dead = false;
 }
+
