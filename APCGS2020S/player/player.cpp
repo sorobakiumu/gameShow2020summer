@@ -152,7 +152,7 @@ void player::attackCtl(void)
 	// ËŒ‚Ì×¸ŞŠÇ—
 	if (shotFlag == false && CheckHitKey(KEY_INPUT_D) != pushCtl[0] && CheckHitKey(KEY_INPUT_D) == 1)
 	{
-		shotPos = MapPos;
+
 
 		shotFlag = true;
 	}
