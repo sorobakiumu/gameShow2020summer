@@ -4,6 +4,7 @@
 #include "algorithm"
 #include "../enemy/Enemy.h"
 #include "ImageManage.h"
+#include "../Obj/item.h"
 
 SceneManage* SceneManage::sInstance = nullptr;
 
@@ -88,6 +89,7 @@ void SceneManage::Run()
 {
 	SysInit();
 	_activeScene = std::make_unique<TitleScene>();
+	item::GetInstance().SysInit();
 	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
 	{
 		_drawList.clear();
@@ -103,7 +105,7 @@ bool SceneManage::SysInit()
 {
 	bool rtnFlag = true;
 
-	//Enemy::initFlag = true;
+
 
 	// ºΩ√—èàóù
 

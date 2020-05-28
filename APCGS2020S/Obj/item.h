@@ -1,5 +1,6 @@
 #pragma once
 #include "Obj.h"
+#include "../manager/SceneManage.h"
 
 #include "item/bannsoukou.h"
 #include "item/fmj.h"
@@ -7,6 +8,7 @@
 #include "item/hidenyaku.h"
 #include "item/tyusyaki.h"
 
+#define lpitem item::GetInstance()
 
 enum class ITEM_ID
 {
@@ -27,6 +29,7 @@ class item :
 public:
 	void UpDate();
 	void Draw();
+	void SysInit();
 	static item& GetInstance(void)
 	{
 		Create();
@@ -49,7 +52,7 @@ public:
 		}
 		sInstance = nullptr;
 	}
-	std::map<ITEM_ID, std::vector<int>> enemyImage;
+	int itemImage[static_cast<int>(ITEM_ID::MAX)];
 private:
 	static item* sInstance;
 	item();
