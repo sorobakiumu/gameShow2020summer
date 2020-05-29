@@ -38,7 +38,7 @@ void player::UpDate()
 	switch (ptn)
 	{
 	// ｷｰﾎﾞｰﾄﾞ使用時
-	case KeyBoard:
+	case Ctl::KeyBoard:
 
 		// 十字ｷｰ(左)入力時、左移動
 		if (CheckHitKey(KEY_INPUT_LEFT) == 1)
@@ -60,7 +60,7 @@ void player::UpDate()
 		break;
 
 	// ｹﾞｰﾑﾊﾟｯﾄﾞ?使用時
-	case Pad:
+	case Ctl::Pad:
 
 		// ﾊﾟｯﾄﾞ(左)入力時、左移動
 		if (GetJoypadInputState(PAD_INPUT_LEFT) == 1)
@@ -154,6 +154,7 @@ void player::attackCtl(void)
 	// 射撃ﾌﾗｸﾞ管理
 	if (shotFlag == false && CheckHitKey(KEY_INPUT_D) != pushCtl[0] && CheckHitKey(KEY_INPUT_D) == 1)
 	{
+		new shot(MapPos, MapSize, plstate);
 
 		shotFlag = true;
 	}
@@ -170,7 +171,7 @@ void player::attackCtl(void)
 	// 射撃制御関数呼び出し
 	if (shotFlag == true)
 	{
-		new shot( MapPos , MapSize , plstate);
+		//shot::UpDate();
 	}
 
 	// 近接制御関数呼び出し
@@ -200,7 +201,7 @@ void player::Init(void)
 {
 	Rad = 0;
 
-	ptn = KeyBoard;
+	ptn = Ctl::KeyBoard;
 
 	jmpCnt = 40;
 

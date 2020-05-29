@@ -27,14 +27,19 @@ shot::~shot()
 }
 
 
+
+
 // UŒ‚§ŒäŠÖ”
 bool shot::shotMove(void)
 {
 	switch (moveState)
 	{
 	case PLSTATE::WORKL:
+	
+		// ’e‚ÌˆÚ“®Šm”F(¶)
 		MapPos.x = MapPos.x - 3.0;
 
+		// 
 		if (MapPos.x - startPos.x == -1800)
 		{
 			return false;
@@ -43,16 +48,16 @@ bool shot::shotMove(void)
 		break;
 
 	case PLSTATE::WORKR:
+	
+		// ’e‚ÌˆÚ“®Šm”F(‰E)
 		MapPos.x = MapPos.x + 3.0;
 		
+		// 
 		if (MapPos.x - startPos.x == 1800)
 		{
 			return false;
 
 		}
-
-		break;
-
 
 		break;
 
@@ -65,20 +70,21 @@ bool shot::shotMove(void)
 
 }
 
-// player‰Šú‰»
+// shot‰Šú‰»
 void shot::Init(void)
 {
-	Rad = 0;
+	Rad = 0.0;
 
-	 
-	
 }
 
 void shot::Draw()
 {
-	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, lpImageMng.GetMap("’e") , LAYER::PLAYER, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, Rad, lpImageMng.GetMap("’e") , LAYER::PLAYER, 999));
 }
 
 void shot::UpDate()
 {
+	shotMove();
+
+	Draw();
 }

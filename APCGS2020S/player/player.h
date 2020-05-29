@@ -8,7 +8,7 @@
 
 
 // ‘€ì¯•Ê\‘¢‘Ì
-enum Ctl
+enum class Ctl
 {
 	KeyBoard,
 	Pad,
@@ -91,6 +91,7 @@ private:
 	PLSTATE plstate;
 
 	Ctl ptn;					// 
+
 	int pushCtl[3];				// 
 
 	int bulletImage;			// ËŒ‚‰æ‘œŠi”[•Ï”
