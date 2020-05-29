@@ -1,6 +1,6 @@
 #pragma once
-#include "Obj.h"
 #include "../manager/SceneManage.h"
+#include "../player/player.h"
 
 #include "item/bannsoukou.h"
 #include "item/fmj.h"
@@ -23,8 +23,7 @@ enum class ITEM_ID
 
 
 
-class item :
-	public Obj
+class item
 {
 public:
 	void UpDate();
@@ -53,8 +52,16 @@ public:
 		sInstance = nullptr;
 	}
 	int itemImage[static_cast<int>(ITEM_ID::MAX)];
+
+	bool checkHitItem(Vec2double position);
+
+	void SetItem(Vec2double pos);
+
+	void upData();
+
 private:
 	static item* sInstance;
+	std::vector<SharedObj> itemList;
 	item();
 	~item();
 };

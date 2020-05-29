@@ -2,6 +2,7 @@
 #include "../manager/CheckHitManage.h"
 #include <DxLib.h>
 
+
 item* item::sInstance = nullptr;
 
 void item::UpDate()
@@ -24,6 +25,40 @@ void item::SysInit()
 
 item::~item()
 {
+}
+
+bool item::checkHitItem(Vec2double position)
+{
+
+	if (player::GetInstance().GetPos().x + CHIP_SIZE<position.x ||
+	player::GetInstance().GetPos().x > position.x + CHIP_SIZE ||
+	player::GetInstance().GetPos().y + CHIP_SIZE < position.y ||
+	player::GetInstance().GetPos().y > position.y + CHIP_SIZE)
+	{
+		return true;
+	}
+	return false;
+}
+
+void item::SetItem(Vec2double pos)
+{
+	for (auto IQue : itemList)
+	{
+		(*IQue).SetPos(pos);
+		(*IQue).SetDead(false);
+	}
+}
+
+void item::upData()
+{
+	for (auto IQue : itemList)
+	{
+		(*IQue).UpDate();
+	}
+	auto itr = std::remove_if(itemList.begin(),				// チェックの開始地点
+		itemList.end(),								// チェックの終了地点
+		/* ラムダ式*/  [](SharedObj& obj) {return (*obj).Getdead(); }	// removeの条件
+	);
 }
 
 item::item()
