@@ -3,12 +3,16 @@
 // ╨щ╫дв╦ю
 shot::shot()
 {
+	Init();					// ┌╩┌л▒╪▐┴┼З┴╩
+	moveState = PLSTATE::STOPR;
 
 }
 
 // ▌w▓Х∙t┌╚╨щ╫дв╦ю
 shot::shot(Vec2double pos, Vec2Int size , PLSTATE _state)
 {
+	Init();					// ┌╩┌л▒╪▐┴┼З┴╩
+
 	MapPos = pos;			// █ю∙W▐┴┼З┴╩
 
 	startPos = pos;			// 
@@ -19,7 +23,6 @@ shot::shot(Vec2double pos, Vec2Int size , PLSTATE _state)
 
 	ID = OBJ_ID::PLAYER;	// ╣лч╪ч╙╦д▒╝░╚░щ▓Х
 
-	Init();					// ┌╩┌л▒╪▐┴┼З┴╩
 }
 
 shot::~shot()
@@ -71,10 +74,11 @@ bool shot::shotMove(void)
 }
 
 // shot▐┴┼З┴╩
-void shot::Init(void)
+void shot::Init()
 {
 	Rad = 0.0;
 
+	moveState = PLSTATE::STOPR;
 }
 
 void shot::Draw()

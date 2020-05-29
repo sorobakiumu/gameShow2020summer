@@ -2,6 +2,8 @@
 #include "DxLib.h"
 #include "shot.h"
 
+player* player::sInstance = nullptr;
+
 // player‚ÌºÝ½Ä×¸À
 player::player()
 {

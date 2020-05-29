@@ -105,6 +105,7 @@ protected:
 	OBJ_ID ID;
 	Vec2double MapPos;
 	Vec2Int Size;
+
 	double Rad;
 	// Š®‘S‚ÉÁ‚µ‚Ä‚¢‚¢‚©‚ğ”»’f‚·‚é
 	bool dead;
