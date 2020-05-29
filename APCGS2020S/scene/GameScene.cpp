@@ -30,8 +30,27 @@ unique_Base GameScene::Update(unique_Base own)
 
 	int ECnt=0;
 	int tmp;
-	Vec2double plPos;
-	
+
+	// player 処理
+	lpplayer.UpDate();
+
+	Vec2double plPos = lpplayer.GetPos();
+	Vec2Int plSize = lpplayer.GetSize();
+
+	lpplayer.SetPos(lpMapMng.HitCheck(plPos,plSize,0));
+	plPos = lpplayer.GetPos();
+	plSize = lpplayer.GetSize();
+	int Cnt = 0;
+	while (CheckFall(plPos,plSize)&&Cnt<3)
+	{
+		lpplayer.SetPos(lpMapMng.HitCheck({plPos.x,plPos.y+1}, plSize, 0));
+		plPos = lpplayer.GetPos();
+		Cnt++;
+	}
+
+
+
+	// オブジェクト処理
 	Vec2Int size = { CHIP_SIZE,CHIP_SIZE };
 	for (auto obj : ObjList)
 	{
@@ -41,24 +60,6 @@ unique_Base GameScene::Update(unique_Base own)
 		}
 		switch (obj->GetID())
 		{
-		case OBJ_ID::PLAYER:
-			obj->SetPos(lpMapMng.HitCheck(obj->GetPos(), obj->GetSize(), 0));
-			plPos = obj->GetPos();
-			if (1)
-			{
-				// 落下処理
-				int Cnt = 0;
-				while ((CheckFall(obj->GetPos(), obj->GetSize()) == false) && (Cnt < 3))
-				{
-					obj->SetPos({ obj->GetPos().x, obj->GetPos().y + 1 });
-					Cnt++;
-				}
-				if (CheckFall(obj->GetPos(), obj->GetSize()) == true)
-				{
-					obj->SetFlag(false);
-				}
-			}
-			break;
 		case OBJ_ID::GIMMICK:
 			switch (obj->GetGID())
 			{
@@ -149,18 +150,6 @@ unique_Base GameScene::Update(unique_Base own)
 		}
 	}
 
-	for (auto obj : ObjList)
-	{
-		if (((*obj).GetID() == OBJ_ID::ENEMY) || ((*obj).GetID() == OBJ_ID::FRY_ENEMY))
-		{
-			if ((*obj).GetPos().x-plPos.x<ScrCenter.x*2)
-			{
-				obj->UpDate();
-			}
-		}
-	}
-
-
 	if (plPos.x >= ScrCenter.x && plPos.x <= MapSize.x-ScrCenter.x)
 	{
 		lpMapMng.SetPos({ MapSize.x/2 - plPos.x+ScrCenter.x,ScrCenter.y });
@@ -189,7 +178,7 @@ unique_Base GameScene::Update(unique_Base own)
 			obj->Draw();
 		}
 	}
-
+	lpplayer.Draw();
 
 	lpitem.upData();
 
@@ -205,7 +194,6 @@ void GameScene::AddObjList(SharedObj obj)
 {
 	ObjList.emplace_back(obj);
 }
-
 
 bool GameScene::CheckFall(Vec2double pos, Vec2Int size)
 {
@@ -280,7 +268,8 @@ GameScene::GameScene()
 	lpitem.SetItem({100,100});
 
 
-	ObjList.emplace_back(new player({ 320,380 }, { 32,32 }));
+	player({ 320,380 }, { 32,32 });
+	lpplayer.SetPos({320,380});
 	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, 300));
 	ObjList.emplace_back(new FallLift({ 640.0,ScrCenter.y }, 3));
 	ObjList.emplace_back(new FallNeedle({ 640.0,32.0 }));

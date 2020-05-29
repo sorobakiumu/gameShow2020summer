@@ -27,7 +27,6 @@ enum class GIMMICK_ID
 
 enum class OBJ_ID
 {
-	PLAYER,
 	ENEMY,
 	FRY_ENEMY,
 	ITEM,

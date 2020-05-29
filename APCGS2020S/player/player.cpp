@@ -19,10 +19,6 @@ player::player(Vec2double _pos, Vec2Int _size)
 	// »²½Ş‘ã“ü
 	Size = _size;
 
-
-	// ‘ÎÛ¯•Ê•t—^
-	ID = OBJ_ID::PLAYER;
-
 	// ‰Šú‰»
 	Init();
 }

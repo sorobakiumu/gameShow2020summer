@@ -20,8 +20,6 @@ shot::shot(Vec2double pos, Vec2Int size , PLSTATE _state)
 
 	moveState = _state;		// ░i█s∙Ш▄Э░щ▓Х
 
-	ID = OBJ_ID::PLAYER;	// ╣лч╪ч╙╦д▒╝░╚░щ▓Х
-
 }
 
 shot::~shot()
