@@ -92,12 +92,13 @@ void player::UpDate()
 
 	}
 
-	// 画面外に行かないようにする制御
+	// 画面外に行かないようにする制御(右)
 	if ( MapPos.x < Size.x/2 )
 	{
 		MapPos.x = Size.x / 2;
 	}
 
+	// 画面外に行かないようにする制御(左)
 	if (MapPos.x > MapSize.x- Size.x / 2)
 	{
 		MapPos.x = MapSize.x- Size.x / 2;
@@ -142,11 +143,6 @@ void player::UpDate()
 void player::Draw()
 {
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, Image[0], LAYER::PLAYER, 999));
-	
-	if (shotFlag == true)
-	{
-	//	lpSceneMng.addDrawQue(std::make_tuple(shotPos, 1.0, 0.0, bulletImage, LAYER::PLAYER, 999));
-	}
 }
 
 // 攻撃制御関数
@@ -156,9 +152,7 @@ void player::attackCtl(void)
 	// 射撃ﾌﾗｸﾞ管理
 	if (shotFlag == false && CheckHitKey(KEY_INPUT_D) != pushCtl[0] && CheckHitKey(KEY_INPUT_D) == 1)
 	{
-		new shot(MapPos, MapSize, plstate);
 
-		shotFlag = true;
 	}
 
 	// 近接ﾌﾗｸﾞ管理
@@ -166,19 +160,6 @@ void player::attackCtl(void)
 	{
 		//atkPos = MapPos;
 		atkFlag = true;
-	}
-
-	
-
-	// 射撃制御関数呼び出し
-	if (shotFlag == true)
-	{
-		//shot::UpDate();
-	}
-
-	// 近接制御関数呼び出し
-	if ( atkFlag == true)
-	{
 	}
 
 }

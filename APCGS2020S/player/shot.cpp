@@ -3,7 +3,6 @@
 // ºİ½Ä×¸À
 shot::shot()
 {
-	Init();					// ‚»‚Ì‘¼‰Šú‰»
 	moveState = PLSTATE::STOPR;
 
 }
@@ -29,9 +28,6 @@ shot::~shot()
 {
 }
 
-
-
-
 // UŒ‚§ŒäŠÖ”
 bool shot::shotMove(void)
 {
@@ -45,6 +41,7 @@ bool shot::shotMove(void)
 		// 
 		if (MapPos.x - startPos.x == -1800)
 		{
+			
 			return false;
 		}
 
@@ -59,7 +56,6 @@ bool shot::shotMove(void)
 		if (MapPos.x - startPos.x == 1800)
 		{
 			return false;
-
 		}
 
 		break;
@@ -78,14 +74,15 @@ void shot::Init()
 {
 	Rad = 0.0;
 
-	moveState = PLSTATE::STOPR;
 }
 
+// ¼®¯Ä•`‰æŠÖ”
 void shot::Draw()
 {
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, Rad, lpImageMng.GetMap("’e") , LAYER::PLAYER, 999));
 }
 
+// ¼®¯ÄXVŠÖ”
 void shot::UpDate()
 {
 	shotMove();
