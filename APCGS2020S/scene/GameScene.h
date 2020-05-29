@@ -26,19 +26,9 @@ public:
 
 	void AddObjList(SharedObj obj);
 
-	Vec2double CheckHit(Vec2double pos, Vec2Int size,int Cnt);
-
 	bool CheckFall(Vec2double pos,Vec2Int size);
 private:
 	friend Canon;
-
-	int bgImage[9];
-	int MapScreen;
-
 	void CheckEnemy(double posx);
-
 	std::vector<SharedObj> ObjList;
-
-	Vec2double plPos, plPosOld, MapPos;
-	std::vector<std::vector<int>> Map;
 };
