@@ -5,6 +5,7 @@
 class shot :
 	public Obj
 {
+public:
 	// ┼ж░■
 	shot();												// ╨щ╫дв╦ю
 	shot(Vec2double pos, Vec2Int size, PLSTATE _state);	// ▌w▓Х∙t┌╚╨щ╫дв╦ю
