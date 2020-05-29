@@ -4,6 +4,9 @@
 class bannsoukou :
 	public Obj
 {
+public:
 	void UpDate();
+	void Draw();
+	bannsoukou(Vec2double pos) { MapPos = pos; dead = false;}
 };
 

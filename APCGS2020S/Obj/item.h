@@ -26,7 +26,6 @@ enum class ITEM_ID
 class item
 {
 public:
-	void UpDate();
 	void Draw();
 	void SysInit();
 	static item& GetInstance(void)

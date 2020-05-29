@@ -4,6 +4,9 @@
 class hidenyaku :
 	public Obj
 {
+public:
 	void UpDate();
+	void Draw();
+	hidenyaku(Vec2double pos) { MapPos = pos; dead = false; }
 };
 

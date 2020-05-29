@@ -5,10 +5,6 @@
 
 item* item::sInstance = nullptr;
 
-void item::UpDate()
-{
-}
-
 void item::Draw()
 {
 }
@@ -42,11 +38,11 @@ bool item::checkHitItem(Vec2double position)
 
 void item::SetItem(Vec2double pos)
 {
-	for (auto IQue : itemList)
-	{
-		(*IQue).SetPos(pos);
-		(*IQue).SetDead(false);
-	}
+	itemList.emplace_back(new bannsoukou(pos));
+	itemList.emplace_back(new gaze({ pos.x + 100,pos.y }));
+	itemList.emplace_back(new tyusyaki({ pos.x + 200,pos.y }));
+	itemList.emplace_back(new hidenyaku({ pos.x + 300,pos.y }));
+	itemList.emplace_back(new fmj({ pos.x + 400,pos.y }));
 }
 
 void item::upData()

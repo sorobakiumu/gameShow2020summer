@@ -3,7 +3,7 @@
 #include "BaseScene.h"
 #include "../Obj/Obj.h"
 
-//#include "../enemy/Enemy.h"
+#include "../Obj/item.h"
 #include "../Obj/Gimmick/Canon.h"
 
 enum class PL_POS

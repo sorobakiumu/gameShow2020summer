@@ -190,6 +190,9 @@ unique_Base GameScene::Update(unique_Base own)
 		}
 	}
 
+
+	lpitem.upData();
+
 	ObjList.erase(itr,
 		ObjList.end());
 	//Vec2double MSizeD;
@@ -273,6 +276,9 @@ GameScene::GameScene()
 
 
 	lpMapMng.MapScreen = 0;
+
+	lpitem.SetItem({100,100});
+
 
 	ObjList.emplace_back(new player({ 320,380 }, { 32,32 }));
 	ObjList.emplace_back(new Lift({ static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, { 0,static_cast<double>(ScrCenter.y) }, { static_cast<double>(ScrSize.x),static_cast<double>(ScrCenter.y) }, 300));

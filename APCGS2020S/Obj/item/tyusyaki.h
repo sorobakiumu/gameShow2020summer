@@ -4,6 +4,9 @@
 class tyusyaki :
 	public Obj
 {
+public:
 	void UpDate();
+	void Draw();
+	tyusyaki(Vec2double pos) { MapPos = pos; dead = false; }
 };
 
