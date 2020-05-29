@@ -60,7 +60,7 @@ unique_Base GameScene::Update(unique_Base own)
 			case GIMMICK_ID::CANON:
 				if (obj->CheckFlag())
 				{
-					ObjList.emplace_back(new Bullet(obj->GetPos(), 3, obj->GetRad()));
+					ObjList.emplace_back(new Bullet(obj->GetPos(), -3, obj->GetRad()));
 				}
 				break;
 			case GIMMICK_ID::GENERATOR:
@@ -326,6 +326,7 @@ GameScene::GameScene()
 	ObjList.emplace_back(new FallLift({ 640.0,ScrCenter.y }, 3));
 	ObjList.emplace_back(new FallNeedle({ 640.0,32.0 }));
 	ObjList.emplace_back(new Generator({480.0,120.0},120));
+	ObjList.emplace_back(new Canon({ 480,360 }, 1.0, 120));
 	FILE* fp;
 	fopen_s(&fp, "Data/tester.dat", "rb");
 	if (fp != nullptr)

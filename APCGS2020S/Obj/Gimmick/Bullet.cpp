@@ -24,7 +24,7 @@ Bullet::Bullet(Vec2double pos,int speed,double rad)
 	ID = OBJ_ID::GIMMICK;
 	G_ID=GIMMICK_ID::BULLET;
 	dead = false;
-	Image = 0;
+	Image = LoadGraph("image/Bullet.png");
 	AnyFlag = false;
 }
 
@@ -45,5 +45,5 @@ void Bullet::UpDate()
 
 void Bullet::Draw()
 {
-	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0,Rad, Image, LAYER::MAP, 999));
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0,Rad, Image, LAYER::ENEMY, 999));
 }
