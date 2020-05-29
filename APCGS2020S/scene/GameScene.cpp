@@ -72,7 +72,7 @@ unique_Base GameScene::Update(unique_Base own)
 			case GIMMICK_ID::CANON_EX:
 				if (obj->CheckFlag())
 				{
-					ObjList.emplace_back(new BulletEX(obj->GetPos(), 3, obj->GetRad()));
+					ObjList.emplace_back(new BulletEX(obj->GetPos(),-3, obj->GetRad()));
 					obj->SetFlag(false);
 				}
 				break;

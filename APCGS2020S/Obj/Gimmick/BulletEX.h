@@ -6,7 +6,7 @@ class BulletEX :
 public:
 
     BulletEX();
-    BulletEX(Vec2double pos, double rad,int speed);
+    BulletEX(Vec2double pos,int speed, double rad);
     ~BulletEX();
 
     void UpDate();

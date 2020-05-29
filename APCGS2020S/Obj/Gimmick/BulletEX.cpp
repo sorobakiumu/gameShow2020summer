@@ -14,7 +14,7 @@ BulletEX::BulletEX()
 	AnyFlag = false;
 }
 
-BulletEX::BulletEX(Vec2double pos, double rad, int speed)
+BulletEX::BulletEX(Vec2double pos, int speed ,double rad)
 {
 	MapPos = pos;
 	Size = { 32,32 };
@@ -35,7 +35,7 @@ BulletEX::~BulletEX()
 void BulletEX::UpDate()
 {
 	Vec2double plPos = lpplayer.GetPos();
-	Rad = atan2(plPos.y-MapPos.y,plPos.x-MapPos.x);
+	Rad = atan2(plPos.y - MapPos.y, plPos.x - MapPos.x) + atan2(1.0, 0);
 	MapPos.x += cos(Rad) * Speed;
 	MapPos.y += sin(Rad) * Speed;
 	if (MapPos.x <= Size.x / 2 || MapPos.x >= MapSize.x + Size.x / 2 ||
