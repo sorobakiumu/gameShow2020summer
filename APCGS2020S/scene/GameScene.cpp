@@ -13,6 +13,8 @@
 #include "../Obj/Gimmick/Generator.h"
 #include "../Obj/Gimmick/Canon.h"
 #include "../Obj/Gimmick/Bullet.h"
+#include "../Obj/Gimmick/CanonEX.h"
+#include "../Obj/Gimmick/BulletEX.h"
 #include "../player/player.h"
 #include "..\manager\SEManage.h"
 
@@ -64,6 +66,14 @@ unique_Base GameScene::Update(unique_Base own)
 				if (obj->CheckFlag())
 				{
 					ObjList.emplace_back(new Bullet(obj->GetPos(), -3, obj->GetRad()));
+					obj->SetFlag(false);
+				}
+				break;
+			case GIMMICK_ID::CANON_EX:
+				if (obj->CheckFlag())
+				{
+					ObjList.emplace_back(new BulletEX(obj->GetPos(), 3, obj->GetRad()));
+					obj->SetFlag(false);
 				}
 				break;
 			case GIMMICK_ID::GENERATOR:
@@ -94,6 +104,7 @@ unique_Base GameScene::Update(unique_Base own)
 				//		ObjList.emplace_back(new wolf(0.0));
 				//		break;
 				//	}
+				//	obj->SetFlag(false);
 				//}
 				break;
 			default:
@@ -268,7 +279,7 @@ GameScene::GameScene()
 	ObjList.emplace_back(new FallLift({ 640.0,ScrCenter.y }, 3));
 	ObjList.emplace_back(new FallNeedle({ 640.0,32.0 }));
 	ObjList.emplace_back(new Generator({480.0,120.0},120));
-	ObjList.emplace_back(new Canon({ 480,360 }, 1.0, 120));
+	ObjList.emplace_back(new CanonEX({ 480,360 }, 1.0, 120));
 
 	lpMapMng.SysInit();
 

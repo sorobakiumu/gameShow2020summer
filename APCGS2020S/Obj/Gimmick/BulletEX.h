@@ -9,7 +9,7 @@ public:
     BulletEX(Vec2double pos, double rad,int speed);
     ~BulletEX();
 
-    void UpData();
+    void UpDate();
     void Draw();
 private:
     int Image;
