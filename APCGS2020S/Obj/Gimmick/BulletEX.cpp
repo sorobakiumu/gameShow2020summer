@@ -34,7 +34,7 @@ BulletEX::~BulletEX()
 
 void BulletEX::UpDate()
 {
-	Vec2double plPos = player().GetPos();
+	Vec2double plPos = lpplayer.GetPos();
 	Rad = atan2(plPos.y-MapPos.y,plPos.x-MapPos.x);
 	MapPos.x += cos(Rad) * Speed;
 	MapPos.y += sin(Rad) * Speed;
