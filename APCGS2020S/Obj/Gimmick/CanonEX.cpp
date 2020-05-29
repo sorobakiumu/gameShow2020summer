@@ -24,7 +24,7 @@ CanonEX::CanonEX(Vec2double pos, double rad, int speed)
 	Rad = rad;
 	Speed = speed;
 	dead = false;
-	Image = LoadGraph("image/CanonX");
+	Image = LoadGraph("image/CanonX.png");
 	Cnt = 0;
 	AnyFlag = false;
 }

@@ -1,6 +1,6 @@
 #include "BulletEX.h"
 #include "../../player/player.h"
-
+#include "../../manager/SceneManage.h"
 BulletEX::BulletEX()
 {
 	MapPos = { 0,0 };
@@ -22,8 +22,8 @@ BulletEX::BulletEX(Vec2double pos, double rad, int speed)
 	Rad = rad;
 	ID = OBJ_ID::GIMMICK;
 	G_ID = GIMMICK_ID::BULLET_EX;
-	dead = true;
-	Image = 0;
+	dead = false;
+	Image = LoadGraph("image/BulletX.png");
 	AnyFlag = false;
 }
 
@@ -32,10 +32,10 @@ BulletEX::~BulletEX()
 
 }
 
-void BulletEX::UpData()
+void BulletEX::UpDate()
 {
-	Vec2double plPos = player().GetPos();
-	Rad = atan2(MapPos.y-plPos.y,MapPos.x-plPos.x);
+	Vec2double plPos = lpplayer.GetPos();
+	Rad = atan2(plPos.y-MapPos.y,plPos.x-MapPos.x);
 	MapPos.x += cos(Rad) * Speed;
 	MapPos.y += sin(Rad) * Speed;
 	if (MapPos.x <= Size.x / 2 || MapPos.x >= MapSize.x + Size.x / 2 ||
@@ -47,5 +47,5 @@ void BulletEX::UpData()
 
 void BulletEX::Draw()
 {
-
+	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, Rad, Image, LAYER::MAP, 999));
 }
