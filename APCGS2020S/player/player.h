@@ -16,7 +16,7 @@ enum Ctl
 
 };
 
-enum PLSTATE
+enum class PLSTATE
 {
 	STOPL,
 	WORKL,
@@ -62,10 +62,8 @@ public:
 	~player();								// playerのﾃﾞｽﾄﾗｸﾀ
 
 	void UpDate() override;		// player更新用関数
-	void shot(void);			// 
+	//void shot(void);			// 
 	void attack(void);			// 
-	Vec2double shotPos;			// 
-	Vec2double atkPos;			// 
 
 	void Draw();				// 
 
@@ -89,6 +87,8 @@ private:
 	int sec;					// 跳躍経過時間変数
 	Vec2double jmpPos;			// 跳躍座標制御変数
 	bool jmpFlag;				// 跳躍ﾌﾗｸﾞ変数
+
+	PLSTATE plstate;
 
 	Ctl ptn;					// 
 	int pushCtl[3];				// 

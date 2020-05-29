@@ -13,9 +13,10 @@ class shot :
 	void Init(void);									// ‰Šú‰»
 
 	void Draw();
+	void UpDate() override;		// playerXV—pŠÖ”
 
 	// •Ï”
-	PLSTATE plState;									// ó‘ÔŠi”[•Ï”
+	PLSTATE moveState;									// ó‘ÔŠi”[•Ï”
 
 private:
 	Vec2double startPos;

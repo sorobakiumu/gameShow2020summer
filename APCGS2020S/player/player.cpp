@@ -1,5 +1,6 @@
 #include "player.h"
 #include "DxLib.h"
+#include "shot.h"
 
 // playerÇÃ∫›Ωƒ◊∏¿
 player::player()
@@ -94,6 +95,7 @@ void player::UpDate()
 	{
 		MapPos.x = Size.x / 2;
 	}
+
 	if (MapPos.x > MapSize.x- Size.x / 2)
 	{
 		MapPos.x = MapSize.x- Size.x / 2;
@@ -141,7 +143,7 @@ void player::Draw()
 	
 	if (shotFlag == true)
 	{
-		lpSceneMng.addDrawQue(std::make_tuple(shotPos, 1.0, 0.0, bulletImage, LAYER::PLAYER, 999));
+	//	lpSceneMng.addDrawQue(std::make_tuple(shotPos, 1.0, 0.0, bulletImage, LAYER::PLAYER, 999));
 	}
 }
 
@@ -153,14 +155,13 @@ void player::attackCtl(void)
 	if (shotFlag == false && CheckHitKey(KEY_INPUT_D) != pushCtl[0] && CheckHitKey(KEY_INPUT_D) == 1)
 	{
 
-
 		shotFlag = true;
 	}
 
 	// ãﬂê⁄Ã◊∏ﬁä«óù
 	if (atkFlag == false && CheckHitKey(KEY_INPUT_S) != pushCtl[1] && CheckHitKey(KEY_INPUT_S) == 1)
 	{
-		atkPos = MapPos;
+		//atkPos = MapPos;
 		atkFlag = true;
 	}
 
@@ -169,34 +170,20 @@ void player::attackCtl(void)
 	// éÀåÇêßå‰ä÷êîåƒÇ—èoÇµ
 	if (shotFlag == true)
 	{
-		shot();
+		new shot( MapPos , MapSize , plstate);
 	}
 
 	// ãﬂê⁄êßå‰ä÷êîåƒÇ—èoÇµ
 	if ( atkFlag == true)
 	{
-		shot();
 	}
 
 }
-
-// éÀåÇä÷êî
-void player::shot(void)
-{
-	shotPos.x = shotPos.x + 3.0;
-
-	if (shotPos.x >= 1200.0)
-	{
-		shotFlag = false;
-		shotPos = { 0.0,0.0 };
-	}
-}
-
 
 // ãﬂê⁄ä÷êî
 void player::attack(void)
 { 
-	atkPos.x = atkPos.x + 0.1;
+	//atkPos.x = atkPos.x + 0.1;
 }
 
 
@@ -223,7 +210,7 @@ void player::Init(void)
 	jmpFlag = false;
 	shotFlag = false;
 
-	shotPos = { 0.0,0.0 };
+	//shotPos = { 0.0,0.0 };
 
 	LoadDivGraph("image/test.png",6,3,2,32,32,Image);
 	//Image = LoadGraph("image/test.png", true);

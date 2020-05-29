@@ -15,7 +15,7 @@ shot::shot(Vec2double pos, Vec2Int size , PLSTATE _state)
 
 	size = size;			// ｻｲｽﾞ初期化
 
-	plState = _state;		// 進行方向設定
+	moveState = _state;		// 進行方向設定
 
 	ID = OBJ_ID::PLAYER;	// ｵﾌﾞｼﾞｪｸﾄ属性設定
 
@@ -30,9 +30,9 @@ shot::~shot()
 // 攻撃制御関数
 bool shot::shotMove(void)
 {
-	switch (plState)
+	switch (moveState)
 	{
-	case WORKL:
+	case PLSTATE::WORKL:
 		MapPos.x = MapPos.x - 3.0;
 
 		if (MapPos.x - startPos.x == -1800)
@@ -42,9 +42,9 @@ bool shot::shotMove(void)
 
 		break;
 
-	case WORKR:
+	case PLSTATE::WORKR:
 		MapPos.x = MapPos.x + 3.0;
-
+		
 		if (MapPos.x - startPos.x == 1800)
 		{
 			return false;
@@ -77,4 +77,8 @@ void shot::Init(void)
 void shot::Draw()
 {
 	lpSceneMng.addDrawQue(std::make_tuple(MapPos, 1.0, 0.0, lpImageMng.GetMap("弾") , LAYER::PLAYER, 999));
+}
+
+void shot::UpDate()
+{
 }
