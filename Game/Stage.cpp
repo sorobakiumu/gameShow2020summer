@@ -16,10 +16,7 @@ namespace {
 	constexpr float block_scale = 2.0f;
 	constexpr int ground_line = 600;
 	constexpr uint8_t  layer_back0 = 0;
-	constexpr uint8_t  layer_back1 = 1;
-	constexpr uint8_t  layer_back_front = 2;
-	constexpr uint8_t  layer_back_collision = 3;
-	constexpr uint8_t  layer_back_enemy = 4;
+	constexpr uint8_t  layer_back_collision = 1;
 	constexpr uint8_t  boss_no = 255;
 }
 
@@ -186,18 +183,18 @@ Vector2f Stage::ComputeOverlapWall(const Position2f& pos,float f) const
 
 void Stage::CheckBossMode()
 {
-	constexpr uint8_t boss_no = 255;
-	auto rc = camera_->GetViewRange();
-	size_t xleft = static_cast<size_t>(static_cast<float>(rc.pos.x) /
-		(stageHeader_.chipW * block_scale));
-	size_t xright = static_cast<size_t>(static_cast<float>(rc.pos.x+rc.size.w) /
-		(stageHeader_.chipW * block_scale));
-	auto itBegin = stagedata_[layer_back_enemy].begin();
+	//constexpr uint8_t boss_no = 255;
+	//auto rc = camera_->GetViewRange();
+	//size_t xleft = static_cast<size_t>(static_cast<float>(rc.pos.x) /
+	//	(stageHeader_.chipW * block_scale));
+	//size_t xright = static_cast<size_t>(static_cast<float>(rc.pos.x+rc.size.w) /
+	//	(stageHeader_.chipW * block_scale));
+	//auto itBegin = stagedata_[layer_back_enemy].begin();
 
-	isBossMode_ = std::count(
-		std::next(itBegin, xleft * stageHeader_.mapH),//first 
-		std::next(itBegin, xright * stageHeader_.mapH),//last 
-		boss_no) > 0;
+	//isBossMode_ = std::count(
+	//	std::next(itBegin, xleft * stageHeader_.mapH),//first 
+	//	std::next(itBegin, xright * stageHeader_.mapH),//last 
+	//	boss_no) > 0;
 }
 
 bool Stage::IsBossMode() const

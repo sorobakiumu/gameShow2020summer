@@ -92,19 +92,23 @@ void GamePlaingScene::InitializeUpdate(const Input&)
 	equipNo_[0] = LoadGraph(L"image/UI/bomb.png");
 
 	collisonManager_ = std::make_shared<CollisionManager>();
-	bg_ = std::make_unique<Background>();
+
 
 	auto gm = this;
 
 	camera = std::make_shared<Camera>();
 	stage_ = std::make_shared<Stage>(camera,gm);
 
+
 	projectileManager_ = make_unique<ProjectileManage>(camera);
 	player_ = std::make_shared<Player>(gm, camera);
 	player_->SetPosition(Vector2f(400, 500));
 	camera->setPlayer(player_);
+
+	bg_ = std::make_unique<Background>(camera);
 	enemyManager_ = std::make_shared<EnemyManager>();
 	spawners.emplace_back(new SideSpawner(Position2f(0, 0), new Slasher(player_, camera, stage_), enemyManager_, collisonManager_, camera));
+
 
 	camera->Update();
 	stage_->Load(L"image/BG/level/level1.fmf", camera);
