@@ -13,6 +13,7 @@ class Spawner;
 class CollisionManager;
 class Stage;
 class Camera;
+class EffectMng;
 class GamePlaingScene :
 	public Scene
 {
@@ -21,6 +22,7 @@ private:
 	GamePlaingScene(SceneController&);
 
 	std::shared_ptr<Camera> camera;
+	std::shared_ptr<EffectMng> effectManager_;
 	std::shared_ptr<Stage> stage_;
 	std::shared_ptr<Player> player_;
 	std::unique_ptr<Background> bg_;
@@ -55,5 +57,6 @@ public:
 	std::shared_ptr<Stage>& GetStage();
 	std::shared_ptr<Camera>& GetCamera();
 	std::shared_ptr<EnemyManager>& GetEnemyManager();
+	std::shared_ptr<EffectMng>& GetEffectMng();
 	void AddSpawner(Spawner* spawner);
 };

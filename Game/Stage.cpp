@@ -10,13 +10,18 @@
 #include "../Scene/GamePlaingScene.h"
 #include "../Game/Enemy/Asura.h"
 #include "../Game/Enemy/BossSpawner.h"
+#include "../Game/Enemy/Slaher.h"
+#include "../Game/Enemy/SideSpawner.h"
 
 namespace {
 	int stageAtlasH_ = -1;
 	constexpr float block_scale = 2.0f;
 	constexpr int ground_line = 600;
 	constexpr uint8_t  layer_back0 = 0;
-	constexpr uint8_t  layer_back_collision = 1;
+	constexpr uint8_t  layer_back1 = 1;
+	constexpr uint8_t  layer_back_front = 2;
+	constexpr uint8_t  layer_back_collision = 3;
+	constexpr uint8_t  layer_back_enemy = 4;
 	constexpr uint8_t  boss_no = 255;
 }
 
@@ -36,13 +41,46 @@ void Stage::NormalUpdate()
 {
 	CheckBossMode();
 	if (isBossMode_) {
-		gamescene_->AddSpawner(new BossSpawner(Position2f(0, 0),new Asura(gamescene_),gamescene_->GetEnemyManager(),gamescene_->GetCollisionManager(),camera_));
+	//	gamescene_->AddSpawner(new BossSpawner(Position2f(0, 0),new Asura(gamescene_),gamescene_->GetEnemyManager(),gamescene_->GetCollisionManager(),camera_));
 		updater_ = &Stage::BossUpdate;
 	}
 }
 
 void Stage::BossUpdate()
 {
+}
+
+void Stage::BildEnemyLayout()
+{
+	constexpr uint8_t nodate = 0;
+	constexpr uint8_t slasher_side = 1;
+	constexpr uint8_t samurai_side = 3;
+	constexpr uint8_t boss = 255;
+
+	for (size_t y = 0; y < stageHeader_.mapH; ++y) {
+		for (size_t x = 0; x < stageHeader_.mapW; ++x) {
+			auto date = stagedata_[layer_back_enemy][x * stageHeader_.mapH+ y ];
+			if (date == 0)continue;
+			switch (date)
+			{
+			case slasher_side:
+			{
+				gamescene_->AddSpawner(new SideSpawner(Position2f(x*stageHeader_.chipW*2.0f, y * stageHeader_.chipH*2.0f),
+					 new Slasher(gamescene_->GetPlayer(), gamescene_->GetCamera(), gamescene_->GetStage()),
+					gamescene_->GetEnemyManager(), gamescene_->GetCollisionManager(), gamescene_->GetCamera()));
+				break;
+			}
+			case boss:
+			{
+				gamescene_->AddSpawner(new BossSpawner(Position2f(x * stageHeader_.chipW * 2.0f, y * stageHeader_.chipH * 2.0f), new Asura(gamescene_), gamescene_->GetEnemyManager(), gamescene_->GetCollisionManager(), camera_));
+				break;
+			}
+			default:
+				break;
+			}
+		}
+	}
+
 }
 
 std::array<Segment, 3> Stage::GetThreeSegment(const Position2f& pos) const
@@ -70,10 +108,6 @@ std::array<Segment, 3> Stage::GetThreeSegment(const Position2f& pos) const
 
 void Stage::Load(const TCHAR* path, std::shared_ptr<Camera> camera)
 {
-
-
-
-
 	camera_ = camera;
 	auto h = DxLib::FileRead_open(path);
 	assert(h > 0);
@@ -142,6 +176,7 @@ void Stage::Load(const TCHAR* path, std::shared_ptr<Camera> camera)
 			}
 		}
 	}
+	BildEnemyLayout();
 }
 
 float Stage::ComputeGlandY(const Position2f& pos)const {
@@ -183,30 +218,23 @@ Vector2f Stage::ComputeOverlapWall(const Position2f& pos,float f) const
 
 void Stage::CheckBossMode()
 {
-	//constexpr uint8_t boss_no = 255;
-	//auto rc = camera_->GetViewRange();
-	//size_t xleft = static_cast<size_t>(static_cast<float>(rc.pos.x) /
-	//	(stageHeader_.chipW * block_scale));
-	//size_t xright = static_cast<size_t>(static_cast<float>(rc.pos.x+rc.size.w) /
-	//	(stageHeader_.chipW * block_scale));
-	//auto itBegin = stagedata_[layer_back_enemy].begin();
+	constexpr uint8_t boss_no = 255;
+	auto rc = camera_->GetViewRange();
+	size_t xleft = static_cast<size_t>(static_cast<float>(rc.pos.x) /
+		(stageHeader_.chipW * block_scale));
+	size_t xright = static_cast<size_t>(static_cast<float>(rc.pos.x+rc.size.w) /
+		(stageHeader_.chipW * block_scale));
+	auto itBegin = stagedata_[layer_back_enemy].begin();
 
-	//isBossMode_ = std::count(
-	//	std::next(itBegin, xleft * stageHeader_.mapH),//first 
-	//	std::next(itBegin, xright * stageHeader_.mapH),//last 
-	//	boss_no) > 0;
+	isBossMode_ = std::count(
+		std::next(itBegin, xleft * stageHeader_.mapH),//first 
+		std::next(itBegin, xright * stageHeader_.mapH),//last 
+		boss_no) > 0;
 }
 
 bool Stage::IsBossMode() const
 {
 	return isBossMode_;
-	/*auto viewrange = camera_->GetViewRange();
-	int xleft = viewrange.pos.x / (stageHeader_.chipW * block_scale);
-	int xright = (viewrange.pos.x+viewrange.size.w) / (stageHeader_.chipW * block_scale);
-	
-	auto itBegin = stagedata_[layer_back_enemy].begin();
-	auto a= std::count(std::next(itBegin, xleft * stageHeader_.mapH), std::next(itBegin, xleft * stageHeader_.mapH), boss_no);
-	return std::count(std::next(itBegin, xleft * stageHeader_.mapH), std::next(itBegin, xright * stageHeader_.mapH), boss_no);*/
 }
 
 void Stage::Update()
@@ -249,6 +277,25 @@ void Stage::Draw()
 				(int)epos.x, (int)epos.y,
 				0xffffff, 3);
 		}
+		for (unsigned int x = 0; x < stageHeader_.mapW; ++x) {
+			float xpos = x * stageHeader_.chipW * 2.0f;
+			float xmargin = stageHeader_.chipW * 2.0f;
+			if (xpos < rc.pos.x - xmargin || rc.pos.x + rc.size.w < xpos) {
+				continue;
+			}
+			for (auto y = 0; y < stageHeader_.mapH; y++) {
+				auto enemNo = stagedata_[layer_back_enemy][x + y * stageHeader_.mapW];
+				if (enemNo == 0)continue;
+				auto xpos = static_cast<int>(x * stageHeader_.chipW * 2.0f);
+				auto ypos = static_cast<int>(y * stageHeader_.chipH * 2.0f);
+				auto offset_x = camera_->ViewOffset().x;
+				DrawTriangleAA(xpos+ offset_x, ypos - stageHeader_.chipH*2.0f,
+					xpos + offset_x + stageHeader_.chipW * 2.0f, ypos - stageHeader_.chipH * 2.0f,
+					xpos + offset_x + stageHeader_.chipW,ypos,
+					0xffaaff,true);
+			}
+		}
+
 	}
 }
 

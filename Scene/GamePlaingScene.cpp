@@ -15,6 +15,8 @@
 #include "../Game/Collision/CircleCollider.h"
 #include"../Game/Stage.h"
 #include"../Game/Player/Camera.h"
+#include"../Game/Effect.h"
+#include"../System/File.h"
 #include"../System/FileManager.h"
 
 using namespace std;
@@ -23,7 +25,7 @@ namespace {
 	const int fadeouto_interval = 45;
 	int waitTimer_;
 
-	int equipNo_[3];
+	int equipNo_[2];
 
 	int frmCnt;
 }
@@ -48,17 +50,23 @@ void GamePlaingScene::NomalUpdate(const Input& input)
 	collisonManager_->Update();
 	player_->Update();
 	bg_->Update();
-	projectileManager_->Update();
-	enemyManager_->UpDate();
+	if (!player_->TimeStop()) {
+		projectileManager_->Update();
+		enemyManager_->UpDate();
+	}
+
 	stage_->Update();
+	effectManager_->Update();
 	if (stage_->IsBossMode())
 	{
 		camera->lock();
 	}
 	camera->Update();
-	for (auto& spw : spawners)
-	{
-		spw->Update();
+	if (!player_->TimeStop()) {
+		for (auto& spw : spawners)
+		{
+			spw->Update();
+		}
 	}
 	for (auto& lisner : listeners)
 	{
@@ -90,6 +98,7 @@ void GamePlaingScene::InitializeUpdate(const Input&)
 	frmCnt = 0;
 
 	equipNo_[0] = LoadGraph(L"image/UI/bomb.png");
+	equipNo_[1] = LoadGraph(L"image/UI/sword.png");
 
 	collisonManager_ = std::make_shared<CollisionManager>();
 
@@ -97,6 +106,7 @@ void GamePlaingScene::InitializeUpdate(const Input&)
 	auto gm = this;
 
 	camera = std::make_shared<Camera>();
+	effectManager_ = std::make_shared<EffectMng>();
 	stage_ = std::make_shared<Stage>(camera,gm);
 
 
@@ -107,7 +117,7 @@ void GamePlaingScene::InitializeUpdate(const Input&)
 
 	bg_ = std::make_unique<Background>(camera);
 	enemyManager_ = std::make_shared<EnemyManager>();
-	spawners.emplace_back(new SideSpawner(Position2f(0, 0), new Slasher(player_, camera, stage_), enemyManager_, collisonManager_, camera));
+	//spawners.emplace_back(new SideSpawner(Position2f(0, 0), new Slasher(player_, camera, stage_), enemyManager_, collisonManager_, camera));
 
 
 	camera->Update();
@@ -120,16 +130,26 @@ void GamePlaingScene::InitializeUpdate(const Input&)
 
 void GamePlaingScene::NormalDraw()
 {
-	bg_->Draw();
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+	bg_->Draw(player_->TimeStop());
+	if (player_->TimeStop()) {
+		SetDrawBlendMode(DX_BLENDMODE_INVSRC, 255);
+	}
 	stage_->Draw();
 	enemyManager_->Draw();
 	projectileManager_->Draw();
+	if (player_->TimeStop()) {
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+	}
 	player_->Draw();
-	collisonManager_->DebagDraw();
-
-	DrawRotaGraph(37,37,1.0f,0.0,equipNo_[player_->CrrentEquipmentNo_()],true);
+	effectManager_->Draw();
+	DrawRotaGraph(37, 37, 1.0f, 0.0, equipNo_[player_->CrrentEquipmentNo_()], true);
 	DrawBox(7, 7, 64 + 7, 64 + 7, 0x000000, false);
 	DrawBox(5, 5, 64 + 5, 64 + 5, 0xffffff, false);
+	if (player_->TimeStop()) {
+		SetDrawBlendMode(DX_BLENDMODE_INVSRC, 255);
+	}
+	collisonManager_->DebagDraw();
 }
 
 void GamePlaingScene::FadeOutDraw()
@@ -203,6 +223,11 @@ std::shared_ptr<Camera>& GamePlaingScene::GetCamera()
 std::shared_ptr<EnemyManager>& GamePlaingScene::GetEnemyManager()
 {
 	return enemyManager_;
+}
+
+std::shared_ptr<EffectMng>& GamePlaingScene::GetEffectMng()
+{
+	return effectManager_;
 }
 
 void GamePlaingScene::AddSpawner(Spawner* spawner)

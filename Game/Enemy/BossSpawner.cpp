@@ -8,10 +8,13 @@
 
 void BossSpawner::SpawnUpdate()
 {
-	auto clone = CreatCloan();
-	enemyManager->AddEnemy(clone);
-	updater_ = &BossSpawner::SleepUpdate;
-	collisionManager_->AddColliders(new CircleCollider(enemyManager->Enemies().back(), "bdmg", Circle(Vector2f(0, 0), 32.0)));
+	auto rc = camera_->GetViewRange();
+	if (rc.pos.x + rc.size.w > pos_.x&& rc.pos.x < pos_.x) {
+		auto clone = CreatCloan();
+		enemyManager->AddEnemy(clone);
+		updater_ = &BossSpawner::SleepUpdate;
+		collisionManager_->AddColliders(new CircleCollider(enemyManager->Enemies().back(), "bdmg", Circle(Vector2f(0, 0), 32.0)));
+	}
 }
 
 void BossSpawner::SleepUpdate()

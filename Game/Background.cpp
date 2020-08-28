@@ -50,16 +50,28 @@ void Background::Update()
 	frmCnt_++;
 }
 
-void Background::Draw()
+void Background::Draw(bool flag)
 {
 	for (unsigned int i = 0; i < bgH_.size(); i++)
 	{
 		SetDrawScreen(screen[i].screen);
 		ClsDrawScreen();
+		if (flag) {
+			SetDrawBlendMode(DX_BLENDMODE_INVSRC, 255);
+		}
 		DrawExtendGraph(0, 0, 800, 600, bgH_[i], true);
+		if (flag) {
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		}
 		SetDrawScreen(screenNext[i].screen);
 		ClsDrawScreen();
+		if (flag) {
+			SetDrawBlendMode(DX_BLENDMODE_INVSRC, 255);
+		}
 		DrawExtendGraph(0, 0, 800, 600, bgH_[i], true);
+		if (flag) {
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		}
 	}
 	oldCameraPos_x = cameraPos_x;
 	cameraPos_x = camera_->GetPosition().x;

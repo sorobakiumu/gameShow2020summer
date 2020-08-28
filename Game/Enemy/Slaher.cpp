@@ -21,16 +21,16 @@ Enemy* Slasher::MakeClone()
 
 void Slasher::RunUpdate()
 {
-	if (flame % 150 == 0)
+
+	//if (flame % 150 == 0)
 	{
 		AimPlayer();
 		velocity_.x *= 5;
 		velocity_.y *= 5;
 	}
 	pos_ += velocity_;
-	flame++;
 	animFrame_ = (animFrame_ + 1) % 15;
-	
+
 	auto seg3 = stage_->GetThreeSegment(pos_);
 	if (seg3[1].IsNILL()) {
 		pos_.y = FLT_MAX;
@@ -60,15 +60,15 @@ void Slasher::RunUpdate()
 	}
 
 
-	if (fabsf(pos_.x - player_->GetPosition().x) < 50)	{
+	if (fabsf(pos_.x - player_->GetPosition().x) < 50) {
 		updater_ = &Slasher::SlashUpdate;
 		drawer_ = &Slasher::SlashDraw;
+		flame = 1;
 	}
 }
 
 void Slasher::SlashUpdate()
 {
-	flame++;
 	animFrame_ = (animFrame_ + 1) % 20;
 	if (animFrame_ == 0) {
 		flame = 1;
@@ -131,7 +131,11 @@ void Slasher::OnDead()
 
 void Slasher::Update()
 {
-	(this->*updater_)();
+	if (!player_->TimeStop()) 
+	{
+		flame++;
+		(this->*updater_)();
+	}
 }
 
 void Slasher::Draw()

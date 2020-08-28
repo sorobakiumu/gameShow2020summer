@@ -24,6 +24,6 @@ public:
 	Background(std::shared_ptr<Camera>& camera);
 	~Background();
 	void Update();
-	void Draw();
+	void Draw(bool flag);
 };
 

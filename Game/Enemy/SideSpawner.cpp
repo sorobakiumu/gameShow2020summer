@@ -11,15 +11,18 @@ SideSpawner::SideSpawner(const Position2f& pos, Enemy* prototype, std::shared_pt
 
 void SideSpawner::Update()
 {
-	if (++frame % 60 == 0) {
-		auto xoffset = camera_->GetPosition().x;
-		auto clone = CreatCloan();
-		clone->SetPosition({ -436+xoffset,500 });
-		if (rand() % 2 == 0)
-		{
-			clone->SetPosition({ 436+xoffset,500 });
+	auto rc = camera_->GetViewRange();
+	if (rc.pos.x + rc.size.w > pos_.x&& rc.pos.x < pos_.x) {
+		if (++frame % 60 == 0) {
+			auto xoffset = camera_->GetPosition().x;
+			auto clone = CreatCloan();
+			clone->SetPosition({ -436 + xoffset,500 });
+			if (rand() % 2 == 0)
+			{
+				clone->SetPosition({ 436 + xoffset,500 });
+			}
+			enemyManager->AddEnemy(clone);
+			cm_->AddColliders(new CircleCollider(enemyManager->Enemies().back(), "edmg", Circle(Vector2f(0, 0), 32.0)));
 		}
-		enemyManager->AddEnemy(clone);
-		cm_->AddColliders(new CircleCollider(enemyManager->Enemies().back(), "edmg", Circle(Vector2f(0, 0), 32.0)));
 	}
 }

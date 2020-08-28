@@ -4,6 +4,7 @@
 #include <memory>
 #include "../Geometry.h"
 #include "../Scene/GamePlaingScene.h"
+#include <DxLib.h>
 
 struct StageHeader
 {
@@ -36,6 +37,7 @@ private:
 	GamePlaingScene* gamescene_;
 	void NormalUpdate();
 	void BossUpdate();
+	void BildEnemyLayout();
 public:
 	std::array<Segment, 3> GetThreeSegment(const Position2f& pos)const;
 	void Load(const TCHAR* path,std::shared_ptr<Camera> camera);
