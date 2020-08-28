@@ -298,7 +298,6 @@ Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(ca
 		wss << L"image/player/ran/adventurer-run-";
 		wss << setw(2) << setfill(L'0') << i;
 		wss << ".png";
-		//run_[i] = LoadGraph(wss.str().c_str());
 		run_[i] = FileManager::Instance().Load(wss.str().c_str(),"PL")->Handle();
 	}
 	for (int i = 0; i < _countof(jamp); ++i) {
@@ -345,10 +344,10 @@ Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(ca
 				player_.left = false;
 			}
 			if (input.IsTriggerd("chenge")) {
-				//if (!player_.CheckStop()) {
-				//	player_.TimeStopMove();
-				//}
-				player_.EquipNext();
+				if (!player_.CheckStop()) {
+					player_.TimeStopMove();
+				}
+				//player_.EquipNext();
 			}
 			if (input.IsTriggerd("shot")) {
 				if (player_.Drawer_ == &Player::DoubleJampDraw)

@@ -34,7 +34,7 @@ private:
 	bool timeStop=false;
 	bool timeinterval = false;
 	//std::vector<std::pair<Position2f, int>> movehistry_;
-	std::array<std::tuple<Position2f, int ,bool>, 5> movehistory_;
+	std::array<std::tuple<Position2f, int ,bool>, 10> movehistory_;
 	size_t currentMoveIndex_ = 0;
 	void AddMovehistry(int gf);
 	Position2f lastPos;
