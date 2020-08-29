@@ -11,10 +11,12 @@
 
 CircleCollider::CircleCollider(std::shared_ptr<Character> owner, const char* tag):Collider(owner,tag,false)
 {
+	camera_ = owner->GetCamera();
 }
 
 CircleCollider::CircleCollider(std::shared_ptr<Character> owner, const char* tag,Circle c):Collider(owner, tag,false),circle_(c)
 {
+	camera_ = owner->GetCamera();
 }
 
 bool CircleCollider::IsHit(std::shared_ptr<Collider> col)
@@ -33,17 +35,20 @@ bool CircleCollider::IsHit(std::shared_ptr<Collider> col)
 }
 const Position2f CircleCollider::ActualPosition()
 {
-	return circle_.center + GetOwner()->Pos();
+	Vector2f ownerPos = GetOwner()->GetPosition();
+	return circle_.center + ownerPos;
 }
+
 void CircleCollider::Draw() {
 	if (OwnerIsDead())return;
-	auto& pos = ActualPosition();
+
 	uint32_t col = 0xffffff;
 	if (GetTag() == "patk") {
 		col = 0xffaaaa;
 	}
-
-	DrawCircle(pos.x, pos.y, static_cast<int>(circle_.radius), col, false);
+	auto& pos = ActualPosition();
+	Vector2f Offset = camera_->ViewOffset();
+	DrawCircle(pos.x+Offset.x, pos.y, static_cast<int>(circle_.radius), col, true);
 }
 
 const Circle& CircleCollider::GetCircle() const

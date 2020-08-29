@@ -23,6 +23,8 @@ public:
 	///<param name="another">“ü—Í</param>
 	virtual void OnHit(CollisionInfo& another,CollisionInfo& me)=0;
 	Position2f Pos();
+	Position2f GetPosition();
 	Position2 Size() { return { 32,32 }; }
+	std::shared_ptr<Camera> GetCamera();
 };
 

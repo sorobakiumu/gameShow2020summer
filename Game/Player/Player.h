@@ -4,12 +4,21 @@
 #include <vector>
 #include <array>
 #include <tuple>
+
+enum class DIR
+{
+	LEFT,
+	RIGHT,
+	MAX
+};
+
 //プレイヤークラス
 class PlayerInputListener;
 class GamePlaingScene;
 class InputLitener;
 class Equipment;
 class CollisionManager;
+
 class Player :
 	public Character
 {
@@ -39,6 +48,12 @@ private:
 	void AddMovehistry(int gf);
 	Position2f lastPos;
 	int shadowMask;
+	DIR dir;
+
+	void RiseUpdate();
+	void FallUpdate();
+	void NormalUpdate();
+	void DamageUpdate();
 public:
 	GamePlaingScene* GetGameScene();
 	void EquipNext();
@@ -59,10 +74,8 @@ public:
 	int CrrentEquipmentNo_()const;
 	void OnHit(CollisionInfo&, CollisionInfo&)override;
 	void Jamp();
-	void RiseUpdate();
-	void FallUpdate();
-	void NormalUpdate();
-	void DamageUpdate();
+
+	DIR GetDir();
 	float accelY_;
 	float velY_;
 	bool left = false;

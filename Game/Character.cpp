@@ -14,3 +14,13 @@ Position2f Character::Pos()
 	pos.x += camera_->ViewOffset().x;
 	return pos; 
 }
+
+Position2f Character::GetPosition()
+{
+	return pos_;
+}
+
+std::shared_ptr<Camera> Character::GetCamera()
+{
+	return camera_;
+}

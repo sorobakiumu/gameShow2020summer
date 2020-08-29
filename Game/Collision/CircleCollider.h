@@ -9,6 +9,7 @@ class CircleCollider :
 {
 private:
     Circle circle_;///<判定に使う円 
+    
 public:
     /// <summary> 
     /// 何もなければ{0,0},0 「円のコライダー」 

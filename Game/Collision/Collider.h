@@ -2,6 +2,8 @@
 #include <memory>
 #include <string>
 
+class Camera;
+
 class Character;
 ///<summary>
 ///“–‚½‚è”»’è”\—Í‚ğ‚ÂŠî’êƒNƒ‰ƒX
@@ -13,7 +15,7 @@ private:
 	std::weak_ptr<Character> owner_;
     bool dead=false;
 protected:
-
+    std::shared_ptr<Camera> camera_;
 public:
     bool isImmortal_ = false;
     Collider();

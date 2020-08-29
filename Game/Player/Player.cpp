@@ -6,7 +6,7 @@
 #include <iomanip>
 #include"../../System/Input.h"
 #include"../../Scene/GamePlaingScene.h"
-#include "BombEquip.h"
+#include "GunEquip.h"
 #include "Camera.h"
 #include "../Stage.h"
 #include"../../System/FileManager.h"
@@ -168,6 +168,11 @@ void Player::AddMovehistry(int gf)
 			currentMoveIndex_ = (currentMoveIndex_ + 1) % movehistory_.size();
 		}
 	}
+}
+
+DIR Player::GetDir()
+{
+	return dir;
 }
 
 GamePlaingScene* Player::GetGameScene()
@@ -377,11 +382,13 @@ Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(ca
 	collisionManager_ = gs->GetCollisionManager();
 	inputListener_ = std::make_unique<PlayerInputListener>(*this);
 	gs->AddListener(inputListener_.get());
-	em_.emplace_back(make_shared<BombEquip>(gs->GetProjectileManage(), collisionManager_,camera_));
+	em_.emplace_back(make_shared<GunEquip>(gs->GetProjectileManage(), collisionManager_,camera_));
 	em_.emplace_back(make_shared<SlashEquip>(gs->GetProjectileManage(), collisionManager_, camera_));
 	gs_ = gs;
 	gs_->GetEffectMng()->CollPlayerCharge(this,gs->GetCamera());
 	shadowMask = LoadMask(L"image/player/shadow_mask.bmp");
+
+	dir = DIR::RIGHT;
 }
 
 Player::~Player()
