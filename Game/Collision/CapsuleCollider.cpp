@@ -62,5 +62,5 @@ void CapsuleCollider::Draw()
 
 const Vector2f CapsuleCollider::ActualPosition()
 {
-	return capsule_.start + GetOwner()->Pos();
+	return capsule_.start + GetOwner()->GetCameraPos();
 }

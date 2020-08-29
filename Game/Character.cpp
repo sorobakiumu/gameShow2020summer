@@ -8,7 +8,7 @@ Character::Character(std::shared_ptr<Camera> camera):camera_(camera)
 {
 }
 
-Position2f Character::Pos()
+Position2f Character::GetCameraPos()
 {
 	auto pos = pos_;
 	pos.x += camera_->ViewOffset().x;
