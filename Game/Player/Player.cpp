@@ -342,10 +342,12 @@ Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(ca
 			}
 			if (input.IsPressed("left")) {
 				player_.Move(Vector2f(-5, 0),input);
+				player_.dir = DIR::LEFT;
 				player_.left = true;
 			}
 			if (input.IsPressed("right")) {
 				player_.Move(Vector2f(5, 0),input);
+				player_.dir = DIR::RIGHT;
 				player_.left = false;
 			}
 			if (input.IsTriggerd("chenge")) {

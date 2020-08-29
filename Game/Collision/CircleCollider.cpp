@@ -48,7 +48,7 @@ void CircleCollider::Draw() {
 	}
 	auto& pos = ActualPosition();
 	Vector2f Offset = camera_->ViewOffset();
-	DrawCircle(pos.x+Offset.x, pos.y, static_cast<int>(circle_.radius), col, true);
+	DrawCircle(pos.x+Offset.x, pos.y, static_cast<int>(circle_.radius), col,false);
 }
 
 const Circle& CircleCollider::GetCircle() const

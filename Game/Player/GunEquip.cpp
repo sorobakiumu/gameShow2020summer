@@ -11,7 +11,7 @@ GunEquip::GunEquip(ProjectileManage& pm, std::shared_ptr<CollisionManager>& cm, 
 	:Equipment(cm,camera),pm_(pm)
 {
 	ShotSpeed = 20;
-	rad = 50;
+	rad = 5;
 }
 
 void GunEquip::Attack(Player& player, const Input& input, Vector2f offset)
@@ -37,8 +37,7 @@ void GunEquip::Attack(Player& player, const Input& input, Vector2f offset)
 			vel += Vector2f(ShotSpeed, 0);
 		}
 	}
-	Vector2f test = player.GetPosition();
-	pm_.AddProjectile(new GunShot(test,vel,camera_));
+	pm_.AddProjectile(new GunShot(player.GetPosition() + Vector2f(0,-60), vel, camera_));
 	collisionManager_->AddColliders(new CircleCollider(pm_.GetProjecties().back(),
 		"patk", Circle(Vector2f(0, 0), rad)));
 }

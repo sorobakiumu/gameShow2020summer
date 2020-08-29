@@ -11,7 +11,6 @@ public:
 	///</summary>
 	void Draw()override;
 	void OnHit(CollisionInfo&, CollisionInfo&)override;
-	Position2f Pos;
 	Position2 Size;
 private:
 	float angle;
