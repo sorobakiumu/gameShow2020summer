@@ -17,7 +17,7 @@ private:
         Vector2f(-128.0f,50.0f),300,
         Vector2f(128.0f,50.0f),450
     };
-    int ashuraH_ = -1;
+    int ashuraH_[3] = {};
     int chargeH_[30];
     int frame_ = 0;
     int cnt;

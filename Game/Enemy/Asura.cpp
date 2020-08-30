@@ -22,22 +22,19 @@ Enemy* Asura::MakeClone()
 
 void Asura::InitializeUpdate()
 {
-	ashuraH_=LoadGraph(L"image/enemy/asyura/ashura.png");
+	LoadDivGraph(L"image/enemy/asyura/ボス.png", 3, 3, 1, 64, 64, &ashuraH_[0]);
+	//ashuraH_ = LoadGraph(L"image/enemy/asyura/ボス.png");
 	LoadDivGraph(L"image/enemy/asyura/chargeball.png",30,6,5,100,100,&chargeH_[0]);
 
 	updater_ = &Asura::EnteringUpdate;
 	camera_->ViewOffset().x;
 	pos_.x = 400 - camera_->ViewOffset().x;
-	pos_.y = 600;
+	pos_.y = 300;
 }
 
 void Asura::EnteringUpdate()
 {
-	pos_.y -= 10;
-	if (pos_.y < 200)
-	{
-		updater_ = &Asura::NormalUpdate;
-	}
+	updater_ = &Asura::NormalUpdate;
 }
 
 void Asura::NormalUpdate()
@@ -49,8 +46,8 @@ void Asura::NormalUpdate()
 		if (frame_ % 600 == enelgyBalls[energyBall].frame) {
 			Attack(enelgyBalls[energyBall].pos + Vector2f(pos_.x , pos_.y));
 		}
-
 	}
+	pos_.x += static_cast<double>((((frame_ / 60) % 2) * 2) - 1);
 }
 
 void Asura::Attack(Position2f& pos)
@@ -105,6 +102,7 @@ void Asura::DamageUpdate()
 		drawer_ = &Asura::NormalDraw;
 		updater_ = &Asura::NormalUpdate;
 	}
+	pos_.x += static_cast<double>((((frame_ / 60) % 2) * 2) - 1);
 }
 
 void Asura::ExitingUpdate()
@@ -117,10 +115,10 @@ void Asura::DeadUpdate()
 
 void Asura::NormalDraw()
 {
-	DrawRotaGraph2(pos_.x + camera_->ViewOffset().x, pos_.y+400,170,400,1.5,0.0,ashuraH_,true,true);
+	DrawRotaGraph2(pos_.x + camera_->ViewOffset().x, pos_.y,32,32,1.5,0.0,ashuraH_[frame_%3],true,true);
 	for (unsigned int energyBall = 0; energyBall < enelgyBalls.size(); energyBall++)
 	{
-		if (frame_ % 600 <= enelgyBalls[energyBall].frame||frame_%600 > 50) {
+		if (frame_ % 600 <= enelgyBalls[energyBall].frame) {
 			DrawRotaGraph(pos_.x + enelgyBalls[energyBall].pos.x+ camera_->ViewOffset().x, pos_.y - 50 + enelgyBalls[energyBall].pos.y, 1.0, 0.0, chargeH_[frame_ % 30], true);
 			break;
 		}
