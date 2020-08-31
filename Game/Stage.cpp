@@ -218,6 +218,7 @@ Vector2f Stage::ComputeOverlapWall(const Position2f& pos,float f) const
 
 void Stage::CheckBossMode()
 {
+	return;
 	constexpr uint8_t boss_no = 255;
 	auto rc = camera_->GetViewRange();
 	size_t xleft = static_cast<size_t>(static_cast<float>(rc.pos.x) /
@@ -249,7 +250,9 @@ void Stage::Draw()
 	constexpr float gland_line = 600.0f;
 	const float yofSet = gland_line-(stageHeader_.chipH*scale*stageHeader_.mapH);
 	auto rc = camera_->GetViewRange();
-	for (int d = 0; d < stageHeader_.layer-2; d++) {
+	//int d = 3;
+	for (int d = 0; d < stageHeader_.layer; d++)
+	{
 		for (unsigned int x = 0; x < stageHeader_.mapW; ++x) {
 			float xpos = x * stageHeader_.chipW * 2.0f;
 			float xmargin = stageHeader_.chipW * 2.0f;
@@ -258,6 +261,7 @@ void Stage::Draw()
 		}
 			for (unsigned int y = 0; y < stageHeader_.mapH; ++y) {
 				auto chip = stagedata_[d][y + x * stageHeader_.mapH];
+				//if (chip == 0)continue;
 				DxLib::DrawRectRotaGraph2(
 					static_cast<int>(x * stageHeader_.chipW* scale+xoffset), static_cast<int>(yofSet+ y * stageHeader_.chipH* scale),
 					(chip % 16) * stageHeader_.chipW, (chip / 16) * stageHeader_.chipW,

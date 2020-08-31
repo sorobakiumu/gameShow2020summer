@@ -31,7 +31,7 @@ private:
 	std::vector<StageLayerData_t> stagedata_;
 	StageHeader stageHeader_ = {};
 	void CreateSegment(Position2f& lastPos, Position2f& pos);
-	bool isBossMode_;
+	bool isBossMode_=false;
 	using Update_t = void (Stage::*)();
 	Update_t updater_;
 	GamePlaingScene* gamescene_;
