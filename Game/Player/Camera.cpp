@@ -6,7 +6,7 @@
 
 template<typename T>
 T Clamp(T value, T minvalue, T maxvalue) {
-	return std::min(std::max(value, minvalue), maxvalue);
+	return min(max(value, minvalue), maxvalue);
 }
 
 

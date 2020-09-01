@@ -1,6 +1,7 @@
 #pragma once
 #include<cmath>
 #include <assert.h>
+#include <DxLib.h>
 
 template<typename T>
 struct Vector2D
@@ -118,3 +119,4 @@ inline bool Vector2D<T>::IsNILL() const
 {
 	return isnan(x) || isnan(y);
 }
+

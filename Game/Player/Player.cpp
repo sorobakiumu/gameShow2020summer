@@ -264,7 +264,7 @@ void Player::FallUpdate()
 	velY_ += accelY_;
 	pos_.y += velY_;
 	auto grandy = gs_->GetStage()->ComputeGlandY(pos_);
-	if (grandy < pos_.y) { 
+	if (grandy < pos_.y/*&&grandy-pos_.y<=10*/) { 
 		velY_ = 0.0f;
 		pos_.y = grandy;
 		updater_ = &Player::NormalUpdate;
