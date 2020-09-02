@@ -83,7 +83,7 @@ void PlayerCharge::UpDate()
 {
 	frame++;
 
-	isDeletable_ = player_->CheckStop();
+	isDeletable_ = (player_->IsTimeStop());
 }
 
 void PlayerCharge::Draw()

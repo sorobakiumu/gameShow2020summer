@@ -131,10 +131,15 @@ void Slasher::OnDead()
 
 void Slasher::Update()
 {
-	if (!player_->TimeStop()) 
+	if (!player_->IsTimeStop()) 
 	{
 		flame++;
 		(this->*updater_)();
+		auto CRange = camera_->GetViewRange();
+		if (pos_.y > CRange.pos.y + (CRange.size.h*3/2))
+		{
+			isDeletable_ = true;
+		}
 	}
 }
 

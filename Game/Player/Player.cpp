@@ -39,7 +39,7 @@ void Player::NormalDraw()
 	DxLib::GetGraphSize(gH, &w, &h);
 	DrawRotaGraph2(static_cast<int>(pos_.x + xoffset), static_cast<int>(pos_.y),
 		w/2,h-1,
-		3.0, 0.0, run_[frmCnt / 5 % 6], true, left);
+		3.0, 0.0, run_[frmCnt / 5 % 6], true, dir == DIR::LEFT);
 	AddMovehistry(run_[frmCnt / 5 % 6]);
 }
 
@@ -51,7 +51,7 @@ void Player::JampDraw()
 	DxLib::GetGraphSize(gH, &w, &h);
 	DrawRotaGraph2(static_cast<int>(pos_.x + xoffset), static_cast<int>(pos_.y),
 		w / 2, h - 1,
-		3.0, 0.0, jamp[frmCnt / 5 % 4], true, left);
+		3.0, 0.0, jamp[frmCnt / 5 % 4], true, dir == DIR::LEFT);
 	AddMovehistry(jamp[frmCnt / 5 % 4]);
 }
 
@@ -63,7 +63,7 @@ void Player::DoubleJampDraw()
 	DxLib::GetGraphSize(gH, &w, &h);
 	DrawRotaGraph2(static_cast<int>(pos_.x + xoffset), static_cast<int>(pos_.y), 
 		w / 2, h - 1, 
-		3.0, 0.0,wjamp[frmCnt / 5 % 4], true, left);
+		3.0, 0.0,wjamp[frmCnt / 5 % 4], true, dir == DIR::LEFT);
 	AddMovehistry(wjamp[frmCnt / 5 % 4]);
 }
 
@@ -75,7 +75,7 @@ void Player::FallDraw()
 	DxLib::GetGraphSize(gH, &w, &h);
 	DrawRotaGraph2(static_cast<int>(pos_.x + xoffset), static_cast<int>(pos_.y),
 		w/2,h-1,
-		3.0, 0.0, fall[frmCnt / 5 % 2], true, left);
+		3.0, 0.0, fall[frmCnt / 5 % 2], true,dir==DIR::LEFT);
 	AddMovehistry(fall[frmCnt / 5 % 2]);
 }
 
@@ -111,6 +111,11 @@ void Player::Update()
 			cnt = frmCnt;
 			movehistory_.fill({Position2f(0,-100), 0, 0});
 		}
+	}
+	auto CRange = camera_->GetViewRange();
+	if (pos_.y > + CRange.pos.y + CRange.size.h*3/2 )
+	{
+		Death();
 	}
 }
 
@@ -180,7 +185,7 @@ GamePlaingScene* Player::GetGameScene()
 	return gs_;
 }
 
-bool Player::TimeStop()
+bool Player::IsTimeStop()
 {
 	return timeStop;
 }
@@ -191,24 +196,13 @@ void Player::TimeStopMove()
 	cnt = frmCnt;
 }
 
-bool Player::CheckStop()
-{
-	if (timeStop) {
-		return true;
-	}
-	if (timeinterval) {
-		return true;
-	}
-	return false;
-}
-
 void Player::DoubleAttack(const Input& input)
 {
 	em_[crrentEquipmentNo_]->DoubleAttack(*this, input);
 
 }
 
-int Player::CrrentEquipmentNo_()const
+int Player::GetCrrentEquipmentNo_()const
 {
 	return crrentEquipmentNo_;
 }
@@ -296,6 +290,11 @@ void Player::DamageUpdate()
 	}
 }
 
+void Player::Death()
+{
+	SetPosition(Vector2f(400, 500));
+}
+
 Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(camera)
 {
 	for (int i = 0; i < _countof(run_); ++i) {
@@ -343,16 +342,16 @@ Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(ca
 			if (input.IsPressed("left")) {
 				player_.Move(Vector2f(-5, 0),input);
 				player_.dir = DIR::LEFT;
-				player_.left = true;
 			}
 			if (input.IsPressed("right")) {
 				player_.Move(Vector2f(5, 0),input);
 				player_.dir = DIR::RIGHT;
-				player_.left = false;
 			}
 			if (input.IsTriggerd("chenge")) {
-				if (!player_.CheckStop()) {
-					player_.TimeStopMove();
+				if (!player_.IsTimeStop()) {
+					if (!player_.timeinterval) {
+						player_.TimeStopMove();
+					}
 				}
 				//player_.EquipNext();
 			}

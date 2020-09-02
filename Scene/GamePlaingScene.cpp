@@ -50,7 +50,7 @@ void GamePlaingScene::NomalUpdate(const Input& input)
 	collisonManager_->Update();
 	player_->Update();
 	bg_->Update();
-	if (!player_->TimeStop()) {
+	if (!player_->IsTimeStop()) {
 		projectileManager_->Update();
 		enemyManager_->UpDate();
 	}
@@ -62,7 +62,7 @@ void GamePlaingScene::NomalUpdate(const Input& input)
 		camera->lock();
 	}
 	camera->Update();
-	if (!player_->TimeStop()) {
+	if (!player_->IsTimeStop()) {
 		for (auto& spw : spawners)
 		{
 			spw->Update();
@@ -131,22 +131,22 @@ void GamePlaingScene::InitializeUpdate(const Input&)
 void GamePlaingScene::NormalDraw()
 {
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-	bg_->Draw(player_->TimeStop());
-	if (player_->TimeStop()) {
+	bg_->Draw(player_->IsTimeStop());
+	if (player_->IsTimeStop()) {
 		SetDrawBlendMode(DX_BLENDMODE_INVSRC, 255);
 	}
 	stage_->Draw();
 	enemyManager_->Draw();
 	projectileManager_->Draw();
-	if (player_->TimeStop()) {
+	if (player_->IsTimeStop()) {
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
 	player_->Draw();
 	effectManager_->Draw();
-	DrawRotaGraph(37, 37, 1.0f, 0.0, equipNo_[player_->CrrentEquipmentNo_()], true);
+	DrawRotaGraph(37, 37, 1.0f, 0.0, equipNo_[player_->GetCrrentEquipmentNo_()], true);
 	DrawBox(7, 7, 64 + 7, 64 + 7, 0x000000, false);
 	DrawBox(5, 5, 64 + 5, 64 + 5, 0xffffff, false);
-	if (player_->TimeStop()) {
+	if (player_->IsTimeStop()) {
 		SetDrawBlendMode(DX_BLENDMODE_INVSRC, 255);
 	}
 	collisonManager_->DebagDraw();

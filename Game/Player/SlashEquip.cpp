@@ -19,7 +19,15 @@ SlashEquip::SlashEquip(ProjectileManage& pm, std::shared_ptr<CollisionManager>& 
 void SlashEquip::Attack(Player& player, const Input& input, Vector2f offset)
 {
 	Vector2f vel;
-	vel = Vector2f(((!player.left * 2.0) - 1.0) * shotSpeed, 0.0);
+	if (player.GetDir() == DIR::LEFT)
+	{
+		vel= Vector2f(-shotSpeed, 0);
+	}
+	else
+	{
+		vel = Vector2f(shotSpeed, 0);
+	}
+
 	if (input.IsPressed("left")) {
 		vel = Vector2f(-shotSpeed, 0);
 	}

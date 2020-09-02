@@ -31,7 +31,7 @@ const Rect Camera::GetViewRange()
 	auto cameraSize = viewport.GetSize();
 	Rect r;
 	r.pos.x = pos_.x - cameraSize.w / 2.0;
-	r.pos.y = pos_.y - cameraSize.h / 2.0;
+	r.pos.y = pos_.y;
 	r.size.h = stageSize.size.h;
 	r.size.w = stageSize.size.w/8;
 	return r;

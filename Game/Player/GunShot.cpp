@@ -18,6 +18,12 @@ GunShot::GunShot(const Vector2f pos, const Vector2f vel, std::shared_ptr<Camera>
 void GunShot::Update()
 {
 	pos_ += vel_;
+	auto Vrange = camera_->GetViewRange();
+	if ((pos_.x<Vrange.pos.x || pos_.x>Vrange.pos.x+Vrange.size.w)||
+		(pos_.y<Vrange.pos.y || pos_.y>Vrange.pos.y + Vrange.size.h))
+	{
+		isActive_ = false;
+	}
 }
 
 void GunShot::Draw()

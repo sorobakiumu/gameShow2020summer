@@ -20,7 +20,16 @@ BombEquip::BombEquip(ProjectileManage& pm, std::shared_ptr<CollisionManager>& c,
 void BombEquip::Attack(Player& player, const Input& input, Vector2f offset)
 {
 	Vector2f vel;
-	vel = Vector2f(((!player.left * 2.0) - 1.0) * 10, 0.0);
+	if (player.GetDir() == DIR::LEFT)
+	{
+		vel = { -10,0 };
+	}
+	else if(player.GetDir() == DIR::RIGHT)
+	{
+		vel = { 10,0 };
+	}
+
+
 	if (input.IsPressed("up")) {
 		vel=Vector2f(0, -shotSpeed);
 	}

@@ -28,6 +28,13 @@ private:
 	size_t crrentEquipmentNo_ = 0;
 	std::shared_ptr<CollisionManager> collisionManager_;
 
+	float accelY_;
+	float velY_;
+
+	using UpdateFunction_t = void (Player::*)();
+	UpdateFunction_t updater_;
+	int jampCnt = 0;
+
 	const int ground_line = 480;
 	void NormalDraw();
 	void JampDraw();
@@ -54,34 +61,38 @@ private:
 	void FallUpdate();
 	void NormalUpdate();
 	void DamageUpdate();
-public:
-	GamePlaingScene* GetGameScene();
+
+	void Death();
+
+
 	void EquipNext();
-	bool TimeStop();
+
 	void TimeStopMove();
-	bool CheckStop();
+
 	void DoubleAttack(const Input& input);
 	using DrawFunction_t = void (Player::*)();
 	DrawFunction_t Drawer_;
 	void DoubleJampDraw();
-	void SetPosition(const Vector2f);
-	Vector2f GetPosition();
-	void Update()override;
-	void Draw()override;
+
+
 	void ShadowDraw(std::tuple<Position2f, int, bool> a);
 	void Move(const Vector2f, Input input);
 	void Attack(const Input& input);
-	int CrrentEquipmentNo_()const;
+
 	void OnHit(CollisionInfo&, CollisionInfo&)override;
 	void Jamp();
+public:
+	void Update()override;
+	void Draw()override;
+
+	void SetPosition(const Vector2f);
+	Vector2f GetPosition();
+	int GetCrrentEquipmentNo_()const;
+	GamePlaingScene* GetGameScene();
+	bool IsTimeStop();
 
 	DIR GetDir();
-	float accelY_;
-	float velY_;
-	bool left = false;
-	using UpdateFunction_t = void (Player::*)();
-	UpdateFunction_t updater_;
-	int jampCnt = 0;
+
 	Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera);
 	~Player();
 };
