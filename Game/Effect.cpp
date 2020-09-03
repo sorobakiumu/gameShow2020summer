@@ -89,5 +89,5 @@ void PlayerCharge::UpDate()
 void PlayerCharge::Draw()
 {
 	auto offset = camera_->ViewOffset().x;
-	DrawRotaGraph(player_->GetPosition().x + offset, player_->GetPosition().y-50, 0.2f, 0.0f, charge[(frame/4) % 4], true);
+	DrawRotaGraph(player_->GetPosition().x + offset, player_->GetPosition().y, 0.2f, 0.0f, charge[(frame/4) % 4], true);
 }

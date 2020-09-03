@@ -22,7 +22,7 @@ Enemy* Slasher::MakeClone()
 void Slasher::RunUpdate()
 {
 
-	//if (flame % 150 == 0)
+	if (flame % 150 == 0)
 	{
 		AimPlayer();
 		velocity_.x *= 5;
@@ -32,13 +32,16 @@ void Slasher::RunUpdate()
 	animFrame_ = (animFrame_ + 1) % 15;
 
 	auto seg3 = stage_->GetThreeSegment(pos_);
-	if (seg3[1].IsNILL()) {
-		pos_.y = FLT_MAX;
+	auto groundy = stage_->ComputeGlandY(pos_);
+	if (seg3[1].IsNILL())
+	{
+		pos_.y = groundy;
 	}
-	else {
-		float a = seg3[1].vec.y / seg3[1].vec.x;
-		pos_.y = seg3[1].start.y + a * (pos_.x - seg3[1].start.x);
+	if(groundy -60 < pos_.y)
+	{
+		pos_.y = groundy-60;
 	}
+
 	if (velocity_.x > 0)
 	{
 		if (seg3[2].IsNILL()) {
@@ -82,8 +85,8 @@ void Slasher::JampUpdate()
 	velocity_.y += 0.75f;
 	pos_ += velocity_;
 	auto groundy = stage_->ComputeGlandY(pos_);
-	if (groundy < pos_.y) {
-		pos_.y = groundy;
+	if (groundy-60 < pos_.y) {
+		pos_.y = groundy-60;
 		updater_ = &Slasher::RunUpdate;
 	}
 }
@@ -94,7 +97,7 @@ void Slasher::RunDraw()
 	auto gH = runH;
 	int w, h;
 	DxLib::GetGraphSize(gH, &w, &h);
-	DrawRectRotaGraph2(pos_.x + xoffset, pos_.y, (animFrame_ / 5) * 36, 0, 36, 36, w/6,h-1,5.0f, 0.0f, runH, true);
+	DrawRectRotaGraph(pos_.x + xoffset, pos_.y, (animFrame_ / 5) * 36, 0, 36, 36,5.0f, 0.0f, runH, true);
 }
 
 void Slasher::SlashDraw()
@@ -103,7 +106,7 @@ void Slasher::SlashDraw()
 	auto gH = runH;
 	int w, h;
 	DxLib::GetGraphSize(gH, &w, &h);
-	DrawRectRotaGraph2(pos_.x+xoffset, pos_.y, (animFrame_ / 5) * 42, 0, 42, 36,w/6 ,h-1,5.0f, 0.0f, slashH, true);
+	DrawRectRotaGraph(pos_.x+xoffset, pos_.y, (animFrame_ / 5) * 42, 0, 42, 36,5.0f, 0.0f, slashH, true);
 }
 
 Slasher::Slasher(const std::shared_ptr<Player>& p, std::shared_ptr<Camera> camera,std::shared_ptr<Stage> st):Enemy(p, camera),stage_(st)

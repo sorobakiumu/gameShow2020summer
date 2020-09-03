@@ -37,7 +37,7 @@ void GunEquip::Attack(Player& player, const Input& input, Vector2f offset)
 			vel += Vector2f(ShotSpeed, 0);
 		}
 	}
-	pm_.AddProjectile(new GunShot(player.GetPosition() + Vector2f(0,-60), vel, camera_));
+	pm_.AddProjectile(new GunShot(player.GetPosition(), vel, camera_));
 	collisionManager_->AddColliders(new CircleCollider(pm_.GetProjecties().back(),
 		"patk", Circle(Vector2f(0, 0), rad)));
 }

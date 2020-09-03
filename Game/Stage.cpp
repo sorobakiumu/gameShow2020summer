@@ -180,15 +180,18 @@ void Stage::Load(const TCHAR* path, std::shared_ptr<Camera> camera)
 }
 
 float Stage::ComputeGlandY(const Position2f& pos)const {
-	auto it = find_if(terrainSegment_.begin(), terrainSegment_.end(), [pos](const Segment& seg) {
-		auto spos = seg.start;
-		auto epos = spos + seg.vec;
-		return spos.x <= pos.x && pos.x <= epos.x;});
-	if (it == terrainSegment_.end()) {
-		return FLT_MAX;
-	}
+	auto it = std::find_if(terrainSegment_.begin(), terrainSegment_.end(),
+		[pos](const Segment& seg)
+		{
+			auto spos = seg.start;
+			auto epos = spos + seg.vec;
+			return spos.x <= pos.x && pos.x <= epos.x;
+		});
+
+	if (it == terrainSegment_.end())return 100000;
+
 	float a = it->vec.y / it->vec.x;
-	return it->start.y + a * (pos.x - it->start.x);
+	return it->start.y + a * (pos.x - it->start.x);			// ínñ ÇÃYç¿ïW
 }
 
 Vector2f Stage::ComputeOverlapWall(const Position2f& pos,float f) const

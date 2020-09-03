@@ -37,8 +37,7 @@ void Player::NormalDraw()
 	auto gH = run_[frmCnt / 5 % 6];
 	int w, h;
 	DxLib::GetGraphSize(gH, &w, &h);
-	DrawRotaGraph2(static_cast<int>(pos_.x + xoffset), static_cast<int>(pos_.y),
-		w/2,h-1,
+	DrawRotaGraph(static_cast<int>(pos_.x + xoffset), static_cast<int>(pos_.y),
 		3.0, 0.0, run_[frmCnt / 5 % 6], true, dir == DIR::LEFT);
 	AddMovehistry(run_[frmCnt / 5 % 6]);
 }
@@ -258,9 +257,9 @@ void Player::FallUpdate()
 	velY_ += accelY_;
 	pos_.y += velY_;
 	auto grandy = gs_->GetStage()->ComputeGlandY(pos_);
-	if (grandy < pos_.y/*&&grandy-pos_.y<=10*/) { 
+	if (grandy-55 < pos_.y) { 
 		velY_ = 0.0f;
-		pos_.y = grandy;
+		pos_.y = grandy-55;
 		updater_ = &Player::NormalUpdate;
 		Drawer_ = &Player::NormalDraw;
 		jampCnt = 0;
@@ -271,10 +270,10 @@ void Player::FallUpdate()
 void Player::NormalUpdate()
 {
 	auto grandy = gs_->GetStage()->ComputeGlandY(pos_);
-	if (grandy < pos_.y) {
-		pos_.y = grandy;
+	if (grandy-55 < pos_.y) {
+		pos_.y = grandy-55;
 	}
-	if (grandy > pos_.y) {
+	if (grandy-55 > pos_.y) {
 		accelY_ = 1.65f;//â∫ç~â¡ë¨ìx 
 		velY_ = 1.65f;//è„å¸Ç´ë¨ìx 
 		updater_ = &Player::FallUpdate;
