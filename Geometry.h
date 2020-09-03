@@ -95,6 +95,7 @@ struct Rect
 {
 	Position2f pos;
 	Size size;
+
 };
 
 struct Circle {
@@ -102,6 +103,8 @@ struct Circle {
 	float radius;//”¼Œa
 	Circle() :center{ 0,0 }, radius(0){};
 	Circle(const Position2f p, float r) :center{ p }, radius(r){};
+	void Draw();
+	void ShaderDraw(int,int);
 };
 
 ///<summary>

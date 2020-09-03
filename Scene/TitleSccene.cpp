@@ -18,6 +18,9 @@ namespace {
 
 	int titleH;
 	int stertH;
+
+	int screenH = -1;
+	int shader = -1;
 }
 
 
@@ -29,6 +32,15 @@ TitleScene::TitleScene(SceneController& c) :Scene(c) {
 
 	titleH = LoadGraph(L"image/BG/Title.png");
 	stertH = LoadGraph(L"image/UI/pressstart.png");
+	C = Circle(Vector2f(400,300),100);
+	if (shader == -1)
+	{
+		shader = LoadPixelShader(L"image/Etc/testps.pso");
+	}
+	if (screenH == -1)
+	{
+		screenH = MakeScreen(800, 600);
+	}
 }
 
 void TitleScene::WaitUpdate(const Input& input)
@@ -65,7 +77,8 @@ void TitleScene::NormalDraw()
 	if(blinkTimer_%100/10<6)
 		DrawRotaGraph(vsize.w / 2, vsize.h *3/4, 1.0f, 0.0f, stertH, true);
 
-
+	GetDrawScreenGraph(0, 0, 800, 600, screenH);
+	C.ShaderDraw(shader,screenH);
 	DrawString(100, 100, L"TitleScene", 0xffffff);
 }
 

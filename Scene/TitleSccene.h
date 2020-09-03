@@ -1,6 +1,8 @@
 #pragma once
 #include "Scene.h"
 #include "PauseScene.h"
+#include "../Geometry.h"
+
 class Scene;
 class GameOverScene;
 class PauseScene;
@@ -23,7 +25,7 @@ private:
 	void FadeInDraw();
 	void (TitleScene::* drawer_)();
 
-
+	Circle C;
 public:
 	void Update(const Input&)override;
 	void Draw()override;
