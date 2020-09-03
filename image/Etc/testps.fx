@@ -27,9 +27,9 @@ PS_OUTPUT main( PS_INPUT PSInput )
 //	pso.Output = float4(0.7,0.7,1,0.3);
 
 	pso.Output = tex.Sample(smp,PSInput.uv);
-	float test = pso.Output[0]+pso.Output[1]+pso.Output[2]+pso.Output[3];
+	float test = (1-pso.Output[0])+(1-pso.Output[1])+(1-pso.Output[2])+(1-pso.Output[3]);
 
-	pso.Output = float4(1-test/4,1-test/4,1-test/4,1-test/4);
+	pso.Output = float4(test/4,test/4,test/4,test/4);
 	return pso;
 
 //	float2 dist = norm.Sample(smp,PSInput.uv);

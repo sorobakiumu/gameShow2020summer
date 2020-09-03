@@ -28,10 +28,21 @@ namespace {
 	int equipNo_[2];
 
 	int frmCnt;
+
+	int screenH = -1;
+	int shader = -1;
 }
 GamePlaingScene::GamePlaingScene(SceneController& c) :Scene(c), updater_(&GamePlaingScene::InitializeUpdate),drawer_(&GamePlaingScene::FadeInDraw)
 {
-
+	C = Circle(Vector2f(400,300),600);
+	if (shader == -1)
+	{
+		shader = LoadPixelShader(L"image/Etc/testps.pso");
+	}
+	if (screenH == -1)
+	{
+		screenH = MakeScreen(800, 600);
+	}
 }
 
 void GamePlaingScene::NomalUpdate(const Input& input)
@@ -133,13 +144,16 @@ void GamePlaingScene::NormalDraw()
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	bg_->Draw(player_->IsTimeStop());
 	if (player_->IsTimeStop()) {
-		SetDrawBlendMode(DX_BLENDMODE_INVSRC, 255);
+		//SetDrawBlendMode(DX_BLENDMODE_INVSRC, 255);
+
 	}
 	stage_->Draw();
 	enemyManager_->Draw();
 	projectileManager_->Draw();
 	if (player_->IsTimeStop()) {
-		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		//SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		GetDrawScreenGraph(0, 0, 800, 600, screenH);
+		C.ShaderDraw(shader, screenH);
 	}
 	player_->Draw();
 	effectManager_->Draw();

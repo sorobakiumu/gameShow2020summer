@@ -40,17 +40,21 @@
 // Level9 shader bytecode:
 //
     ps_2_0
-    def c0, 0.25, 1, 0, 0
+    def c0, 1, 0.25, 0, 0
     dcl t1.xy
     dcl_2d s0
     texld r0, t1, s0
-    add r0.x, r0.y, r0.x
-    add r0.x, r0.z, r0.x
-    add r0.x, r0.w, r0.x
-    mad r0, r0.x, -c0.x, c0.y
+    add r0.x, -r0.x, c0.x
+    add r0.x, -r0.y, r0.x
+    add r0.x, r0.x, c0.x
+    add r0.x, -r0.z, r0.x
+    add r0.x, r0.x, c0.x
+    add r0.x, -r0.w, r0.x
+    add r0.x, r0.x, c0.x
+    mul r0, r0.x, c0.y
     mov oC0, r0
 
-// approximately 6 instruction slots used (1 texture, 5 arithmetic)
+// approximately 10 instruction slots used (1 texture, 9 arithmetic)
 ps_4_0
 dcl_sampler s0, mode_default
 dcl_resource_texture2d (float,float,float,float) t0
@@ -58,9 +62,13 @@ dcl_input_ps linear v2.xy
 dcl_output o0.xyzw
 dcl_temps 1
 sample r0.xyzw, v2.xyxx, t0.xyzw, s0
-add r0.x, r0.y, r0.x
-add r0.x, r0.z, r0.x
-add r0.x, r0.w, r0.x
-mad o0.xyzw, -r0.xxxx, l(0.250000, 0.250000, 0.250000, 0.250000), l(1.000000, 1.000000, 1.000000, 1.000000)
+add r0.x, -r0.x, l(1.000000)
+add r0.x, -r0.y, r0.x
+add r0.x, r0.x, l(1.000000)
+add r0.x, -r0.z, r0.x
+add r0.x, r0.x, l(1.000000)
+add r0.x, -r0.w, r0.x
+add r0.x, r0.x, l(1.000000)
+mul o0.xyzw, r0.xxxx, l(0.250000, 0.250000, 0.250000, 0.250000)
 ret 
-// Approximately 6 instruction slots used
+// Approximately 10 instruction slots used

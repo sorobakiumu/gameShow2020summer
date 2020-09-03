@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+#include "../Geometry.h"
 #include <memory>
 #include<vector>
 
@@ -45,7 +46,7 @@ private:
 	void (GamePlaingScene::* drawer_)();
 
 	std::vector<InputLitener*> listeners;
-
+	Circle C;
 public:
 	~GamePlaingScene();
 	void AddListener(InputLitener* listener_);
