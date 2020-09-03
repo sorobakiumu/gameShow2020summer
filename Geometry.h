@@ -70,6 +70,7 @@ struct Vector2D
 
 using Vector2 =Vector2D<int>;
 using Vector2f = Vector2D<float>;
+using Vec2Float = Vector2f;
 using Position2 = Vector2D<int>;
 using Position2f = Vector2D<float>;
 
@@ -107,15 +108,62 @@ struct Circle {
 	void ShaderDraw(int,int);
 };
 
-///<summary>
+// 行列(3*3)
+struct Matrix {
+	float m[3][3] = {};
+
+};
+
 ///カプセル構造体
-///</summary>
 struct Capsule
 {
 	Position2f start;//起点
 	Vector2f vec;//起点からもう１端点までのベクトル
 	float radius;//カプセルの厚み
 };
+
+template <typename T>
+T Clamp(T value, T minval = 0, T maxval = 1)
+{
+	return (std::min)((std::max)(value, minval), maxval);
+}
+
+template <typename T>
+float Dot(Vector2D<T>& num, Vector2D<T>& num2)
+{
+	return num.x * num2.x + num.y * num2.y;
+}
+
+template <typename T>
+float Cross(Vector2D<T> num, Vector2D<T> num2)
+{
+	return num.x * num2.y - num.y * num2.x;
+}
+float GetAngleTwoVector(Vec2Float&, Vec2Float&);
+
+// 単位行列を返す
+Matrix IdentityMat();
+
+///平行移動行列を返す 
+template <typename T>
+Matrix TranslateMat(Vector2D<T>);
+
+///回転行列を返す
+Matrix RotateMat(float);
+
+///２つの行列の乗算を返す 
+Matrix MultipleMat(const Matrix& lmat, const Matrix& rmat);
+
+///ベクトルに対して行列乗算を適用し、結果のベクトルを返す 
+template <typename T>
+Vector2D<T> MultipleVec(const Matrix, const Vector2D<T>);
+
+Matrix operator*(const Matrix, const Matrix);
+template <typename T>
+Vector2D<T> operator*(const Matrix& mat, const Vector2D<T>& vec);
+
+template <typename T>
+Vector2D<T> RotaVec(const Vector2D<T>, const Vector2D<T>, float);
 
 template<typename T>
 inline bool Vector2D<T>::IsNILL() const

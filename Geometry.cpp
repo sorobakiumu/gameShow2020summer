@@ -31,7 +31,7 @@ void Circle::Draw()
 void Circle::ShaderDraw(int pixel,int image)
 {
 	std::vector<VERTEX2DSHADER> vertex;
-	vertex.resize(2*360);
+	vertex.resize(2*361);
 	for (auto& v:vertex)
 	{
 		v.dif.a = 0xff;
@@ -41,17 +41,96 @@ void Circle::ShaderDraw(int pixel,int image)
 		v.v = 0.0f;
 		v.rhw = 5.0f;
 	}
-	for (int i = 0; i < 360; i++)
+	auto tmpV = Vector2f(0,-radius);
+	for (int i = 0; i < 361; i++)
 	{
 		vertex[i * 2].pos = V2V(center);
 		vertex[i * 2].u = vertex[i * 2].pos.x / 800;
 		vertex[i * 2].v = vertex[i * 2 ].pos.y / 600;
-		vertex[i * 2 + 1].pos = V2V({ center.x + cos((float)i/180*DX_PI_F)*radius,center.y + sin((float)i / 180 * DX_PI_F)*radius });
+		vertex[i * 2 + 1].pos = V2V(center + tmpV);
 		vertex[i * 2 + 1].u = vertex[i * 2 + 1].pos.x / 800;
 		vertex[i * 2 + 1].v = vertex[i * 2 + 1].pos.y / 600;
+		tmpV = RotateMat(DX_PI_F/180.0) * tmpV;
 	}
 
 	DxLib::SetUsePixelShader(pixel);
 	DxLib::SetUseTextureToShader(0, image);
-	DrawPrimitive2DToShader(vertex.data(),vertex.size(), DX_PRIMTYPE_TRIANGLELIST);
+	DrawPrimitive2DToShader(vertex.data(),vertex.size(), DX_PRIMTYPE_TRIANGLESTRIP);
+}
+
+
+Matrix IdentityMat()
+{
+	Matrix mat;
+	mat.m[0][0] = 1;
+	mat.m[1][1] = 1;
+	mat.m[2][2] = 1;
+	return mat;
+}
+
+Matrix RotateMat(float ang)
+{
+	Matrix mat;
+	mat.m[0][0] = cos(ang);
+	mat.m[0][1] = -sin(ang);
+	mat.m[1][0] = sin(ang);
+	mat.m[1][1] = cos(ang);
+	mat.m[2][2] = 1;
+	return mat;
+}
+
+template <typename T>
+Matrix TranslateMat(Vector2D<T> vec)
+{
+	Matrix mat;
+	mat.m[0][0] = 1;
+	mat.m[0][2] = vec.x;
+	mat.m[1][1] = 1;
+	mat.m[1][2] = vec.y;
+	mat.m[2][2] = 1;
+	return mat;
+}
+
+template<typename T>
+Vector2D<T> MultipleVec(const Matrix mat, const Vector2D<T> vec)
+{
+	return Vector2D<T>(vec.x * mat.m[0][0] + vec.y * mat.m[0][1] + 1 * mat.m[0][2],
+		vec.x * mat.m[1][0] + vec.y * mat.m[1][1] + 1 * mat.m[1][2]);
+}
+
+Matrix MultipleMat(const Matrix& lmat, const Matrix& rmat)
+{
+	Matrix ret = {};
+
+	for (int k = 0; k <= 2; ++k) {
+		for (int j = 0; j <= 2; ++j) {
+			for (int i = 0; i <= 2; ++i) {
+				ret.m[k][j] += lmat.m[k][i] * rmat.m[i][j];
+			}
+		}
+	}
+
+	return ret;
+
+}
+
+Matrix operator*(const Matrix lmat, const Matrix rmat)
+{
+	return MultipleMat(lmat, rmat);
+}
+
+template<typename T>
+Vector2D<T> operator*(const Matrix& mat, const Vector2D<T>& vec)
+{
+	return MultipleVec(mat, vec);
+}
+
+template<typename T>
+Vector2D<T> RotaVec(const Vector2D<T> vec, const Vector2D<T> center, float ang)
+{
+	Matrix mat = MultipleMat(TranslateMat(Vec2Float(center.x, center.y)),
+		MultipleMat(RotateMat(ang),
+			TranslateMat(Vec2Float(-center.x, -center.y))));
+
+	return MultipleVec(mat, vec);
 }

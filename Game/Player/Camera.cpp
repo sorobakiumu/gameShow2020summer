@@ -3,11 +3,11 @@
 #include <algorithm>
 #include "../../System/Application.h"
 #include <math.h>
-
-template<typename T>
-T Clamp(T value, T minvalue, T maxvalue) {
-	return min(max(value, minvalue), maxvalue);
-}
+//
+//template<typename T>
+//T Clamp(T value, T minvalue, T maxvalue) {
+//	return min(max(value, minvalue), maxvalue);
+//}
 
 
 void Camera::setPlayer(std::shared_ptr<Player> player)

@@ -32,7 +32,7 @@ TitleScene::TitleScene(SceneController& c) :Scene(c) {
 
 	titleH = LoadGraph(L"image/BG/Title.png");
 	stertH = LoadGraph(L"image/UI/pressstart.png");
-	C = Circle(Vector2f(400,300),100);
+	C = Circle(Vector2f(400,300),600);
 	if (shader == -1)
 	{
 		shader = LoadPixelShader(L"image/Etc/testps.pso");
