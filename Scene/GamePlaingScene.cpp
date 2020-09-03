@@ -84,6 +84,15 @@ void GamePlaingScene::NomalUpdate(const Input& input)
 		lisner->Notify(input);
 	}
 
+	if (!player_->IsTimeStop())
+	{
+		C.SetRad(0);
+	}
+	else if (player_->IsTimeStop())
+	{
+		C.AddRad(20);
+		C.SetCenter(player_->GetCameraPos());
+	}
 }
 
 void GamePlaingScene::FastBlinkUpdate(const Input&)
@@ -161,7 +170,7 @@ void GamePlaingScene::NormalDraw()
 	DrawBox(7, 7, 64 + 7, 64 + 7, 0x000000, false);
 	DrawBox(5, 5, 64 + 5, 64 + 5, 0xffffff, false);
 	if (player_->IsTimeStop()) {
-		SetDrawBlendMode(DX_BLENDMODE_INVSRC, 255);
+		//SetDrawBlendMode(DX_BLENDMODE_INVSRC, 255);
 	}
 	collisonManager_->DebagDraw();
 }

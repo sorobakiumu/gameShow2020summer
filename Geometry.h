@@ -74,6 +74,7 @@ using Vec2Float = Vector2f;
 using Position2 = Vector2D<int>;
 using Position2f = Vector2D<float>;
 
+// 線分
 struct Segment
 {
 	Position2f start;//起点 
@@ -92,6 +93,7 @@ struct Size
 	int w, h;
 };
 
+// 矩形
 struct Rect
 {
 	Position2f pos;
@@ -99,11 +101,16 @@ struct Rect
 
 };
 
+// 円形
 struct Circle {
 	Vector2f center;//中心
 	float radius;//半径
 	Circle() :center{ 0,0 }, radius(0){};
 	Circle(const Position2f p, float r) :center{ p }, radius(r){};
+	void AddRad(float);
+	void SetRad(float);
+	void SetCenter(Vec2Float);
+	Vec2Float GetCenter();
 	void Draw();
 	void ShaderDraw(int,int);
 };

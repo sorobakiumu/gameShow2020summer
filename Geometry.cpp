@@ -23,6 +23,26 @@ Position2f Segment::End()
 }
 
 
+void Circle::AddRad(float rad)
+{
+	radius += rad;
+}
+
+void Circle::SetRad(float rad)
+{
+	radius = rad;
+}
+
+void Circle::SetCenter(Vec2Float pos)
+{
+	center = pos;
+}
+
+Vec2Float Circle::GetCenter()
+{
+	return center;
+}
+
 void Circle::Draw()
 {
 	DrawCircle(center.x,center.y,radius,0xffffff,false);
