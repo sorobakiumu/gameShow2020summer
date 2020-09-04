@@ -154,3 +154,13 @@ Vector2D<T> RotaVec(const Vector2D<T> vec, const Vector2D<T> center, float ang)
 
 	return MultipleVec(mat, vec);
 }
+
+Fan::Fan() :Center(0, 0), Vec1(0, 0), Vec2(0, 0), Radius(0), Angle(0)
+{
+}
+
+Fan::Fan(Position2f center, Vec2Float v1, Vec2Float v2):Center(center),Vec1(v1),Vec2(v2)
+{
+	Radius = Vec1.Magnitude();
+	Angle = 0;
+}

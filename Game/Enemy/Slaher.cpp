@@ -12,8 +12,6 @@ namespace {
 	int slashH = -1;
 }
 
-
-
 Enemy* Slasher::MakeClone()
 {
 	return new Slasher(*this);
@@ -122,6 +120,10 @@ Slasher::Slasher(const std::shared_ptr<Player>& p, std::shared_ptr<Camera> camer
 	animFrame_ = 0;
 	updater_ = &Slasher::RunUpdate;
 	drawer_ = &Slasher::RunDraw;
+
+	AimPlayer();
+	velocity_.x *= 5;
+	velocity_.y *= 5;
 }
 
 void Slasher::OnDamage(int damage)

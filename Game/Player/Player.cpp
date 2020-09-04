@@ -48,9 +48,7 @@ void Player::JampDraw()
 	auto gH = run_[frmCnt / 5 % 6];
 	int w, h;
 	DxLib::GetGraphSize(gH, &w, &h);
-	DrawRotaGraph2(static_cast<int>(pos_.x + xoffset), static_cast<int>(pos_.y),
-		w / 2, h - 1,
-		3.0, 0.0, jamp[frmCnt / 5 % 4], true, dir == DIR::LEFT);
+	DrawRotaGraph(static_cast<int>(pos_.x + xoffset), static_cast<int>(pos_.y),3.0, 0.0, jamp[frmCnt / 5 % 4], true, dir == DIR::LEFT);
 	AddMovehistry(jamp[frmCnt / 5 % 4]);
 }
 
@@ -60,9 +58,7 @@ void Player::DoubleJampDraw()
 	auto gH = wjamp[frmCnt / 5 % 4];
 	int w, h;
 	DxLib::GetGraphSize(gH, &w, &h);
-	DrawRotaGraph2(static_cast<int>(pos_.x + xoffset), static_cast<int>(pos_.y), 
-		w / 2, h - 1, 
-		3.0, 0.0,wjamp[frmCnt / 5 % 4], true, dir == DIR::LEFT);
+	DrawRotaGraph(static_cast<int>(pos_.x + xoffset), static_cast<int>(pos_.y),3.0, 0.0,wjamp[frmCnt / 5 % 4], true, dir == DIR::LEFT);
 	AddMovehistry(wjamp[frmCnt / 5 % 4]);
 }
 
@@ -72,9 +68,7 @@ void Player::FallDraw()
 	auto gH = run_[frmCnt / 5 % 6];
 	int w, h;
 	DxLib::GetGraphSize(gH, &w, &h);
-	DrawRotaGraph2(static_cast<int>(pos_.x + xoffset), static_cast<int>(pos_.y),
-		w/2,h-1,
-		3.0, 0.0, fall[frmCnt / 5 % 2], true,dir==DIR::LEFT);
+	DrawRotaGraph(static_cast<int>(pos_.x + xoffset), static_cast<int>(pos_.y),3.0, 0.0, fall[frmCnt / 5 % 2], true,dir==DIR::LEFT);
 	AddMovehistry(fall[frmCnt / 5 % 2]);
 }
 
@@ -144,9 +138,7 @@ void Player::ShadowDraw(std::tuple<Position2f, int, bool> a)
 		DxLib::GetGraphSize(gH, &w, &h);
 		DxLib::CreateMaskScreen();
 		DrawFillMask(pos.x + xoffset - 32, pos.y - 32 - h, pos.x + xoffset + 32, pos.y + 32 - h, shadowMask);
-		DrawRotaGraph2(static_cast<int>(pos.x + xoffset), static_cast<int>(pos.y),
-			w / 2, h - 1,
-			3.0, 0.0, gf, true, leftflag);
+		DrawRotaGraph(static_cast<int>(pos.x + xoffset), static_cast<int>(pos.y),3.0, 0.0, gf, true, leftflag);
 		DxLib::DeleteMaskScreen();
 	}
 }

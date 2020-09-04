@@ -87,7 +87,6 @@ struct Segment
 	Position2f End();
 };
 
-
 struct Size
 {
 	int w, h;
@@ -128,6 +127,19 @@ struct Capsule
 	Vector2f vec;//起点からもう１端点までのベクトル
 	float radius;//カプセルの厚み
 };
+
+// 扇形
+struct Fan
+{
+	Position2f Center;
+	Vec2Float Vec1;
+	Vec2Float Vec2;
+	float Radius;
+	float Angle;
+	Fan();
+	Fan(Position2f,Vec2Float,Vec2Float);
+};
+
 
 template <typename T>
 T Clamp(T value, T minval = 0, T maxval = 1)
