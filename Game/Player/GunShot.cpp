@@ -10,7 +10,7 @@ GunShot::GunShot(const Vector2f pos, const Vector2f vel, std::shared_ptr<Camera>
 {
 	pos_ = pos;
 	vel_ = vel;
-	angle = 0;
+	angle = atan2(vel.y,vel.x);
 	bulletH = FileManager::Instance().Load(L"image/player/shot/gunshot.png", "PL_EQUIP")->Handle();
 	isActive_ = true;
 }

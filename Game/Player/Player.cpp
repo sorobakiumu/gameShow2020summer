@@ -84,15 +84,6 @@ Vector2f Player::GetPosition()
 
 void Player::Update()
 {
-	//if (0 == CheckSoundMem(sound) && 0 == CheckSoundMem(lowSound)) {
-	//	if (!timeStop) {
-	//		PlaySoundMem(sound, DX_PLAYTYPE_BACK, FALSE);
-	//	}
-	//	else {
-	//		PlaySoundMem(lowSound, DX_PLAYTYPE_BACK, FALSE);
-	//	}
-	//	soundCount = 0;
-	//}
 	soundCount++;
 
 	frmCnt++;
@@ -112,13 +103,6 @@ void Player::Update()
 			timeStop = false;
 			timeinterval = true;
 			cnt=frmCnt;
-			//StopSoundMem(lowSound);
-			//PlaySoundMem(sound, DX_PLAYTYPE_LOOP, TRUE);
-			//StopSoundMem(sound);
-			//float c = soundCount * 44100;
-			//c = c / 60;
-			//SetCurrentPositionSoundMem(c, sound);
-
 			PlaySoundMem(sound, DX_PLAYTYPE_LOOP, FALSE);
 			soundCount = 0;
 		}
@@ -312,7 +296,7 @@ void Player::DamageUpdate()
 	}
 }
 
-void Player::InitializeUpdate()
+void Player::Initialize()
 {
 
 
@@ -330,17 +314,6 @@ void Player::InitializeUpdate()
 	espEnd = LoadSoundMem(L"sound/espEnd.mp3");
 
 	PlaySoundMem(sound, DX_PLAYTYPE_LOOP, FALSE);
-
-	updater_ = &Player::NormalUpdate;
-}
-
-void Player::Death()
-{
-	SetPosition(Vector2f(400, 500));
-}
-
-Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(camera)
-{
 
 	for (int i = 0; i < _countof(run_); ++i) {
 		wstringstream wss;
@@ -370,9 +343,21 @@ Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(ca
 		wss << ".png";
 		fall[i] = FileManager::Instance().Load(wss.str().c_str(), "PL")->Handle();
 	}
-	updater_ = &Player::InitializeUpdate;
-	Drawer_ = &Player::NormalDraw;
+	gs_->AddListener(inputListener_.get());
+	em_.emplace_back(make_shared<GunEquip>(gs_->GetProjectileManage(), collisionManager_, camera_));
+	em_.emplace_back(make_shared<SlashEquip>(gs_->GetProjectileManage(), collisionManager_, camera_));
 
+	updater_ = &Player::NormalUpdate;
+	Drawer_ = &Player::NormalDraw;
+}
+
+void Player::Death()
+{
+	SetPosition(Vector2f(400, 500));
+}
+
+Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(camera)
+{
 	class PlayerInputListener :public InputLitener {
 	private:
 		Player& player_;
@@ -426,9 +411,7 @@ Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(ca
 	};
 	gs_ = gs;
 	inputListener_ = std::make_unique<PlayerInputListener>(*this);
-	gs_->AddListener(inputListener_.get());
-	em_.emplace_back(make_shared<GunEquip>(gs_->GetProjectileManage(), collisionManager_, camera_));
-	em_.emplace_back(make_shared<SlashEquip>(gs_->GetProjectileManage(), collisionManager_, camera_));
+	Initialize();
 }
 
 Player::~Player()

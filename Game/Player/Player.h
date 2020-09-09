@@ -61,7 +61,7 @@ private:
 	void FallUpdate();
 	void NormalUpdate();
 	void DamageUpdate();
-	void InitializeUpdate();
+	void Initialize();
 
 	void Death();
 
