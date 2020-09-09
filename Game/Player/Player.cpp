@@ -84,17 +84,43 @@ Vector2f Player::GetPosition()
 
 void Player::Update()
 {
+	//if (0 == CheckSoundMem(sound) && 0 == CheckSoundMem(lowSound)) {
+	//	if (!timeStop) {
+	//		PlaySoundMem(sound, DX_PLAYTYPE_BACK, FALSE);
+	//	}
+	//	else {
+	//		PlaySoundMem(lowSound, DX_PLAYTYPE_BACK, FALSE);
+	//	}
+	//	soundCount = 0;
+	//}
+	soundCount++;
+
 	frmCnt++;
 	lastPos = pos_;
 
 	em_[crrentEquipmentNo_]->Update();
 	(this->*updater_)();
 
+
+
+
 	if (timeStop) {
+		if (frmCnt - cnt > 130) {
+			PlaySoundMem(espEnd, DX_PLAYTYPE_BACK, TRUE);
+		}
 		if (frmCnt - cnt > 180) {
 			timeStop = false;
 			timeinterval = true;
 			cnt=frmCnt;
+			//StopSoundMem(lowSound);
+			//PlaySoundMem(sound, DX_PLAYTYPE_LOOP, TRUE);
+			//StopSoundMem(sound);
+			//float c = soundCount * 44100;
+			//c = c / 60;
+			//SetCurrentPositionSoundMem(c, sound);
+
+			PlaySoundMem(sound, DX_PLAYTYPE_LOOP, FALSE);
+			soundCount = 0;
 		}
 	}
 	if (timeinterval) {
@@ -103,6 +129,7 @@ void Player::Update()
 			gs_->GetEffectMng()->CollPlayerCharge(this, gs_->GetCamera());
 			cnt = frmCnt;
 			movehistory_.fill({Position2f(0,-100), 0, 0});
+
 		}
 	}
 	auto CRange = camera_->GetViewRange();
@@ -183,6 +210,10 @@ bool Player::IsTimeStop()
 
 void Player::TimeStopMove()
 {
+	StopSoundMem(sound);
+	soundCount = 0;
+	PlaySoundMem(espStart, DX_PLAYTYPE_BACK, TRUE);
+
 	timeStop = true;
 	cnt = frmCnt;
 }
@@ -281,6 +312,28 @@ void Player::DamageUpdate()
 	}
 }
 
+void Player::InitializeUpdate()
+{
+
+
+	frmCnt = 0;
+	collisionManager_ = gs_->GetCollisionManager();
+
+
+
+	gs_->GetEffectMng()->CollPlayerCharge(this, gs_->GetCamera());
+	shadowMask = LoadMask(L"image/player/shadow_mask.bmp");
+
+	dir = DIR::RIGHT;
+	sound = LoadSoundMem(L"sound/GameScene.mp3");
+	espStart = LoadSoundMem(L"sound/espStart.mp3");
+	espEnd = LoadSoundMem(L"sound/espEnd.mp3");
+
+	PlaySoundMem(sound, DX_PLAYTYPE_LOOP, FALSE);
+
+	updater_ = &Player::NormalUpdate;
+}
+
 void Player::Death()
 {
 	SetPosition(Vector2f(400, 500));
@@ -288,12 +341,13 @@ void Player::Death()
 
 Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(camera)
 {
+
 	for (int i = 0; i < _countof(run_); ++i) {
 		wstringstream wss;
 		wss << L"image/player/ran/adventurer-run-";
 		wss << setw(2) << setfill(L'0') << i;
 		wss << ".png";
-		run_[i] = FileManager::Instance().Load(wss.str().c_str(),"PL")->Handle();
+		run_[i] = FileManager::Instance().Load(wss.str().c_str(), "PL")->Handle();
 	}
 	for (int i = 0; i < _countof(jamp); ++i) {
 		wstringstream wss;
@@ -316,8 +370,7 @@ Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(ca
 		wss << ".png";
 		fall[i] = FileManager::Instance().Load(wss.str().c_str(), "PL")->Handle();
 	}
-	frmCnt = 0;
-	updater_ = &Player::NormalUpdate;
+	updater_ = &Player::InitializeUpdate;
 	Drawer_ = &Player::NormalDraw;
 
 	class PlayerInputListener :public InputLitener {
@@ -371,16 +424,11 @@ Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(ca
 			}
 		}
 	};
-	collisionManager_ = gs->GetCollisionManager();
-	inputListener_ = std::make_unique<PlayerInputListener>(*this);
-	gs->AddListener(inputListener_.get());
-	em_.emplace_back(make_shared<GunEquip>(gs->GetProjectileManage(), collisionManager_,camera_));
-	em_.emplace_back(make_shared<SlashEquip>(gs->GetProjectileManage(), collisionManager_, camera_));
 	gs_ = gs;
-	gs_->GetEffectMng()->CollPlayerCharge(this,gs->GetCamera());
-	shadowMask = LoadMask(L"image/player/shadow_mask.bmp");
-
-	dir = DIR::RIGHT;
+	inputListener_ = std::make_unique<PlayerInputListener>(*this);
+	gs_->AddListener(inputListener_.get());
+	em_.emplace_back(make_shared<GunEquip>(gs_->GetProjectileManage(), collisionManager_, camera_));
+	em_.emplace_back(make_shared<SlashEquip>(gs_->GetProjectileManage(), collisionManager_, camera_));
 }
 
 Player::~Player()

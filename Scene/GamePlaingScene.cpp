@@ -146,6 +146,7 @@ void GamePlaingScene::InitializeUpdate(const Input&)
 	collisonManager_->AddColliders(new CircleCollider(player_, "play", Circle(Vector2f(0, 0), 32)));
 
 	updater_ = &GamePlaingScene::NomalUpdate;
+
 }
 
 void GamePlaingScene::NormalDraw()

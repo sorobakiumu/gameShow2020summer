@@ -61,6 +61,7 @@ private:
 	void FallUpdate();
 	void NormalUpdate();
 	void DamageUpdate();
+	void InitializeUpdate();
 
 	void Death();
 
@@ -81,6 +82,14 @@ private:
 
 	void OnHit(CollisionInfo&, CollisionInfo&)override;
 	void Jamp();
+
+	int sound;
+	int lowSound;
+	int soundCount=0;
+
+	int espStart;
+	int espEnd;
+
 public:
 	void Update()override;
 	void Draw()override;

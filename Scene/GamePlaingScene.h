@@ -47,6 +47,8 @@ private:
 
 	std::vector<InputLitener*> listeners;
 	Circle C;
+
+	int sound;
 public:
 	~GamePlaingScene();
 	void AddListener(InputLitener* listener_);
