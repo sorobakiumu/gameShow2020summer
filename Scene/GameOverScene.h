@@ -1,10 +1,11 @@
 #pragma once
 #include "Scene.h"
-class CountinueScene;
+class GamePlaingScene;
+
 class GameOverScene :
 	public Scene
 {
-	friend CountinueScene;
+	friend GamePlaingScene;
 private:
 	GameOverScene(SceneController&);
 	void WaitUpdate(const Input&);

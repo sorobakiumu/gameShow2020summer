@@ -2,6 +2,8 @@
 #include "TitleSccene.h"
 #include "../System/Input.h"
 #include "DxLib.h"
+#include "../System/Application.h"
+
 
 using namespace std;
 
@@ -12,14 +14,18 @@ namespace {
 	int waitTimer_;
 	int blinkTimer_ = 0;
 
-	int titleH;
+	int gameoverH;
 	int stertH;
+	int gameoverTextH;
 }
 
 GameOverScene::GameOverScene(SceneController& c) :Scene(c)
 {
 	updater_ = &GameOverScene::WaitUpdate;
 	drawer_ = &GameOverScene::FadeInDraw;
+
+	gameoverH = LoadGraph(L"image/BG/Title.png");
+	gameoverTextH = LoadGraph(L"image/UI/gameoverText.png");
 	waitTimer_ = 45;
 }
 
@@ -53,6 +59,11 @@ void GameOverScene::FadeoutUpdate(const Input&)
 void GameOverScene::NormalDraw()
 {
 	DrawString(100, 100, L"GamePlaingScene", 0xffffff);
+	Size vsize = Application::Instance().GetViewport().GetSize();
+	DrawExtendGraph(0, 0, 800, 600, gameoverH, true);
+	DrawRotaGraph(vsize.w / 2, vsize.h * 1 / 4, 1.5f, 0.0f, gameoverTextH, true);
+	if (blinkTimer_ % 100 / 10 < 6)
+		DrawRotaGraph(vsize.w / 2, vsize.h * 3 / 4, 1.0f, 0.0f, stertH, true);
 }
 
 void GameOverScene::FadeOutDraw()

@@ -18,6 +18,7 @@
 #include"../Game/Effect.h"
 #include"../System/File.h"
 #include"../System/FileManager.h"
+#include"GameOverScene.h"
 
 using namespace std;
 
@@ -107,7 +108,7 @@ void GamePlaingScene::FastBlinkUpdate(const Input&)
 void GamePlaingScene::FadeoutUpdate(const Input&)
 {
 	if (--waitTimer_ == 0) {
-		controller_.ChengeScene(new CountinueScene(controller_));
+		controller_.ChengeScene(new GameOverScene(controller_));
 	}
 }
 

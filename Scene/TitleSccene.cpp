@@ -18,7 +18,7 @@ namespace {
 
 	int titleH;
 	int stertH;
-
+	int titletextH;
 }
 
 
@@ -30,7 +30,7 @@ TitleScene::TitleScene(SceneController& c) :Scene(c) {
 
 	titleH = LoadGraph(L"image/BG/Title.png");
 	stertH = LoadGraph(L"image/UI/pressstart.png");
-
+	titletextH = LoadGraph(L"image/UI/titletext.png");
 }
 
 void TitleScene::WaitUpdate(const Input& input)
@@ -63,12 +63,12 @@ void TitleScene::FadeoutUpdate(const Input&)
 void TitleScene::NormalDraw()
 {	
 	Size vsize = Application::Instance().GetViewport().GetSize();
-	DrawRotaGraph(vsize.w / 2, vsize.h / 2, 1.0f, 0.0f, titleH, true);
+	//DrawRotaGraph(vsize.w / 2, vsize.h / 2, 1.0f, 0.0f, titleH, true);
+	DrawExtendGraph(0, 0, 800, 600, titleH, true);
+	DrawRotaGraph(vsize.w / 2, vsize.h * 1 / 4, 1.5f, 0.0f, titletextH, true);
 	if(blinkTimer_%100/10<6)
 		DrawRotaGraph(vsize.w / 2, vsize.h *3/4, 1.0f, 0.0f, stertH, true);
 
-
-	DrawString(100, 100, L"TitleScene", 0xffffff);
 }
 
 void TitleScene::FadeOutDraw()
