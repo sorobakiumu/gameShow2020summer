@@ -154,25 +154,21 @@ void GamePlaingScene::NormalDraw()
 {
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	bg_->Draw(player_->IsTimeStop());
-	if (player_->IsTimeStop()) {
-		//SetDrawBlendMode(DX_BLENDMODE_INVSRC, 255);
-
-	}
 	stage_->Draw();
 	enemyManager_->Draw();
 	projectileManager_->Draw();
 	if (player_->IsTimeStop()) {
-		//SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 		GetDrawScreenGraph(0, 0, 800, 600, screenH);
 		C.ShaderDraw(shader, screenH);
 	}
 	player_->Draw();
 	effectManager_->Draw();
-	DrawRotaGraph(37, 37, 1.0f, 0.0, equipNo_[player_->GetCrrentEquipmentNo_()], true);
-	DrawBox(7, 7, 64 + 7, 64 + 7, 0x000000, false);
-	DrawBox(5, 5, 64 + 5, 64 + 5, 0xffffff, false);
+	//DrawRotaGraph(37, 37, 1.0f, 0.0, equipNo_[player_->GetCrrentEquipmentNo_()], true);
+	//DrawBox(7, 7, 64 + 7, 64 + 7, 0x000000, false);
+	//DrawBox(5, 5, 64 + 5, 64 + 5, 0xffffff, false);
 	if (player_->IsTimeStop()) {
-		//SetDrawBlendMode(DX_BLENDMODE_INVSRC, 255);
+		DrawBox(0,0,800,50,0x000000,true);
+		DrawBox(0,550,800,600,0x000000,true);
 	}
 	collisonManager_->DebagDraw();
 }

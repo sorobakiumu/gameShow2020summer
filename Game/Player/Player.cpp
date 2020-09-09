@@ -132,7 +132,7 @@ void Player::Draw()
 	}
 	(this->*Drawer_)();
 	em_[crrentEquipmentNo_]->Draw();
-	DrawFormatString(0,100,0xffffff,L"ライフ＝%d",playerLife_);
+//	DrawFormatString(0,100,0xffffff,L"ライフ＝%d",playerLife_);
 }
 
 void Player::ShadowDraw(std::tuple<Position2f, int, bool> a)
