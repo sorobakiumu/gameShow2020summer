@@ -15,8 +15,8 @@ class Background
 private:
 	std::vector<int> bgH_;
 	int frmCnt_;
-	SCREEN screen[11];
-	SCREEN screenNext[11];
+	SCREEN screen[3];
+	SCREEN screenNext[3];
 	std::shared_ptr<Camera>& camera_;
 	float cameraPos_x=0.0;
 	float oldCameraPos_x=0.0;

@@ -187,7 +187,7 @@ void Player::AddMovehistry(int gf)
 {
 	if (timeStop) {
 		if (lastPos != pos_) {
-			movehistory_[currentMoveIndex_] = { pos_, gf, left };
+			movehistory_[currentMoveIndex_] = { pos_, gf, dir == DIR::LEFT };
 			currentMoveIndex_ = (currentMoveIndex_ + 1) % movehistory_.size();
 		}
 	}

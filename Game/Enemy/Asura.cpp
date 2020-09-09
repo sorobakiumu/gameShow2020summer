@@ -28,7 +28,7 @@ void Asura::InitializeUpdate()
 
 	updater_ = &Asura::EnteringUpdate;
 	camera_->ViewOffset().x;
-	pos_.x = 400 - camera_->ViewOffset().x;
+	pos_.x = 700 - camera_->ViewOffset().x;
 	pos_.y = 300;
 }
 
@@ -47,7 +47,7 @@ void Asura::NormalUpdate()
 			Attack(enelgyBalls[energyBall].pos + Vector2f(pos_.x , pos_.y));
 		}
 	}
-	pos_.x += static_cast<double>((((frame_ / 60) % 2) * 2) - 1);
+	pos_.y += static_cast<double>((((frame_ / 60) % 2) * 2) - 1);
 }
 
 void Asura::Attack(Position2f& pos)
@@ -115,7 +115,7 @@ void Asura::DeadUpdate()
 
 void Asura::NormalDraw()
 {
-	DrawRotaGraph2(pos_.x + camera_->ViewOffset().x, pos_.y,32,32,1.5,0.0,ashuraH_[frame_%3],true,true);
+	DrawRotaGraph2(pos_.x + camera_->ViewOffset().x, pos_.y,32,32,1.5,0.0,ashuraH_[frame_%3],true,false);
 	for (unsigned int energyBall = 0; energyBall < enelgyBalls.size(); energyBall++)
 	{
 		if (frame_ % 600 <= enelgyBalls[energyBall].frame) {

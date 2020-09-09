@@ -8,30 +8,21 @@ using namespace std;
 
 Background::Background(std::shared_ptr<Camera>& camera):camera_(camera)
 {
-	bgH_.resize(11);
-	int skipno[2] = { 4,7 };
-	int no = 9;
+	bgH_.resize(3);
 	for (unsigned int i = 0; i < bgH_.size(); ++i) {
 		wstringstream wss;
-		wss << L"image/BG/Layer_";
-		wss << setw(4) << setfill(L'0') << i << "_";
-		if (count(begin(skipno), end(skipno), i) > 0) {
-			wss << "Lights";
-		}
-		else {
-			wss << no;
-			--no;
-		}
+		wss << L"image/BG/background_";
+		wss << i ;
 		wss << ".png";
-		bgH_[bgH_.size() - 1 - i] = LoadGraph(wss.str().c_str());
+		bgH_[i] = LoadGraph(wss.str().c_str());
 	}
 	frmCnt_ = 0;
-	for (auto i=0;i<11;i++)
+	for (auto i=0;i<3;i++)
 	{
 		screen[i].screen = MakeScreen(800, 600,true);
 		screen[i].pos_ = Position2f(0, 0);
 	}
-	for (auto i = 0; i < 11; i++)
+	for (auto i = 0; i < 3; i++)
 	{
 		screenNext[i].screen = MakeScreen(800, 600,true);
 		screenNext[i].pos_ = Position2f(800, 0);
@@ -81,7 +72,7 @@ void Background::Draw(bool flag)
 	auto pvel = checkPos_x /10;
 	
 	SetDrawScreen(DX_SCREEN_BACK);
-	for (auto i=0;i < 11;i++)
+	for (auto i=0;i < 3;i++)
 	{
 		if (screenNext[i].pos_.x + pvel * (i + 1) < 0) {
 			screen[i].pos_.x = 0;
