@@ -20,7 +20,7 @@ void BossShot::Draw()
 	DxLib::GetGraphSize(gH, &w, &h);
 	angle = atan2(vel_.y,vel_.x);
 	auto x = camera_->ViewOffset().x;
-	DrawRotaGraph(static_cast<int>(pos_.x + camera_->ViewOffset().x), static_cast<int>(pos_.y - h * 2), 1.0f, angle, shotH[frame_%5], true);
+	DrawRotaGraph(static_cast<int>(pos_.x + camera_->ViewOffset().x),pos_.y, 1.0f, angle, shotH[frame_%5], true);
 }
 
 void BossShot::OnHit(CollisionInfo&, CollisionInfo&)

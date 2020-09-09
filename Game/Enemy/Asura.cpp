@@ -23,7 +23,6 @@ Enemy* Asura::MakeClone()
 void Asura::InitializeUpdate()
 {
 	LoadDivGraph(L"image/enemy/asyura/ボス.png", 3, 3, 1, 64, 64, &ashuraH_[0]);
-	//ashuraH_ = LoadGraph(L"image/enemy/asyura/ボス.png");
 	LoadDivGraph(L"image/enemy/asyura/chargeball.png",30,6,5,100,100,&chargeH_[0]);
 
 	updater_ = &Asura::EnteringUpdate;
@@ -74,7 +73,7 @@ void Asura::NomerizePush(Vector2f& vel, Position2f& pos)
 {
 	vel.Nomerize();
 	gameScene->GetProjectileManage().AddProjectile(new BossShot(pos, vel, camera_));
-	gameScene->GetCollisionManager()->AddColliders(new CircleCollider(gameScene->GetProjectileManage().GetProjecties().back(), "eblt", Circle(Vector2f(0, 0), redius)));
+	gameScene->GetCollisionManager()->AddColliders(new CircleCollider(gameScene->GetProjectileManage().GetProjecties().back(), "eblt", Circle(Vector2f(0,0), redius)));
 }
 
 
