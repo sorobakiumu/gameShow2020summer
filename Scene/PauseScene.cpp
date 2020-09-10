@@ -29,7 +29,7 @@ PauseScene::PauseScene(SceneController& c) :Scene(c)
 {
 	menueSize = 0;
 	menuItems_.emplace_back(L"ゲームに戻る", Position2(menubase_x, menubase_y + menu_y_interval), [this]() {controller_.PopScene(); });
-	menuItems_.emplace_back(L"タイトルに戻る", Position2(menubase_x, menubase_y+ menu_y_interval*2), [this]() {controller_.CleneChangeScene(new TitleScene(controller_));});
+//	menuItems_.emplace_back(L"タイトルに戻る", Position2(menubase_x, menubase_y+ menu_y_interval*2), [this]() {controller_.CleneChangeScene(new TitleScene(controller_));});
 	menuItems_.emplace_back(L"ゲーム終了", Position2(menubase_x, menubase_y + menu_y_interval * 3), []() { Application::Instance().Exit(); });
 	menuItems_.emplace_back(L"キーコンフィグ", Position2(menubase_x, menubase_y + menu_y_interval * 4), [this]() {controller_.PushScene(new keyconfig(controller_, { 300,20 })); });
 	curentSelectNo_ = 0;

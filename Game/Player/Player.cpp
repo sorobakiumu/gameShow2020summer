@@ -82,6 +82,13 @@ Vector2f Player::GetPosition()
 	return pos_; 
 }
 
+void Player::OnHit()
+{
+	updater_ = &Player::DamageUpdate;
+	knockbackFrame_ = 6;
+	playerLife_--;
+}
+
 void Player::Update()
 {
 	soundCount++;
@@ -92,17 +99,20 @@ void Player::Update()
 	em_[crrentEquipmentNo_]->Update();
 	(this->*updater_)();
 
-
+	if (playerLife_ <= 0) {
+		gs_->ChangeScene();
+	}
 
 
 	if (timeStop) {
-		if (frmCnt - cnt > 130) {
+		if (frmCnt - cnt == 60) {
 			PlaySoundMem(espEnd, DX_PLAYTYPE_BACK, TRUE);
 		}
 		if (frmCnt - cnt > 180) {
 			timeStop = false;
 			timeinterval = true;
 			cnt=frmCnt;
+			StopSoundMem(espSound);
 			PlaySoundMem(sound, DX_PLAYTYPE_LOOP, FALSE);
 			soundCount = 0;
 		}
@@ -125,6 +135,11 @@ void Player::Update()
 
 void Player::Draw()
 {
+	DrawBox(10-2, 10-2, 30 * 3 + 10+2, 15 + 10+2, 0xff0000, true);
+	DrawBox(10, 10, 30 * 3 + 10, 15 + 10, 0x00ffff, true);
+	DrawBox(10, 10, playerLife_ * 3 + 10, 15 + 10, 0x00ff00, true);
+
+
 	if (!movehistory_.empty()) {
 		for (auto a : movehistory_) {
 			ShadowDraw(a);
@@ -133,6 +148,11 @@ void Player::Draw()
 	(this->*Drawer_)();
 	em_[crrentEquipmentNo_]->Draw();
 //	DrawFormatString(0,100,0xffffff,L"ÉâÉCÉtÅÅ%d",playerLife_);
+}
+
+void Player::StopSound()
+{
+	StopSoundMem(sound);
 }
 
 void Player::ShadowDraw(std::tuple<Position2f, int, bool> a)
@@ -164,6 +184,7 @@ void Player::Move(const Vector2f v,Input input)
 void Player::Attack(const Input& input)
 {
 	auto offset = Vector2f(0, 0);
+	PlaySoundMem(shotSound, DX_PLAYTYPE_BACK, TRUE);
 	em_[crrentEquipmentNo_]->Attack(*this,input, offset);
 }
 
@@ -197,6 +218,7 @@ void Player::TimeStopMove()
 	StopSoundMem(sound);
 	soundCount = 0;
 	PlaySoundMem(espStart, DX_PLAYTYPE_BACK, TRUE);
+	PlaySoundMem(espSound, DX_PLAYTYPE_LOOP, TRUE);
 
 	timeStop = true;
 	cnt = frmCnt;
@@ -312,6 +334,11 @@ void Player::Initialize()
 	sound = LoadSoundMem(L"sound/GameScene.mp3");
 	espStart = LoadSoundMem(L"sound/espStart.mp3");
 	espEnd = LoadSoundMem(L"sound/espEnd.mp3");
+	espSound = LoadSoundMem(L"sound/espSound.mp3");
+	shotSound = LoadSoundMem(L"sound/shotSound.mp3");
+
+	ChangeVolumeSoundMem(150, sound);
+	ChangeVolumeSoundMem(150, shotSound);
 
 	PlaySoundMem(sound, DX_PLAYTYPE_LOOP, FALSE);
 
@@ -353,7 +380,7 @@ void Player::Initialize()
 
 void Player::Death()
 {
-	SetPosition(Vector2f(400, 500));
+	gs_->ChangeScene();
 }
 
 Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(camera)
@@ -411,6 +438,7 @@ Player::Player(GamePlaingScene* gs, std::shared_ptr<Camera> camera):Character(ca
 	};
 	gs_ = gs;
 	inputListener_ = std::make_unique<PlayerInputListener>(*this);
+
 	Initialize();
 }
 

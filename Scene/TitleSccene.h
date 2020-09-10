@@ -25,7 +25,7 @@ private:
 	void FadeInDraw();
 	void (TitleScene::* drawer_)();
 
-
+	int selectSound;
 public:
 	void Update(const Input&)override;
 	void Draw()override;

@@ -28,7 +28,7 @@ void Asura::InitializeUpdate()
 	updater_ = &Asura::EnteringUpdate;
 	camera_->ViewOffset().x;
 	pos_.x = 700 - camera_->ViewOffset().x;
-	pos_.y = 300;
+	pos_.y = 400;
 }
 
 void Asura::EnteringUpdate()
@@ -38,34 +38,25 @@ void Asura::EnteringUpdate()
 
 void Asura::NormalUpdate()
 {
-	for (unsigned int energyBall = 0; energyBall < enelgyBalls.size(); energyBall++)
-	{
-		std::random_device rand;
-		auto ebr = rand() / 100 + 80;
-		if (frame_ % 600 == enelgyBalls[energyBall].frame) {
-			Attack(enelgyBalls[energyBall].pos + Vector2f(pos_.x , pos_.y));
-		}
+	if (frame_ % 60 == 59) {
+		Attack(enelgyBalls + Vector2f(pos_.x, pos_.y));
 	}
-	pos_.y += static_cast<double>((((frame_ / 60) % 2) * 2) - 1);
+	if (pos_.x > 700 - camera_->ViewOffset().x) {
+		pos_.x--;
+	}
+	if (gameScene->GetCollisionManager()->GetBossLife() <= 0) {
+		updater_ = &Asura::ExitingUpdate;
+	}
+	pos_.y += static_cast<double>((((frame_ / 240) % 2) * 2) - 1);
 }
 
 void Asura::Attack(Position2f& pos)
 {
-	Vector2f vel = Vector2f(0, -shotSpeed);
-	NomerizePush(vel, pos);
-	vel = Vector2f(-shotSpeed, -shotSpeed);
+	Vector2f vel = Vector2f(-shotSpeed, -shotSpeed/2);
 	NomerizePush(vel, pos);
 	vel = Vector2f(-shotSpeed, 0);
 	NomerizePush(vel, pos);
-	vel = Vector2f(0, shotSpeed);
-	NomerizePush(vel, pos);
-	vel = Vector2f(shotSpeed, shotSpeed);
-	NomerizePush(vel, pos);
-	vel = Vector2f(shotSpeed, 0);
-	NomerizePush(vel, pos);
-	vel = Vector2f(shotSpeed, -shotSpeed);
-	NomerizePush(vel, pos);
-	vel = Vector2f(-shotSpeed, shotSpeed);
+	vel = Vector2f(-shotSpeed, shotSpeed/2);
 	NomerizePush(vel, pos);
 }
 
@@ -80,14 +71,8 @@ void Asura::NomerizePush(Vector2f& vel, Position2f& pos)
 
 void Asura::DamageUpdate()
 {
-	for (unsigned int energyBall = 0; energyBall < enelgyBalls.size(); energyBall++)
-	{
-		std::random_device rand;
-		auto ebr = rand() / 100 + 80;
-		if (frame_ % 600 == enelgyBalls[energyBall].frame) {
-			Attack(enelgyBalls[energyBall].pos + Vector2f(pos_.x, pos_.y));
-		}
-
+	if (frame_ % 60 == 59) {
+		Attack(enelgyBalls + Vector2f(pos_.x, pos_.y));
 	}
 	if ((frame_ - cnt) < 15) {
 		if (drawer_ == &Asura::DamageDraw) {
@@ -101,27 +86,23 @@ void Asura::DamageUpdate()
 		drawer_ = &Asura::NormalDraw;
 		updater_ = &Asura::NormalUpdate;
 	}
-	pos_.x += static_cast<double>((((frame_ / 60) % 2) * 2) - 1);
+	pos_.x++;
 }
 
 void Asura::ExitingUpdate()
 {
+	updater_ = &Asura::DeadUpdate;
 }
 
 void Asura::DeadUpdate()
 {
+	gameScene->ChangeScene();
 }
 
 void Asura::NormalDraw()
 {
 	DrawRotaGraph2(pos_.x + camera_->ViewOffset().x, pos_.y,32,32,1.5,0.0,ashuraH_[frame_%3],true,false);
-	for (unsigned int energyBall = 0; energyBall < enelgyBalls.size(); energyBall++)
-	{
-		if (frame_ % 600 <= enelgyBalls[energyBall].frame) {
-			DrawRotaGraph(pos_.x + enelgyBalls[energyBall].pos.x+ camera_->ViewOffset().x, pos_.y - 50 + enelgyBalls[energyBall].pos.y, 1.0, 0.0, chargeH_[frame_ % 30], true);
-			break;
-		}
-	}
+	DrawRotaGraph(pos_.x + enelgyBalls.x+ camera_->ViewOffset().x, pos_.y + enelgyBalls.y, 1.0, 0.0, chargeH_[frame_ % 30], true);
 }
 
 void Asura::DamageDraw()
@@ -138,6 +119,7 @@ void Asura::ExitingDraw()
 
 void Asura::DeadDraw()
 {
+
 }
 
 Asura::Asura(GamePlaingScene* gm):Boss(gm)

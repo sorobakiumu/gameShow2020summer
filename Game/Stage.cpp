@@ -41,7 +41,7 @@ void Stage::NormalUpdate()
 {
 	CheckBossMode();
 	if (isBossMode_) {
-	//	gamescene_->AddSpawner(new BossSpawner(Position2f(0, 0),new Asura(gamescene_),gamescene_->GetEnemyManager(),gamescene_->GetCollisionManager(),camera_));
+		gamescene_->AddSpawner(new BossSpawner(Position2f(0, 0),new Asura(gamescene_),gamescene_->GetEnemyManager(),gamescene_->GetCollisionManager(),camera_));
 		updater_ = &Stage::BossUpdate;
 	}
 }
@@ -221,7 +221,6 @@ Vector2f Stage::ComputeOverlapWall(const Position2f& pos,float f) const
 
 void Stage::CheckBossMode()
 {
-	return;
 	constexpr uint8_t boss_no = 255;
 	auto rc = camera_->GetViewRange();
 	size_t xleft = static_cast<size_t>(static_cast<float>(rc.pos.x) /

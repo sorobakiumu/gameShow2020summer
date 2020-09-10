@@ -7,16 +7,7 @@ class Asura :
 	public Boss
 {
 private:
-    struct EnergyBall{
-        Vector2f pos;
-        int frame;
-    };
-    std::array<EnergyBall, 4> enelgyBalls = {
-        Vector2f(-128.0f,-50.0f),0,
-        Vector2f(128.0f,-50.0f),150,
-        Vector2f(-128.0f,50.0f),300,
-        Vector2f(128.0f,50.0f),450
-    };
+    Vector2f enelgyBalls = Vector2f(-64.0f, 0.0f);
     int ashuraH_[3] = {};
     int chargeH_[30];
     int frame_ = 0;
@@ -54,6 +45,7 @@ private:
     std::vector<std::shared_ptr<BossShot>> bossShots_;
     void NomerizePush(Vector2f& vel, Position2f& pos);
     void Attack(Position2f& pos);
+
 public:
     Asura(GamePlaingScene*);
     ~Asura() = default;

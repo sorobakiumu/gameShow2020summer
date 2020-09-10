@@ -52,10 +52,6 @@ void GamePlaingScene::NomalUpdate(const Input& input)
 	if (waitTimer_ >0) {
 		return;
 	}
-	if (input.IsTriggerd("OK")) {
-		updater_ = &GamePlaingScene::FastBlinkUpdate;
-		waitTimer_ = 30;
-	}
 	if (input.IsTriggerd("pause")) {
 		controller_.pushScene(new PauseScene(controller_));
 	}		
@@ -108,6 +104,7 @@ void GamePlaingScene::FastBlinkUpdate(const Input&)
 void GamePlaingScene::FadeoutUpdate(const Input&)
 {
 	if (--waitTimer_ == 0) {
+		player_->StopSound();
 		controller_.ChengeScene(new GameOverScene(controller_));
 	}
 }
@@ -192,6 +189,12 @@ void GamePlaingScene::FadeInDraw()
 	SetDrawBlendMode(DX_BLENDMODE_MULA, static_cast<int>(blendparam));
 	DrawBox(0, 0, 800, 600, 0x000000, true);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+}
+
+void GamePlaingScene::ChangeScene()
+{
+	updater_ = &GamePlaingScene::FastBlinkUpdate;
+	waitTimer_ = 30;
 }
 
 GamePlaingScene::~GamePlaingScene()

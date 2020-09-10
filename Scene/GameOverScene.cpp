@@ -89,6 +89,8 @@ void GameOverScene::FadeInDraw()
 
 void GameOverScene::Update(const Input& input)
 {
+	blinkTimer_ = (blinkTimer_ + 1) % 600;
+	(this->*updater_)(input);
 	if (input.IsTriggerd("OK"))
 	{
 		controller_.ChengeScene(new TitleScene(controller_));
@@ -97,4 +99,5 @@ void GameOverScene::Update(const Input& input)
 
 void GameOverScene::Draw()
 {
+	(this->*drawer_)();
 }

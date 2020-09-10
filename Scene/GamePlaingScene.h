@@ -50,6 +50,7 @@ private:
 
 	int sound;
 public:
+	void ChangeScene();
 	~GamePlaingScene();
 	void AddListener(InputLitener* listener_);
 	void Update(const Input&)override;

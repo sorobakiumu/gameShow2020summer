@@ -31,15 +31,13 @@ void Slasher::RunUpdate()
 
 	auto seg3 = stage_->GetThreeSegment(pos_);
 	auto groundy = stage_->ComputeGlandY(pos_);
-	if (seg3[1].IsNILL())
-	{
-		pos_.y = groundy;
+	if (seg3[1].IsNILL()) {
+		pos_.y = FLT_MAX;
 	}
-	if(groundy -60 < pos_.y)
-	{
-		pos_.y = groundy-60;
+	else {
+		float a = seg3[1].vec.y / seg3[1].vec.x;
+		pos_.y = seg3[1].start.y + a * (pos_.x - seg3[1].start.x)-60;
 	}
-
 	if (velocity_.x > 0)
 	{
 		if (seg3[2].IsNILL()) {
@@ -61,7 +59,7 @@ void Slasher::RunUpdate()
 	}
 
 
-	if (fabsf(pos_.x - player_->GetPosition().x) < 50) {
+	if (fabsf(pos_.x - player_->GetPosition().x) < 50&& fabsf(pos_.y - player_->GetPosition().y) < 50) {
 		updater_ = &Slasher::SlashUpdate;
 		drawer_ = &Slasher::SlashDraw;
 		flame = 1;
@@ -75,6 +73,7 @@ void Slasher::SlashUpdate()
 		flame = 1;
 		updater_ = &Slasher::RunUpdate;
 		drawer_ = &Slasher::RunDraw;
+		player_->OnHit();
 	}
 }
 
@@ -83,7 +82,7 @@ void Slasher::JampUpdate()
 	velocity_.y += 0.75f;
 	pos_ += velocity_;
 	auto groundy = stage_->ComputeGlandY(pos_);
-	if (groundy-60 < pos_.y) {
+	if (groundy-60 < pos_.y&& pos_.y- groundy - 60 < 10) {
 		pos_.y = groundy-60;
 		updater_ = &Slasher::RunUpdate;
 	}
@@ -94,8 +93,9 @@ void Slasher::RunDraw()
 	float xoffset = camera_->ViewOffset().x;
 	auto gH = runH;
 	int w, h;
+	bool a = player_->GetPosition().x < pos_.x;
 	DxLib::GetGraphSize(gH, &w, &h);
-	DrawRectRotaGraph(pos_.x + xoffset, pos_.y, (animFrame_ / 5) * 36, 0, 36, 36,5.0f, 0.0f, runH, true);
+	DrawRectRotaGraph(pos_.x + xoffset, pos_.y, (animFrame_ / 5) * 36, 0, 36, 36,5.0f, 0.0f, runH, true,a);
 }
 
 void Slasher::SlashDraw()
@@ -103,8 +103,9 @@ void Slasher::SlashDraw()
 	float xoffset = camera_->ViewOffset().x;
 	auto gH = runH;
 	int w, h;
+	bool a = player_->GetPosition().x < pos_.x;
 	DxLib::GetGraphSize(gH, &w, &h);
-	DrawRectRotaGraph(pos_.x+xoffset, pos_.y, (animFrame_ / 5) * 42, 0, 42, 36,5.0f, 0.0f, slashH, true);
+	DrawRectRotaGraph(pos_.x+xoffset, pos_.y, (animFrame_ / 5) * 42, 0, 42, 36,5.0f, 0.0f, slashH, true,a);
 }
 
 Slasher::Slasher(const std::shared_ptr<Player>& p, std::shared_ptr<Camera> camera,std::shared_ptr<Stage> st):Enemy(p, camera),stage_(st)

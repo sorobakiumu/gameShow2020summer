@@ -64,5 +64,6 @@ public:
 	///</summary>
 	void OnHit(CollisionInfo&, CollisionInfo&)override;
 	std::shared_ptr<EffectMng> effectManager_;
+
 };
 

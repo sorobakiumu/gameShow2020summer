@@ -31,14 +31,18 @@ TitleScene::TitleScene(SceneController& c) :Scene(c) {
 	titleH = LoadGraph(L"image/BG/Title.png");
 	stertH = LoadGraph(L"image/UI/pressstart.png");
 	titletextH = LoadGraph(L"image/UI/titletext.png");
+	selectSound = LoadSoundMem(L"sound/select.mp3");
+	ChangeVolumeSoundMem(200, selectSound);
 }
 
 void TitleScene::WaitUpdate(const Input& input)
 {
 	if (waitTimer_ <= 0) {
 		if (input.IsTriggerd("OK")) {
+			PlaySoundMem(selectSound, DX_PLAYTYPE_BACK, TRUE);
 			updater_ = &TitleScene::FastBlinkUpdate;
 			blinkInterval_ = blink_interval_fast;
+
 			waitTimer_ = 30;
 		}
 	}
@@ -63,7 +67,6 @@ void TitleScene::FadeoutUpdate(const Input&)
 void TitleScene::NormalDraw()
 {	
 	Size vsize = Application::Instance().GetViewport().GetSize();
-	//DrawRotaGraph(vsize.w / 2, vsize.h / 2, 1.0f, 0.0f, titleH, true);
 	DrawExtendGraph(0, 0, 800, 600, titleH, true);
 	DrawRotaGraph(vsize.w / 2, vsize.h * 1 / 4, 1.5f, 0.0f, titletextH, true);
 	if(blinkTimer_%100/10<6)

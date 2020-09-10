@@ -45,7 +45,7 @@ private:
 	int wjamp[4];
 	int fall[2];
 	int knockbackFrame_ = 0;//ノックバックのフレーム
-	int playerLife_ = 100;
+	int playerLife_ = 30;
 	int cnt=0;
 	bool timeStop=false;
 	bool timeinterval = false;
@@ -89,11 +89,14 @@ private:
 
 	int espStart;
 	int espEnd;
+	int espSound;
 
+	int shotSound;
 public:
+	void OnHit();
 	void Update()override;
 	void Draw()override;
-
+	void StopSound();
 	void SetPosition(const Vector2f);
 	Vector2f GetPosition();
 	int GetCrrentEquipmentNo_()const;
