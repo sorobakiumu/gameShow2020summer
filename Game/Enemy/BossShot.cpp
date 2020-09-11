@@ -11,6 +11,7 @@ void BossShot::Update()
 	{
 		isActive_ = false;
 	}
+	
 }
 
 void BossShot::Draw()

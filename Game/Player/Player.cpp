@@ -84,14 +84,24 @@ Vector2f Player::GetPosition()
 
 void Player::OnHit()
 {
-	updater_ = &Player::DamageUpdate;
-	knockbackFrame_ = 6;
-	playerLife_--;
+	if (updater_ != &Player::DamageUpdate) {
+		if (mutetki == 0) {
+			damageUpdate = updater_;
+			updater_ = &Player::DamageUpdate;
+			knockbackFrame_ = 6;
+			playerLife_--;
+		}
+	}
 }
 
 void Player::Update()
 {
 	soundCount++;
+
+
+	if (mutetki != 0) {
+		mutetki--;
+	}
 
 	frmCnt++;
 	lastPos = pos_;
@@ -226,8 +236,9 @@ void Player::TimeStopMove()
 
 void Player::DoubleAttack(const Input& input)
 {
-	em_[crrentEquipmentNo_]->DoubleAttack(*this, input);
-
+	auto offset = Vector2f(0, 0);
+	PlaySoundMem(shotSound, DX_PLAYTYPE_BACK, TRUE);
+	em_[crrentEquipmentNo_]->Attack(*this, input, offset);
 }
 
 int Player::GetCrrentEquipmentNo_()const
@@ -237,6 +248,9 @@ int Player::GetCrrentEquipmentNo_()const
 
 void Player::OnHit(CollisionInfo& anathar, CollisionInfo& me)
 {
+	if (mutetki != 0) {
+		return;
+	}
 	if (updater_ == &Player::DamageUpdate && (Drawer_ == &Player::DoubleJampDraw && updater_ == &Player::RiseUpdate))
 	{
 		return;
@@ -245,9 +259,12 @@ void Player::OnHit(CollisionInfo& anathar, CollisionInfo& me)
 	{
 		return;
 	}
+	damageUpdate = updater_;
 	updater_ = &Player::DamageUpdate;
+	Drawer_ = &Player::DamegeDraw;
 	knockbackFrame_ = 6;
 	playerLife_--;
+	mutetki = 15;
 }
 
 void Player::Jamp()
@@ -264,6 +281,14 @@ void Player::Jamp()
 	{
 		Drawer_ = &Player::DoubleJampDraw;
 	}
+}
+
+void Player::DamegeDraw()
+{
+	NormalDraw();
+	SetDrawBlendMode(DX_BLENDMODE_ADD, 255);
+	NormalDraw();
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 }
 
 void Player::RiseUpdate()
@@ -285,10 +310,10 @@ void Player::FallUpdate()
 {
 	velY_ += accelY_;
 	pos_.y += velY_;
-	auto grandy = gs_->GetStage()->ComputeGlandY(pos_);
-	if (grandy-55 < pos_.y) { 
+	auto groundy = gs_->GetStage()->ComputeGlandY(pos_);
+	if ((groundy -60 < pos_.y) && (pos_.y - groundy - 60 < 10)) {
 		velY_ = 0.0f;
-		pos_.y = grandy-55;
+		pos_.y = groundy -60;
 		updater_ = &Player::NormalUpdate;
 		Drawer_ = &Player::NormalDraw;
 		jampCnt = 0;
@@ -298,11 +323,11 @@ void Player::FallUpdate()
 
 void Player::NormalUpdate()
 {
-	auto grandy = gs_->GetStage()->ComputeGlandY(pos_);
-	if (grandy-55 < pos_.y) {
-		pos_.y = grandy-55;
+	auto groundy = gs_->GetStage()->ComputeGlandY(pos_);
+	if ((groundy - 60 < pos_.y) && (pos_.y - groundy - 60 < 10)) {
+		pos_.y = groundy -60;
 	}
-	if (grandy-55 > pos_.y) {
+	if ((groundy - 60 < pos_.y) && (pos_.y - groundy - 60 < 10)) {
 		accelY_ = 1.65f;//‰º~‰Á‘¬“x 
 		velY_ = 1.65f;//ãŒü‚«‘¬“x 
 		updater_ = &Player::FallUpdate;
@@ -312,9 +337,24 @@ void Player::NormalUpdate()
 
 void Player::DamageUpdate()
 {
-	if (knockbackFrame_-- < 0)
-	{
-		updater_ = &Player::NormalUpdate;
+	if (dir == DIR::LEFT) {
+		pos_.x += 2;
+	}
+	else {
+		pos_.x -= 2;
+	}
+	if (knockbackFrame_-- < 0){
+		updater_ = damageUpdate;
+		Drawer_ = &Player::NormalDraw;
+		return;
+	}
+	if (Drawer_ == &Player::DamegeDraw) {
+		Drawer_ = &Player::NormalDraw;
+		return;
+	}
+	else if (Drawer_ == &Player::NormalDraw) {
+		Drawer_ = &Player::DamegeDraw;
+		return;
 	}
 }
 

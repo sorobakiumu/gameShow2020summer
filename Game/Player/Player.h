@@ -33,6 +33,8 @@ private:
 
 	using UpdateFunction_t = void (Player::*)();
 	UpdateFunction_t updater_;
+	UpdateFunction_t damageUpdate;
+
 	int jampCnt = 0;
 
 	const int ground_line = 480;
@@ -82,6 +84,7 @@ private:
 
 	void OnHit(CollisionInfo&, CollisionInfo&)override;
 	void Jamp();
+	void DamegeDraw();
 
 	int sound;
 	int lowSound;
@@ -92,6 +95,7 @@ private:
 	int espSound;
 
 	int shotSound;
+	int mutetki=0;
 public:
 	void OnHit();
 	void Update()override;

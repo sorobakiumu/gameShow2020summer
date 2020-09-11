@@ -13,6 +13,7 @@
 namespace {
 	const float shotSpeed = 5;
 	const float redius = 16;
+	float xpos;
 }
 
 Enemy* Asura::MakeClone()
@@ -27,13 +28,17 @@ void Asura::InitializeUpdate()
 
 	updater_ = &Asura::EnteringUpdate;
 	camera_->ViewOffset().x;
-	pos_.x = 700 - camera_->ViewOffset().x;
+	pos_.x = 800 - camera_->ViewOffset().x;
 	pos_.y = 400;
+	xpos = 700 - camera_->ViewOffset().x;
 }
 
 void Asura::EnteringUpdate()
 {
-	updater_ = &Asura::NormalUpdate;
+	pos_.x-=2;
+	if (pos_.x <= xpos) {
+		updater_ = &Asura::NormalUpdate;
+	}
 }
 
 void Asura::NormalUpdate()
@@ -91,7 +96,16 @@ void Asura::DamageUpdate()
 
 void Asura::ExitingUpdate()
 {
-	updater_ = &Asura::DeadUpdate;
+	pos_.y += 2;
+	if (drawer_ == &Asura::DamageDraw) {
+		drawer_ = &Asura::NormalDraw;
+	}
+	else if (drawer_ == &Asura::NormalDraw) {
+		drawer_ = &Asura::DamageDraw;
+	}
+	if (pos_.y >= 800) {
+		updater_ = &Asura::DeadUpdate;
+	}
 }
 
 void Asura::DeadUpdate()
@@ -102,7 +116,9 @@ void Asura::DeadUpdate()
 void Asura::NormalDraw()
 {
 	DrawRotaGraph2(pos_.x + camera_->ViewOffset().x, pos_.y,32,32,1.5,0.0,ashuraH_[frame_%3],true,false);
-	DrawRotaGraph(pos_.x + enelgyBalls.x+ camera_->ViewOffset().x, pos_.y + enelgyBalls.y, 1.0, 0.0, chargeH_[frame_ % 30], true);
+	if (frame_ % 60 > 30) {
+		DrawRotaGraph(pos_.x + enelgyBalls.x + camera_->ViewOffset().x, pos_.y + enelgyBalls.y, 1.0, 0.0, chargeH_[frame_ % 30], true);
+	}
 }
 
 void Asura::DamageDraw()
