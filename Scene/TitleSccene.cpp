@@ -70,7 +70,7 @@ void TitleScene::NormalDraw()
 	DrawExtendGraph(0, 0, 800, 600, titleH, true);
 	DrawRotaGraph(vsize.w / 2, vsize.h * 1 / 4, 1.5f, 0.0f, titletextH, true);
 	if(blinkTimer_%100/10<6)
-		DrawRotaGraph(vsize.w / 2, vsize.h *3/4, 1.0f, 0.0f, stertH, true);
+		DrawRotaGraph(vsize.w / 2, vsize.h *3/4, 0.7f, 0.0f, stertH, true);
 
 }
 

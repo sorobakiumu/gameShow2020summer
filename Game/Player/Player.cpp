@@ -327,7 +327,7 @@ void Player::NormalUpdate()
 	if ((groundy - 60 < pos_.y) && (pos_.y - groundy - 60 < 10)) {
 		pos_.y = groundy -60;
 	}
-	if ((groundy - 60 < pos_.y) && (pos_.y - groundy - 60 < 10)) {
+	if ((groundy-60 > pos_.y) /*&& (pos_.y - groundy - 60 < 10)*/) {
 		accelY_ = 1.65f;//‰º~‰Á‘¬“x 
 		velY_ = 1.65f;//ãŒü‚«‘¬“x 
 		updater_ = &Player::FallUpdate;
